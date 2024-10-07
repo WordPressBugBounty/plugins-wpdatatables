@@ -3005,7 +3005,7 @@
 @media screen and (max-width: 767px) {
     .wpdt-c .table-responsive {
         width: 100%;
-        margin-bottom: 13.5px;
+        margin-bottom: 13px;
         overflow-y: hidden;
         -ms-overflow-style: -ms-autohiding-scrollbar;
         border: 1px solid #F5F5F5;
@@ -3066,7 +3066,7 @@
     width: 100%;
     padding: 0;
     margin-bottom: 18px;
-    font-size: 19.5px;
+    font-size: 19px;
     line-height: inherit;
     color: #333333;
     border: 0;

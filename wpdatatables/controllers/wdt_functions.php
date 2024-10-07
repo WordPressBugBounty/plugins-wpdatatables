@@ -279,6 +279,9 @@ function wdtActivationCreateTables() {
     if (get_option('wdtGoogleStableVersion') === false) {
         update_option('wdtGoogleStableVersion', 1);
     }
+    if (!get_option('wdtActivationSimpleTableTemplates')) {
+        update_option('wdtActivationSimpleTableTemplates', 'no');
+    }
 }
 
 /**
@@ -453,7 +456,7 @@ function wdtUninstallDelete() {
         delete_option('wdtBorderRemoval');
         delete_option('wdtBorderRemovalHeader');
         delete_option('wdtGoogleStableVersion');
-
+        delete_option('wdtActivationSimpleTableTemplates');
         delete_option('wdtSiteLink');
 
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables");
@@ -486,9 +489,7 @@ function wdtActivation($networkWide) {
                 //Insert standard templates if not exists
                 $tableName = $wpdb->prefix . 'wpdatatables_templates';
                 $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-                if ($rowCount == 0) {
-                    wdtActivationInsertTemplates();
-                }
+                wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
             }
             switch_to_blog($oldBlog);
 
@@ -500,8 +501,17 @@ function wdtActivation($networkWide) {
     //Insert standard templates if not exists
     $tableName = $wpdb->prefix . 'wpdatatables_templates';
     $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-    if ($rowCount == 0) {
+    wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
+}
+
+function wdtCheckSimpleTemplatesActivation ($rowCount, $tableName) {
+    global $wpdb;
+    if (get_option('wdtActivationSimpleTableTemplates') !== 'yes') {
+        if ((int)$rowCount !== 0) {
+            $wpdb->query("TRUNCATE TABLE {$tableName}");
+        }
         wdtActivationInsertTemplates();
+        update_option('wdtActivationSimpleTableTemplates', 'yes');
     }
 }
 
@@ -536,9 +546,7 @@ function wdtOnCreateSiteOnMultisiteNetwork($blogId) {
         //Insert standard templates if not exists
         $tableName = $wpdb->prefix . 'wpdatatables_templates';
         $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-        if ($rowCount == 0) {
-            wdtActivationInsertTemplates();
-        }
+        wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
         restore_current_blog();
     }
 }
