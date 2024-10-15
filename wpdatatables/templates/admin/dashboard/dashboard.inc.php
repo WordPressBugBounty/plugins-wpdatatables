@@ -342,7 +342,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><b>Improvement:</b> WCAG compliance adaptation for Simple table templates.</li>
+                                <li>Compatibility with WordPres 6.6.2 version approved.</li>
                                 <li><b>Improvement:</b> Minor CSS fixes.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
