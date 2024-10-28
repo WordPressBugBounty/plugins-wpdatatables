@@ -342,8 +342,8 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Compatibility with WordPres 6.6.2 version approved.</li>
-                                <li><b>Improvement:</b> Minor CSS fixes.</li>
+                                <li><b>Improvement:</b> Added an Activation tab to Plugin settings.</li>
+                                <li><b>Improvement:</b> Improved newsletter subscription.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
@@ -541,8 +541,8 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                     about 1 message per month and never spam!', 'wpdatatables'); ?> </p>
                             </div>
                             <div class="wdt-subscribe-form">
-                                <div id="form-acm_31410"></div>
-                                <script type="text/javascript" src="https://acumbamail.com/newform/dynamic/js/ET8rshmNeLvQox6J8U99sSJZ8B1DZo1mhOgs408R0mHYiwgmM/31410/"></script>
+                                <div id="form-acm_50703"></div>
+                                <script type="text/javascript" src="https://acumbamail.com/newform/dynamic/js/ET8rshmNeLvQox6J8U99sSJZ8B1DZo1mhOgs408R0mHYiwgmM/50703/"></script>
                             </div>
                         </div>
                     </div>

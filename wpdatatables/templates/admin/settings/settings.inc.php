@@ -65,6 +65,10 @@
                                 <a href="#cache-settings" aria-controls="cache_settings" role="tab"
                                    data-toggle="tab"><?php esc_html_e('Cache settings', 'wpdatatables'); ?></a>
                             </li>
+                            <li class="wdt-activation-tab">
+                                <a href="#wdt-activation" aria-controls="wdt-activation" role="tab"
+                                   data-toggle="tab"><?php esc_html_e('Activation', 'wpdatatables'); ?></a>
+                            </li>
                             <li class="wdt-charts-tab">
                                 <a href="#wdt-charts" aria-controls="wdt-charts" role="tab"
                                    data-toggle="tab"><?php esc_html_e('Charts', 'wpdatatables'); ?></a>
@@ -94,6 +98,10 @@
 
                             <!-- Charts tab-->
                             <?php include 'tabs/charts.php' ?>
+                            <!-- /Charts tab-->
+
+                            <!-- Charts tab-->
+                            <?php include 'tabs/activation.php' ?>
                             <!-- /Charts tab-->
 
                         </div>
