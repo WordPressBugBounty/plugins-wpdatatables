@@ -6,7 +6,7 @@ Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
 Tested up to: 6.6.2
 Requires PHP: 7.4
-Stable tag: 3.4.2.29
+Stable tag: 3.4.2.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -420,18 +420,23 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 == Screenshots ==
 1. New simple editor
 2. Merge cells and customization
-3. Reorder/resizing columns and rows
+3. Create table from data source
 4. Front-end data table preview.
 5. Back-end data table editor preview.
-6. Data Table preview from the back-end
+6. Column settings
 7. Table browser example
 8. General settings
-9. Column settings
+9. Simple templates
 10. Plugin settings
 11. Google charts
-12. Google chart settings
+12. Chart.js charts
+13. Google chart settings
 
 == Changelog ==
+= 3.4.2.30 =
+* Fixed issue with “Return to the Top” feature.
+Other small bug fixes and stability improvements.
+
 = 3.4.2.29 =
 * Added an Activation tab to Plugin settings.
 * Improved newsletter subscription.

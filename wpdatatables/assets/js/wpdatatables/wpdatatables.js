@@ -323,7 +323,7 @@ var wdtRenderDataTable = null;
                 if (JSON.parse($('#' + $('#' + tableSelector).data('described-by')).val()).pagination_top) {
                     function paginateScroll() {
                         $('html, body').animate({
-                            scrollTop: $('#' + tableSelector + "_wrapper.wpDataTablesWrapper").offset().top
+                            scrollTop: $('#' + tableSelector + "_wrapper").offset().top
                         }, 100);
                     }
 

@@ -1922,7 +1922,11 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                                     <a href="#custom-css-settings" aria-controls="custom-css-settings" role="tab"
                                        data-toggle="tab"><?php esc_html_e('Custom CSS', 'wpdatatables'); ?></a>
                                 </li>
-
+                                <li class="loader-settings-tab">
+                                    <a href="#loader-settings" aria-controls="loader-settings"
+                                       role="tab"
+                                       data-toggle="tab"><?php esc_html_e( 'Loader', 'wpdatatables' ); ?></a>
+                                </li>
 
                                 <?php do_action_deprecated( 'wdt_add_customize_table_configuration_tab', array(), WDT_INITIAL_LITE_VERSION, 'wpdatatables_add_customize_table_configuration_tab' ); ?>
                                 <?php do_action( 'wpdatatables_add_customize_table_configuration_tab' ); ?>
@@ -2605,7 +2609,7 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                             <h4 class="c-title-color m-b-2 wdt-beta-feature">
 					            <?php esc_html_e( 'Fixed columns', 'wpdatatables' ); ?>
                                 <p class="m-b-2 wdt-fixedcolumns wdt-beta-feature"><?php esc_html_e( 'BETA', 'wpdatatables' ); ?></p>
-                                <i class=" wpdt-icon-info-circle-thin" data-popover-content="#fixed-columns-hint"
+                                <i class=" wpdt-icon-info-circle-thin" data-popowrapver-content="#fixed-columns-hint"
                                    data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
                             </h4>
 

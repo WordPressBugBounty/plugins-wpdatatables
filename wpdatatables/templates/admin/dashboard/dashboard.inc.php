@@ -342,8 +342,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><b>Improvement:</b> Added an Activation tab to Plugin settings.</li>
-                                <li><b>Improvement:</b> Improved newsletter subscription.</li>
+                                <li><b>BugFix:</b> Fixed issue with “Return to the Top” feature.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
