@@ -4,9 +4,9 @@ Author URI: https://tmsproducts.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 6.6.2
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 3.4.2.30
+Stable tag: 3.4.2.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -279,6 +279,9 @@ Group similar values from one column for a clearer, more organized table view. L
 Most of the users need to show a single value from their tables. With our table plugin, you can display dynamic single values from your tables using wpDataTables’ [single-cell shortcode](https://wpdatatables.com/documentation/table-features/single-cell-shortcode/).
 
 ## Premium Features of wpDataTables
+-   [WooCommerce Integration](https://wpdatatables.com/documentation/creating-new-wpdatatables-with-table-constructor/woocommerce-integration) - Create dynamic and customizable tables to display product data directly from your WooCommerce store.
+
+-   [WP Posts Builder - New Table Type](https://wpdatatables.com/documentation/creating-new-wpdatatables-with-table-constructor/wp-post-builder-integration) - Easily generate tables displaying posts, pages, or custom post types with the new WP Posts Builder integration.
 
 -   [Folders/Categories](https://wpdatatables.com/documentation/table-features/folders-for-tables-and-charts/) – Organize Tables and Charts in WordPress Using Folders.
 
@@ -433,6 +436,15 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 13. Google chart settings
 
 == Changelog ==
+= 3.4.2.32 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
+= 3.4.2.31 =
+* Compatibility with WordPress 6.7 version approved.
+* Updated page Lite vs Premium.
+Other small bug fixes and stability improvements.
+
 = 3.4.2.30 =
 * Fixed issue with “Return to the Top” feature.
 Other small bug fixes and stability improvements.

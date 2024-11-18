@@ -156,3 +156,16 @@
     background: #F8F8FA;
     border-radius: 0 2px 2px 0;
 }
+.wpdt-c .wdt-upgrade-btn {
+    background: #091D70 !important;
+}
+
+.wpdt-c .wdt-upgrade-img {
+    width: 100%;
+}
+.wpdt-c .wdt-upgrade-btn a {
+    color: #FFFFFF !important;
+}
+.wpdt-c .wdt-upgrade-btn a:hover {
+    opacity: .8;
+}

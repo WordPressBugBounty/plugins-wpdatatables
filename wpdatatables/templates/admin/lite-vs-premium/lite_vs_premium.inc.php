@@ -145,6 +145,84 @@
                             </tr>
                             <tr>
                                 <td class=" sticky bg-white" colspan="6">
+                                    <strong class="wdt-lite-premium-features">
+                                        <?php esc_html_e('New Premium features', 'wpdatatables'); ?>
+                                    </strong>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-title="Features">
+                                    <?php esc_html_e('WP Post Builder', 'wpdatatables'); ?>
+                                    <span style="color: #7f54b3;font-weight: bold;float: right;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></span>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-title="Features">
+                                    <?php esc_html_e('WooCommerce Integration', 'wpdatatables'); ?>
+                                    <span style="color: #7f54b3;font-weight: bold;float: right;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></span>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2">
+                                <div class="wdt-lite-vs-premium-footer text-center">
+                                    <a target="_blank" href="https://wpdatatables.com/pricing/?utm_source=wpdt-lite&utm_medium=lite-upgrade-btn-woo&utm_content=wpdt&utm_campaign=wpdt"
+                                       class="btn btn-primary m-t-24 p-r-48 p-l-48 f-500 wdt-lite-premium-woo-button">
+                                        <i class="wpdt-icon-star-full m-r-5"></i>
+                                        <?php esc_html_e('Go Premium Now', 'wpdatatables'); ?></a>
+                                </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td class=" sticky bg-white" colspan="6">
                                     <strong>
                                         <?php esc_html_e('Creating simple Excel-like tables', 'wpdatatables'); ?>
                                     </strong>
@@ -1963,6 +2041,60 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td data-title="Features">
+                                    <?php esc_html_e('WP Post Builder', 'wpdatatables'); ?>
+                                    <span style="color: #ea0b0b;font-weight: bold;float: right;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></span>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center bg-grey">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-starter">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-standard">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-pro">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-dev">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-title="Features">
+                                    <?php esc_html_e('WooCommerce Integration', 'wpdatatables'); ?>
+                                    <span style="color: #ea0b0b;font-weight: bold;float: right;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></span>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center bg-grey">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-starter">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-standard">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-pro">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-dev">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class=" sticky bg-white" colspan="6">
                                     <strong>
                                         <?php esc_html_e('Datatable column types and features', 'wpdatatables'); ?>
@@ -2728,7 +2860,7 @@
                         <p style="padding-left: 28px;padding-top: 10px;font-size: 10px"><?php esc_html_e('* Please note that wpDataTables add-ons are not included in premium version of plugin.', 'wpdatatables'); ?></p>
                     </div>
                     <div class="wdt-lite-vs-premium-footer text-center">
-                        <a target="_blank" href="https://wpdatatables.com/pricing/?utm_source=wpdt-lite&utm_medium=lite-upgrade&utm_content=wpdt&utm_campaign=wpdt"
+                        <a target="_blank" href="https://wpdatatables.com/pricing/?utm_source=wpdt-lite&utm_medium=lite-upgrade-btn-bottom&utm_content=wpdt&utm_campaign=wpdt"
                            class="btn btn-primary m-t-24 p-r-48 p-l-48 f-500">
                             <i class="wpdt-icon-star-full m-r-5"></i>
                             <?php esc_html_e('Go Premium Now', 'wpdatatables'); ?></a>

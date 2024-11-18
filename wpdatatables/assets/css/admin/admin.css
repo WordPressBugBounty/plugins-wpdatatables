@@ -1947,3 +1947,12 @@ div.mce-widget button i.mce-i-wpdatachart{
     margin-left: 5px;
     text-decoration: unset;
 }
+.wpdt-c .wdt-upgrade-img {
+    width: 100%;
+}
+.wpdt-c .wdt-upgrade-btn a {
+    color: #FFFFFF !important;
+}
+.wpdt-c .wdt-upgrade-btn a:hover {
+    opacity: .8;
+}

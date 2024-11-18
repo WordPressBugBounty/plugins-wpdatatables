@@ -85,11 +85,11 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                        data-toggle="tab"><?php esc_html_e('Table Tools', 'wpdatatables'); ?></a>
                 </li>
                 <li class="placeholders-settings-tab">
-                    <a href="#placeholders-settings" aria-controls="placeholders-settings" role="tab">
+                    <a href="#placeholders-settings" aria-controls="placeholders-settings" role="tab" data-toggle="tab">
                         <?php esc_html_e('Placeholders', 'wpdatatables'); ?></a>
                 </li>
                 <li class="customize-table-settings-tab hidden">
-                    <a href="#customize-table-settings" aria-controls="customize-table-settings" role="tab">
+                    <a href="#customize-table-settings" aria-controls="customize-table-settings" role="tab" data-toggle="tab">
                         <strong style="color: #ef8137"><?php esc_html_e('NEW!', 'wpdatatables'); ?></strong> <?php esc_html_e(' Customize', 'wpdatatables'); ?>
                     </a>
                 </li>
@@ -1495,377 +1495,25 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                 <!-- Placeholders settings -->
                 <div role="tabpanel" class="tab-pane fade" id="placeholders-settings">
 
-                    <div class="row">
-                        <div class="col-md-12 m-b-16">
-                            <div class="text-center">
-                                <i class="wpdt-icon-star-full m-r-5"
-                                   style="color: #FFC078;"></i><strong><?php esc_html_e('This is a premium feature', 'wpdatatables'); ?></strong>
-                                <p class="m-b-0"><?php esc_html_e('This feature is available only in premium version of wpDataTables', 'wpdatatables'); ?></p>
-                                <p>
-                                    <a style="font-family: Inter,serif;font-style: normal;font-weight: 600;font-size: 13px;line-height: 16px;color: #008CFF;"
-                                       href="<?php echo admin_url('admin.php?page=wpdatatables-lite-vs-premium'); ?>"
-                                       target="_blank"><?php esc_html_e('Compare and View Pricing', 'wpdatatables'); ?></a>
-                                </p>
-                            </div>
-                            <p class="opacity-5"><?php esc_html_e('Placeholders can be understood as predefined ‘search and replace‘ templates; that will be replaced with some actual values at the execution time; usually this is used for SQL queries, but you can use it for filtering and editing for manual tables and only filtering for tables created from XML, JSON, Excel, CSV, Google Spreadsheet and PHP Serialized array.', 'wpdatatables'); ?></p>
-                        </div>
+                    <div class="row text-center">
+                        <i class="wpdt-icon-star-full m-r-5"
+                           style="color: #FFC078;"></i><strong><?php esc_html_e('Available from Standard license', 'wpdatatables'); ?></strong>
+
+                        <p class="m-b-0 m-t-10"><?php esc_html_e('Placeholders act as predefined templates for \'search and replace,\' dynamically 
+    substituted with actual values during execution,', 'wpdatatables'); ?>
+                        </p><p class="m-b-0"><?php esc_html_e(' commonly utilized in MySQL queries but extendable to filtering and editing manual tables, 
+    and exclusively for filtering in tables derived from XML, JSON, Excel, CSV, Google Spreadsheet, and PHP Serialized array.', 'wpdatatables'); ?></p>
+                        <p class="p-t-10">
+                            <a style="font-family: Inter,serif;font-style: normal;font-weight: 600;font-size: 13px;line-height: 16px;color: #008CFF;"
+                               href="<?php echo admin_url('admin.php?page=wpdatatables-lite-vs-premium'); ?>"
+                               target="_blank"><?php esc_html_e('Compare and View Pricing', 'wpdatatables'); ?></a>
+                        </p>
                     </div>
-
-                    <div class="opacity-5">
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR1%
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var1-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR2%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group  m-b-0">
-                                    <input id="wdt-var2-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR3%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var3-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR4%
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var4-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR5%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group  m-b-0">
-                                    <input id="wdt-var5-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR6%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var6-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR7%
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var7-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR8%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group  m-b-0">
-                                    <input id="wdt-var8-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %VAR9%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with any value that you will provide in a shortcode. Provide a default value here that will be used for table generation and when a different one is not defined in the shortcode.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-var9-placeholder" type="text" class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_USER_ID%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the ID of currently logged in user. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-user-id-placeholder" type="text"
-                                           value="<?php echo esc_attr(get_current_user_id()); ?>" class="form-control input-sm"
-                                           disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_USER_LOGIN%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the login of currently logged in user. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_user = wp_get_current_user(); ?>
-                                    <input id="wdt-user-login-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_user->user_login); ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_USER_EMAIL%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the Email of currently logged in user. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_user = wp_get_current_user(); ?>
-                                    <input id="wdt-user-email-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_user->user_email); ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_POST_ID%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the ID of current post. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <input id="wdt-post-id-placeholder" type="text" value=""
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_USER_FIRST_NAME%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the First Name of currently logged in user. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_user = wp_get_current_user(); ?>
-                                    <input id="wdt-user-first-name-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_user->first_name); ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_USER_LAST_NAME%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the Last Name of currently logged in user. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_user = wp_get_current_user(); ?>
-                                    <input id="wdt-user-last-name-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_user->last_name); ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <!-- .row -->
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_DATE%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with current date.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_date = current_time(get_option('wdtDateFormat'));
-                                    ?>
-                                    <input id="wdt-date-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_date) ?>" class="form-control input-sm"
-                                           disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_DATETIME%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with current datetime.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_date = current_time(get_option('wdtDateFormat'));
-                                    $wdt_current_time = current_time(get_option('wdtTimeFormat'));
-                                    ?>
-                                    <input id="wdt-datetime-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_date . ' ' . $wdt_current_time) ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %CURRENT_TIME%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with current time.', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php $wdt_current_time = current_time(get_option('wdtTimeFormat'));
-                                    ?>
-                                    <input id="wdt-time-placeholder" type="text"
-                                           value="<?php echo esc_attr($wdt_current_time) ?>" class="form-control input-sm"
-                                           disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-
-                            <div class="col-sm-4 m-b-16">
-
-                                <h4 class="c-title-color m-b-2">
-                                    %WPDB%
-                                    <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
-                                       title="<?php esc_attr_e('This placeholder will be replaced with the current prefix of WordPress database. Provide a value here to be used for table generation', 'wpdatatables'); ?>"></i>
-                                </h4>
-
-                                <div class="fg-line form-group m-b-0">
-                                    <?php global $wpdb; ?>
-                                    <input id="wdt-wpdb-placeholder" type="text" value="<?php echo esc_attr($wpdb->prefix); ?>"
-                                           class="form-control input-sm" disabled
-                                           placeholder="<?php esc_attr_e('Default for table generation', 'wpdatatables'); ?>">
-                                </div>
-
-                            </div>
-
+                    <div class="row notice-images">
+                        <div class="wpdt-custom-center-flex" style="align-items: center;">
+                            <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-editing.gif" alt="Placeholders editing image notice"/>
+                            <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-query.gif" alt="Placeholders query image notice"/>
+                            <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-filters.gif" alt="Placeholders filtering image notice"/>
                         </div>
                     </div>
                 </div>
@@ -1877,7 +1525,7 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                     <div role="tabpanel">
                         <div class="text-center">
                             <i class="wpdt-icon-star-full m-r-5"
-                               style="color: #FFC078;"></i><strong><?php esc_html_e('This is a premium feature', 'wpdatatables'); ?></strong>
+                               style="color: #FFC078;"></i><strong><?php esc_html_e('Available from Starter license', 'wpdatatables'); ?></strong>
                             <p class="m-b-0"><?php esc_html_e('This feature is available only in premium version of wpDataTables', 'wpdatatables'); ?></p>
                             <p>
                                 <a style="font-family: Inter,serif;font-style: normal;font-weight: 600;font-size: 13px;line-height: 16px;color: #008CFF;"
@@ -2595,184 +2243,20 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                 <div role="tabpanel" class="tab-pane fade" id="advanced-table-settings">
                     <div class="row text-center">
                         <i class="wpdt-icon-star-full m-r-5"
-                           style="color: #FFC078;"></i><strong><?php esc_html_e('This is a premium feature', 'wpdatatables'); ?></strong>
-                        <p class="m-b-0"><?php esc_html_e('This feature is available only in premium version of wpDataTables', 'wpdatatables'); ?></p>
-                        <p>
+                           style="color: #FFC078;"></i><strong><?php esc_html_e('Available from Standard license', 'wpdatatables'); ?></strong>
+
+                        <p class="m-b-0 m-t-10"><?php esc_html_e('Fixed headers and columns enhance user experience by ensuring that column and row labels remain visible while scrolling, facilitating easier data interpretation and reference. ', 'wpdatatables'); ?></p>
+                        <p><?php esc_html_e('This features improves usability, especially for large datasets, by providing constant navigation points without the need for manual scrolling back to the top or side of the table.', 'wpdatatables'); ?></p>
+                        <p class="p-t-10">
                             <a style="font-family: Inter,serif;font-style: normal;font-weight: 600;font-size: 13px;line-height: 16px;color: #008CFF;"
                                href="<?php echo admin_url('admin.php?page=wpdatatables-lite-vs-premium'); ?>"
                                target="_blank"><?php esc_html_e('Compare and View Pricing', 'wpdatatables'); ?></a>
                         </p>
                     </div>
-                    <div class="row opacity-5">
-                        <div class="col-sm-4 m-b-16">
-
-                            <h4 class="c-title-color m-b-2 wdt-beta-feature">
-					            <?php esc_html_e( 'Fixed columns', 'wpdatatables' ); ?>
-                                <p class="m-b-2 wdt-fixedcolumns wdt-beta-feature"><?php esc_html_e( 'BETA', 'wpdatatables' ); ?></p>
-                                <i class=" wpdt-icon-info-circle-thin" data-popowrapver-content="#fixed-columns-hint"
-                                   data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
-                            </h4>
-
-                            <!-- Hidden popover for fixed header -->
-                            <div class="hidden" id="fixed-columns-hint">
-                                <div class="popover-heading">
-						            <?php esc_html_e( 'Fixed columns', 'wpdatatables' ); ?>
-                                </div>
-
-                                <div class="popover-body">
-						            <?php esc_html_e( 'Enable this to make columns fixed.', 'wpdatatables' ); ?>
-                                </div>
-                            </div>
-                            <!-- /Hidden popover for fixed header -->
-
-                            <div class="toggle-switch" data-ts-color="blue">
-                                <input id="wdt-fixed-columns" disabled type="checkbox">
-                                <label for="wdt-fixed-columns"
-                                       class="ts-label"><?php esc_html_e( 'Enable fixed columns', 'wpdatatables' ); ?></label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 m-b-16 advanced-table-settings-block-fixed-columns">
-
-                            <h4 class="c-title-color m-b-2">
-					            <?php esc_html_e( 'Left columns numbers', 'wpdatatables' ); ?>
-                                <i class=" wpdt-icon-info-circle-thin"
-                                   data-popover-content="#fixed-left-columns-number-hint"
-                                   data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
-                            </h4>
-
-                            <!-- Hidden offset for fixed headers hint -->
-                            <div class="hidden" id="fixed-left-columns-number-hint">
-                                <div class="popover-heading">
-						            <?php esc_html_e( 'Left columns number', 'wpdatatables' ); ?>
-                                </div>
-
-                                <div class="popover-body">
-						            <?php esc_html_e( 'You can enter the number for fixed left columns here.', 'wpdatatables' ); ?>
-                                </div>
-                            </div>
-                            <!-- /Hidden offset for fixed headers hint -->
-                            <div class="form-group">
-                                <div class="fg-line wdt-custom-number-input">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-minus"
-                                            data-type="minus"
-                                            data-field="wdt-fixed-columns-left-number">
-                                        <i class="wpdt-icon-minus"></i>
-                                    </button>
-                                    <input disabled type="number" name="wdt-fixed-columns-left-number" min="0" value="1"
-                                           class="form-control input-sm input-number"
-                                           id="wdt-fixed-columns-left-number">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-plus"
-                                            data-type="plus"
-                                            data-field="wdt-fixed-columns-left-number">
-                                        <i class="wpdt-icon-plus-full"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 m-b-16 advanced-table-settings-block-fixed-columns">
-
-                            <h4 class="c-title-color m-b-2">
-					            <?php esc_html_e( 'Right columns numbers', 'wpdatatables' ); ?>
-                                <i class=" wpdt-icon-info-circle-thin"
-                                   data-popover-content="#fixed-right-columns-number-hint"
-                                   data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
-                            </h4>
-
-                            <!-- Hidden offset for fixed headers hint -->
-                            <div class="hidden" id="fixed-right-columns-number-hint">
-                                <div class="popover-heading">
-						            <?php esc_html_e( 'Right columns number', 'wpdatatables' ); ?>
-                                </div>
-
-                                <div class="popover-body">
-						            <?php esc_html_e( 'You can enter the number for fixed right columns here.', 'wpdatatables' ); ?>
-                                </div>
-                            </div>
-                            <!-- /Hidden offset for fixed headers hint -->
-                            <div class="form-group">
-                                <div class="fg-line wdt-custom-number-input">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-minus"
-                                            data-type="minus"
-                                            data-field="wdt-fixed-columns-right-number">
-                                        <i class="wpdt-icon-minus"></i>
-                                    </button>
-                                    <input disabled type="number" name="wdt-fixed-columns-right-number" min="0" value="0"
-                                           class="form-control input-sm input-number"
-                                           id="wdt-fixed-columns-right-number">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-plus"
-                                            data-type="plus"
-                                            data-field="wdt-fixed-columns-right-number">
-                                        <i class="wpdt-icon-plus-full"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row opacity-5">
-                        <div class="col-sm-4 m-b-16">
-
-                            <h4 class="c-title-color m-b-2 wdt-beta-feature">
-					            <?php esc_html_e( 'Fixed headers', 'wpdatatables' ); ?>
-                                <p class="m-b-2 wdt-fixedheaders wdt-beta-feature"><?php esc_html_e( 'BETA', 'wpdatatables' ); ?></p>
-                                <i class=" wpdt-icon-info-circle-thin" data-popover-content="#fixed-headers-hint"
-                                   data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
-                            </h4>
-
-                            <!-- Hidden popover for fixed header -->
-                            <div class="hidden" id="fixed-headers-hint">
-                                <div class="popover-heading">
-						            <?php esc_html_e( 'Fixed header', 'wpdatatables' ); ?>
-                                </div>
-
-                                <div class="popover-body">
-						            <?php esc_html_e( 'Enable this to make header fixed.', 'wpdatatables' ); ?>
-                                </div>
-                            </div>
-                            <!-- /Hidden popover for fixed header -->
-
-                            <div class="toggle-switch" data-ts-color="blue">
-                                <input id="wdt-fixed-header" disabled type="checkbox">
-                                <label for="wdt-fixed-header"
-                                       class="ts-label"><?php esc_html_e( 'Enable fixed header', 'wpdatatables' ); ?></label>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-4 m-b-16 advanced-table-settings-block-fixed-header">
-
-                            <h4 class="c-title-color m-b-2">
-					            <?php esc_html_e( 'Header offset', 'wpdatatables' ); ?>
-                                <i class=" wpdt-icon-info-circle-thin" data-popover-content="#fixed-header-offset-hint"
-                                   data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
-                            </h4>
-
-                            <!-- Hidden offset for fixed headers hint -->
-                            <div class="hidden" id="fixed-header-offset-hint">
-                                <div class="popover-heading">
-						            <?php esc_html_e( 'Header offset', 'wpdatatables' ); ?>
-                                </div>
-
-                                <div class="popover-body">
-						            <?php esc_html_e( 'You can enter the offset for fixed header here.', 'wpdatatables' ); ?>
-                                </div>
-                            </div>
-                            <!-- /Hidden offset for fixed headers hint -->
-                            <div class="form-group">
-                                <div class="fg-line wdt-custom-number-input">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-minus"
-                                            data-type="minus"
-                                            data-field="wdt-fixed-header-offset">
-                                        <i class="wpdt-icon-minus"></i>
-                                    </button>
-                                    <input disabled type="number" name="wdt-fixed-header-offset" min="1" value="0"
-                                           class="form-control input-sm input-number" id="wdt-fixed-header-offset">
-                                    <button disabled type="button" class="btn btn-default wdt-btn-number wdt-button-plus"
-                                            data-type="plus"
-                                            data-field="wdt-fixed-header-offset">
-                                        <i class="wpdt-icon-plus-full"></i>
-                                    </button>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="wpdt-custom-center-flex" style="align-items: center;">
+                            <img src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/fixed-columns-preview.gif" alt="Fixed columns"/>
+                            <img src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/fixed-header-preview.gif" alt="Fixed header"/>
                         </div>
                     </div>
                 </div>
