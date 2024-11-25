@@ -184,6 +184,13 @@
         });
 
         /**
+         * Set pagination layout for mobile devices
+         */
+        $('#wdt-pagination-layout-mobile').change(function (e) {
+            wpdatatable_config.setPaginationLayoutMobile($(this).val());
+        });
+
+        /**
          * Toggle Vertical scroll
          */
         $('#wdt-vertical-scroll').change(function (e) {

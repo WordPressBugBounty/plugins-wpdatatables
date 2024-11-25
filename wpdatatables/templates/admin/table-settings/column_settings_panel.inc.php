@@ -59,6 +59,11 @@
                            aria-controls="column-conditional-formatting-settings" role="tab"
                            data-toggle="html-input-premium-popover" data-placement="bottom" title="" data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Conditional formatting', 'wpdatatables'); ?></span></a>
                     </li>
+                    <li class="column-transform-value-tab">
+                        <a href="#column-transform-value"
+                           aria-controls="column-transform-value" role="tab"
+                           data-toggle="html-input-premium-popover" data-placement="bottom" title="" data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Transform value', 'wpdatatables'); ?></a>
+                    </li>
                 </ul>
                 <!-- /ul .tab-nav -->
 
@@ -1160,6 +1165,17 @@
 
                     </div>
                     <!--/#column-conditional-formatting-settings -->
+
+                    <!-- Column transform value settings -->
+                    <div role="tabpanel" class="tab-pane"  id="column-transform-value">
+
+                        <?php echo '<div class="alert alert-warning alert-dismissible" role="alert">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="wpdt-icon-times-full"></i></span>
+        </button>
+        This feature is available in the <a class="tms-store-checkout-wpdatatables">Premium version of wpDataTables.</a>
+    </div>' ?>
+                    </div>
+                    <!--/#column-transform-value-->
 
                 </div>
                 <!-- /.tab-content -->

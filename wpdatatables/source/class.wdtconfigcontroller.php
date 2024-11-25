@@ -165,6 +165,7 @@ class WDTConfigController {
             $table->pagination = (isset($advancedSettings->pagination)) ? $advancedSettings->pagination : 1;
             $table->paginationAlign = (isset($advancedSettings->paginationAlign)) ? $advancedSettings->paginationAlign : 'right';
             $table->paginationLayout = (isset($advancedSettings->paginationLayout)) ? $advancedSettings->paginationLayout : 'full_numbers';
+            $table->paginationLayoutMobile = (isset($advancedSettings->paginationLayoutMobile)) ? $advancedSettings->paginationLayoutMobile : 'simple';
             $table->global_search = (isset($advancedSettings->global_search)) ? $advancedSettings->global_search : 1;
             $table->showRowsPerPage = (isset($advancedSettings->showRowsPerPage)) ? $advancedSettings->showRowsPerPage : 1;
             $table->clearFilters = (isset($advancedSettings->clearFilters)) ? $advancedSettings->clearFilters : 0;
@@ -299,6 +300,7 @@ class WDTConfigController {
                     'pagination' => $table->pagination,
                     'paginationAlign' => $table->paginationAlign,
                     'paginationLayout' => $table->paginationLayout,
+                    'paginationLayoutMobile' => $table->paginationLayoutMobile,
                     'global_search' => $table->global_search,
                     'showRowsPerPage' => $table->showRowsPerPage,
                     'clearFilters' => $table->clearFilters,
@@ -379,6 +381,7 @@ class WDTConfigController {
         $table->pagination = (int)$table->pagination;
         $table->paginationAlign = sanitize_text_field($table->paginationAlign);
         $table->paginationLayout = sanitize_text_field($table->paginationLayout);
+        $table->paginationLayoutMobile = sanitize_text_field($table->paginationLayoutMobile);
         $table->file_location = sanitize_text_field($table->file_location);
         $table->simpleResponsive = (int)$table->simpleResponsive;
         $table->simpleHeader = (int)$table->simpleHeader;
@@ -1171,6 +1174,7 @@ class WDTConfigController {
         $table->pagination = 1;
         $table->paginationAlign = 'right';
         $table->paginationLayout = 'full_numbers';
+        $table->paginationLayoutMobile = 'simple';
         $table->file_location = 'wp_media_lib';
         $table->simpleResponsive = 0;
 	    $table->cache_source_data = 0;

@@ -50,14 +50,17 @@
                                 <?php if (!empty($chartId) && ($chartObj->getEngine() == 'chartjs')){ ?>selected="selected"<?php } ?> >
                             <?php esc_html_e('Chart.js', 'wpdatatables'); ?>
                         </option>
-                        <option disabled class="wdt-premium-option-disabled" value="apexcharts" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span'><?php _e('ApexCharts', 'wpdatatables'); ?> <span class='wdt-premium'><?php _e('Available in Premium', 'wpdatatables'); ?></span></span>"
+                        <option value="apexcharts"
                                 <?php if (!empty($chartId) && ($chartObj->getEngine() == 'apexcharts')){ ?>selected="selected"<?php } ?> >
+                            <?php esc_html_e('Apexcharts', 'wpdatatables'); ?>
                         </option>
-                        <option disabled class="wdt-premium-option-disabled" value="highcharts" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span'><?php _e('HighCharts', 'wpdatatables'); ?> <span class='wdt-premium'><?php _e('Available in Premium', 'wpdatatables'); ?></span></span>"
+                        <option value="highcharts"
                                 <?php if (!empty($chartId) && ($chartObj->getEngine() == 'highcharts')){ ?>selected="selected"<?php } ?> >
+                            <?php esc_html_e('HighCharts', 'wpdatatables'); ?>
                         </option>
-                        <option disabled class="wdt-premium-option-disabled" value="highstock" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span'><?php _e('HighCharts Stock', 'wpdatatables'); ?> <span class='wdt-premium'><?php _e('Available in Premium', 'wpdatatables'); ?></span></span>"
+                        <option value="highstock"
                                 <?php if (!empty($chartId) && ($chartObj->getEngine() == 'highstock')){ ?>selected="selected"<?php } ?> >
+                            <?php esc_html_e('HighCharts Stock', 'wpdatatables'); ?>
                         </option>
                     </select>
                 </div>
@@ -87,6 +90,14 @@
 
     </div>
     <!-- /div.highcharts-charts-type -->
+
+    <!-- div.apexcharts-charts-type -->
+        <?php include WDT_TEMPLATE_PATH . 'admin/chart_wizard/steps/charts_pick/apexcharts.inc.php'; ?>
+    <!-- /div.apexcharts-charts-type -->
+
+    <!-- div.highstock-charts-type -->
+        <?php include WDT_TEMPLATE_PATH . 'admin/chart_wizard/steps/charts_pick/highstock.inc.php'; ?>
+    <!-- /div.highstock-charts-type -->
 
     <!-- div.chartjs-charts-type -->
     <div class="charts-type chartjs-charts-type col-sm-12 col-md-12">

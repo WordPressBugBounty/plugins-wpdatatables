@@ -1243,6 +1243,17 @@ var wdtChartColumnsData = {};
                 $('div.alert-info').hide();
                 $('div.alert-warning').show();
                 $('#wdt-chart-wizard-next-step').prop('disabled',true);
+            } else if ($(this).val() == 'apexcharts') {
+                $('div.apexcharts-charts-type').show();
+                $('div.alert-info').hide();
+                $('div.alert-warning').show();
+                $('#wdt-chart-wizard-next-step').prop('disabled',true);
+            }   else if ($(this).val() == 'highstock') {
+                $('div.highstock-charts-type').show();
+                $('div.alert-info').hide();
+                $('div.alert-warning').show();
+                $('#wdt-chart-wizard-next-step').prop('disabled', true);
+
             }
         } else {
             $('div.alert-info').hide();

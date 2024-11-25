@@ -390,11 +390,15 @@
 
 .wpdt-c .wdt-chart-wizard .charts-type.google-charts-type,
 .wpdt-c .wdt-chart-wizard .charts-type.highcharts-charts-type,
+.wpdt-c .wdt-chart-wizard .charts-type.apexcharts-charts-type,
+.wpdt-c .wdt-chart-wizard .charts-type.highstock-charts-type,
 .wpdt-c .wdt-chart-wizard .charts-type.chartjs-charts-type {
     display: none;
 }
 .wpdt-c .wdt-chart-wizard .charts-type.google-charts-type.disabled,
 .wpdt-c .wdt-chart-wizard .charts-type.highcharts-charts-type.disabled,
+.wpdt-c .wdt-chart-wizard .charts-type.apexcharts-charts-type.disabled,
+.wpdt-c .wdt-chart-wizard .charts-type.highstock-charts-type.disabled,
 .wpdt-c .wdt-chart-wizard .charts-type.chartjs-charts-type.disabled {
     opacity: .5;
     pointer-events: none;
@@ -565,4 +569,34 @@
     user-select: none;
     -webkit-user-select: none;
     cursor: not-allowed !important;
+}
+.wpdt-c .charts-type.highstock-charts-type.highstock-not-available-notice,
+.wpdt-c .charts-type.apexcharts-charts-type.apexcharts-not-available-notice,
+.wpdt-c .charts-type.highcharts-charts-type.highcharts-not-available-notice {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.wpdt-c .charts-type.highstock-charts-type.highstock-not-available-notice .btn a,
+.wpdt-c .charts-type.highstock-charts-type.highstock-not-available-notice .btn a:hover,
+.wpdt-c .charts-type.highcharts-charts-type.highcharts-not-available-notice .btn a,
+.wpdt-c .charts-type.highcharts-charts-type.highcharts-not-available-notice .btn a:hover,
+.wpdt-c .charts-type.apexcharts-charts-type.apexcharts-not-available-notice .btn a,
+.wpdt-c .charts-type.apexcharts-charts-type.apexcharts-not-available-notice .btn a:hover {
+    color: #ffffff;
+}
+
+.wpdt-c .charts-type.highstock-charts-type.highstock-not-available-notice .btn a:hover,
+.wpdt-c .charts-type.highcharts-charts-type.highcharts-not-available-notice .btn a:hover,
+.wpdt-c .charts-type.apexcharts-charts-type.apexcharts-not-available-notice .btn a:hover {
+    background-color: #0B86EC !important;
+}
+
+.wpdt-c .highcharts-img,
+.wpdt-c .apexchats-img,
+.wpdt-c .highstock-img {
+    width: 100%;
+    max-width: 1440px;
 }

@@ -31,6 +31,7 @@ var wpdatatable_config = {
     pagination: 1,
     paginationAlign: 'right',
     paginationLayout: 'full_numbers',
+    paginationLayoutMobile: 'simple',
     simpleResponsive: 0,
     simpleHeader: 0,
     stripeTable: 0,
@@ -534,12 +535,15 @@ var wpdatatable_config = {
         if (pagination == 1) {
             jQuery('.pagination-align-settings-block').removeClass('hidden');
             jQuery('.pagination-layout-settings-block').removeClass('hidden');
+            jQuery('.pagination-layout-mobile-settings-block').removeClass('hidden');
             jQuery('.pagination-on-top').removeClass('hidden');
         } else {
             wpdatatable_config.setPaginationAlign('right');
             wpdatatable_config.setPaginationLayout('full_numbers');
+            wpdatatable_config.setPaginationLayoutMobile('simple');
             jQuery('.pagination-align-settings-block').addClass('hidden');
             jQuery('.pagination-layout-settings-block').addClass('hidden');
+            jQuery('.pagination-layout-mobile-settings-block').addClass('hidden');
             jQuery('.pagination-on-top').addClass('hidden');
         }
     },
@@ -562,6 +566,16 @@ var wpdatatable_config = {
         jQuery('#wdt-pagination-layout')
             .val(paginationLayout)
             .wdtBootstrapSelectPicker('refresh');
+    },
+    /**
+     * Set pagination layout for mobile devices
+     * @param paginationLayout string
+     */
+    setPaginationLayoutMobile: function( paginationLayout ){
+        wpdatatable_config.paginationLayoutMobile = paginationLayout;
+        jQuery('#wdt-pagination-layout-mobile')
+            .val( paginationLayout )
+            .selectpicker( 'refresh' );
     },
     /**
      * Enable or disable simple responsive
@@ -1099,6 +1113,7 @@ var wpdatatable_config = {
         wpdatatable_config.setPagination(parseInt(tableJSON.pagination));
         wpdatatable_config.setPaginationAlign(tableJSON.paginationAlign);
         wpdatatable_config.setPaginationLayout(tableJSON.paginationLayout);
+        wpdatatable_config.setPaginationLayoutMobile( tableJSON.paginationLayoutMobile );
         wpdatatable_config.setSimpleHeader(parseInt(tableJSON.simpleHeader));
         wpdatatable_config.setStripeTable(parseInt(tableJSON.stripeTable));
         wpdatatable_config.setCellPadding(parseInt(tableJSON.cellPadding));

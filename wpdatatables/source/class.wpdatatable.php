@@ -83,6 +83,8 @@ class WPDataTable
     private $_pagination = true;
     private $_paginationAlign = 'right';
     private $_paginationLayout = 'full_numbers';
+    private $_paginationLayoutMobile = 'simple';
+
     private $_simpleResponsive = false;
     private $_verticalScroll = false;
     private $_simpleHeader = false;
@@ -740,6 +742,9 @@ class WPDataTable
     public function setPaginationAlign($paginationAlign)
     {
         $this->_paginationAlign = $paginationAlign;
+        if (wp_is_mobile()) {
+            $this->_paginationAlign = 'center';
+        }
     }
 
     /**
@@ -756,6 +761,22 @@ class WPDataTable
     public function setPaginationLayout($paginationLayout)
     {
         $this->_paginationLayout = $paginationLayout;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaginationLayoutMobile()
+    {
+        return $this->_paginationLayoutMobile;
+    }
+
+    /**
+     * @param string $paginationLayout
+     */
+    public function setPaginationLayoutMobile($paginationLayout)
+    {
+        $this->_paginationLayoutMobile = $paginationLayout;
     }
 
     /**
@@ -2439,6 +2460,7 @@ class WPDataTable
             isset($advancedSettings->pagination) ? $this->setPagination($advancedSettings->pagination) : $this->setPagination(true);
             isset($advancedSettings->paginationAlign) ? $this->setPaginationAlign($advancedSettings->paginationAlign) : $this->setPaginationAlign('right');
             isset($advancedSettings->paginationLayout) ? $this->setPaginationLayout($advancedSettings->paginationLayout) : $this->setPaginationLayout('full_numbers');
+            isset($advancedSettings->paginationLayoutMobile) ? $this->setPaginationLayoutMobile($advancedSettings->paginationLayoutMobile) : $this->setPaginationLayoutMobile('simple');
             isset($advancedSettings->showTableToolsIncludeHTML) ? $this->setTableToolsIncludeHTML($advancedSettings->showTableToolsIncludeHTML) : $this->setTableToolsIncludeHTML(false);
             isset($advancedSettings->showTableToolsIncludeTitle) ? $this->setTableToolsIncludeTitle($advancedSettings->showTableToolsIncludeTitle) : $this->setTableToolsIncludeTitle(false);
             isset($advancedSettings->pdfPaperSize) ? $this->setPdfPaperSize($advancedSettings->pdfPaperSize) : $this->setPdfPaperSize('A4');
@@ -2464,6 +2486,7 @@ class WPDataTable
             $this->setPagination(true);
             $this->setPaginationAlign('right');
             $this->setPaginationLayout('full_numbers');
+            $this->setPaginationLayoutMobile('simple');
             $this->setTableToolsIncludeHTML(false);
             $this->setTableToolsIncludeTitle(false);
             $this->setPdfPaperSize('A4');
@@ -2610,6 +2633,7 @@ class WPDataTable
         $obj->pagination = $this->isPagination();
         $obj->paginationAlign = $this->getPaginationAlign();
         $obj->paginationLayout = $this->getPaginationLayout();
+        $obj->paginationLayoutMobile = $this->getPaginationLayoutMobile();
         $obj->file_location = $this->getFileLocation();
         $obj->table_wcag = $this->isTableWCAG();
         $obj->simple_template_id = $this->getSimpleTemplateId();
@@ -2646,7 +2670,11 @@ class WPDataTable
 
         if ($this->paginationEnabled()) {
             $obj->dataTableParams->bPaginate = true;
-            $obj->dataTableParams->sPaginationType = $this->getPaginationLayout();
+            if (wp_is_mobile()) {
+                $obj->dataTableParams->sPaginationType = $this->getPaginationLayoutMobile();
+            } else {
+                $obj->dataTableParams->sPaginationType = $this->getPaginationLayout();
+            }
             $obj->dataTableParams->aLengthMenu = json_decode('[[1,5,10,25,50,100,-1],[1,5,10,25,50,100,"' . __('All', 'wpdatatables') . '"]]');
             $obj->dataTableParams->iDisplayLength = (int)$this->getDisplayLength();
         } else {

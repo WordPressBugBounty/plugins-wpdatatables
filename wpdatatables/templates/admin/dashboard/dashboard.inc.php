@@ -337,13 +337,13 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            New update:
+                            Update with new features and bug fixes:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Compatibility with WordPres 6.7 version approved.</li>
-                                <li>Updated page Lite vs Premium.</li>
+                                <li><strong>Feature: </strong>New responsive option – Pagination Layout on mobile.</li>
+                                <li>Compatibility with WordPress 6.7 version approved.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
