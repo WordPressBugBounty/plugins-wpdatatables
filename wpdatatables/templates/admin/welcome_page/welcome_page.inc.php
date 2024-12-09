@@ -82,7 +82,7 @@
                                          src="<?php echo WDT_ASSETS_PATH ?>img/constructor/create-simple-table.png">
                                 </div>
                                 <div class="wdt-wizard-options-desc pull-left">
-                                    <span class="text-left"><?php esc_html_e('NEW! Create Simple tables', 'wpdatatables'); ?>.</span>
+                                    <span class="text-left"><?php esc_html_e('Create Simple tables', 'wpdatatables'); ?>.</span>
                                     <span class="wdt-lite"> <?php esc_html_e('Available in Lite ', 'wpdatatables'); ?></span>
                                 </div>
                                 <div class="clear"></div>
@@ -101,7 +101,7 @@
                             <div class="col-sm-4 p-0 wdt-wizard-options-details">
                                 <div class="wdt-wizard-options-img pull-left">
                                     <img class="img-responsive"
-                                         src="<?php echo WDT_ASSETS_PATH ?>img/constructor/add-from-data-source.png">
+                                         src="<?php echo WDT_ASSETS_PATH ?>img/constructor/chartJsLite.png">
                                 </div>
                                 <div class="wdt-wizard-options-desc pull-left">
                                     <span class="text-left"><?php esc_html_e('Create charts with Google Charts and Chart.js', 'wpdatatables'); ?>.</span>
@@ -161,6 +161,28 @@
                                 </div>
                                 <div class="wdt-wizard-options-desc pull-left">
                                     <span class="text-left"><?php esc_html_e('Generate a query to the MySQL database', 'wpdatatables'); ?>.</span>
+                                    <span class="wdt-premium"> <?php esc_html_e('Available in Premium ', 'wpdatatables'); ?></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="col-sm-4 p-0 wdt-wizard-options-details">
+                                <div class="wdt-wizard-options-img pull-left">
+                                    <img class="img-responsive"
+                                         src="<?php echo WDT_ASSETS_PATH ?>img/constructor/wpPostLite.png">
+                                </div>
+                                <div class="wdt-wizard-options-desc pull-left">
+                                    <span class="text-left"><strong style="color: #FD800C;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></strong><?php esc_html_e(' Build tables with custom post types, Meta and ACF', 'wpdatatables'); ?>.</span>
+                                    <span class="wdt-premium"> <?php esc_html_e('Available in Premium ', 'wpdatatables'); ?></span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="col-sm-4 p-0 wdt-wizard-options-details">
+                                <div class="wdt-wizard-options-img pull-left">
+                                    <img class="img-responsive"
+                                         src="<?php echo WDT_ASSETS_PATH ?>img/constructor/wooLite.png">
+                                </div>
+                                <div class="wdt-wizard-options-desc pull-left">
+                                    <span class="text-left"><strong style="color: #FD800C;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></strong><?php esc_html_e(' Create WooCommerce product table', 'wpdatatables'); ?>.</span>
                                     <span class="wdt-premium"> <?php esc_html_e('Available in Premium ', 'wpdatatables'); ?></span>
                                 </div>
                                 <div class="clear"></div>

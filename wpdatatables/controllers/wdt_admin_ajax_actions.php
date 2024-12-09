@@ -510,7 +510,7 @@ function wdtListAllCharts()
         exit();
     }
 
-    echo json_encode(WPDataChart::getAllCharts());
+    echo json_encode(WPDataChart::getAll());
     exit();
 }
 

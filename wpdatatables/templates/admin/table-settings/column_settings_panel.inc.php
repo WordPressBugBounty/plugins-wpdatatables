@@ -57,12 +57,15 @@
                     <li class="column-conditional-formatting-settings-tab">
                         <a href="#column-conditional-formatting-settings"
                            aria-controls="column-conditional-formatting-settings" role="tab"
-                           data-toggle="html-input-premium-popover" data-placement="bottom" title="" data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Conditional formatting', 'wpdatatables'); ?></span></a>
+                           data-toggle="html-input-premium-popover" data-placement="bottom" title=""
+                           data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span
+                                    class="opacity-6"><?php esc_html_e('Conditional formatting', 'wpdatatables'); ?></span></a>
                     </li>
                     <li class="column-transform-value-tab">
-                        <a href="#column-transform-value"
-                           aria-controls="column-transform-value" role="tab"
-                           data-toggle="html-input-premium-popover" data-placement="bottom" title="" data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Transform value', 'wpdatatables'); ?></a>
+                        <a href="#column-transform-value" aria-controls="column-transform-value" role="tab"
+                           data-toggle="html-input-premium-popover" data-placement="bottom" title=""
+                           data-content="content"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span
+                                    class="opacity-6"><?php esc_html_e('Transform value', 'wpdatatables'); ?></span></a>
                     </li>
                 </ul>
                 <!-- /ul .tab-nav -->
@@ -94,11 +97,14 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="fg-line wdt-custom-number-input">
-                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-minus" data-type="minus" data-field="wdt-column-position">
+                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-minus"
+                                                data-type="minus" data-field="wdt-column-position">
                                             <i class="wpdt-icon-minus"></i>
                                         </button>
-                                        <input type="number" name="wdt-column-position" min="0" value="" class="form-control input-sm input-number" id="wdt-column-position">
-                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-plus" data-type="plus" data-field="wdt-column-position">
+                                        <input type="number" name="wdt-column-position" min="0" value=""
+                                               class="form-control input-sm input-number" id="wdt-column-position">
+                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-plus"
+                                                data-type="plus" data-field="wdt-column-position">
                                             <i class="wpdt-icon-plus-full"></i>
                                         </button>
                                     </div>
@@ -113,7 +119,8 @@
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2">
                                     <?php esc_html_e('Cell content prefix', 'wpdatatables'); ?>
-                                    <i class="wpdt-icon-info-circle-thin" data-popover-content="#column-cell-prefix-hint"
+                                    <i class="wpdt-icon-info-circle-thin"
+                                       data-popover-content="#column-cell-prefix-hint"
                                        data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
                                 </h4>
 
@@ -143,7 +150,8 @@
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2">
                                     <?php esc_html_e('Cell content suffix', 'wpdatatables'); ?>
-                                    <i class="wpdt-icon-info-circle-thin" data-popover-content="#column-cell-suffix-hint"
+                                    <i class="wpdt-icon-info-circle-thin"
+                                       data-popover-content="#column-cell-suffix-hint"
                                        data-toggle="html-popover" data-trigger="hover" data-placement="right"></i>
                                 </h4>
 
@@ -252,13 +260,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2">
-			                        <?php esc_html_e('Column header alignment', 'wpdatatables'); ?>
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right" title=""
+                                    <?php esc_html_e('Column header alignment', 'wpdatatables'); ?>
+                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
+                                       title=""
                                        data-original-title="<?php esc_attr_e('You can override the default alignment for the column header here.', 'wpdatatables'); ?>"></i>
                                 </h4>
                                 <div class="fg-line">
                                     <div class="select">
-                                        <select class="form-control selectpicker" id="wdt-column-align-header" autocomplete="off"
+                                        <select class="form-control selectpicker" id="wdt-column-align-header"
+                                                autocomplete="off"
                                                 title="<?php esc_attr_e('Default', 'wpdatatables'); ?>">
                                             <option value="left"><?php esc_html_e('Left', 'wpdatatables'); ?></option>
                                             <option value="center"><?php esc_html_e('Center', 'wpdatatables'); ?></option>
@@ -269,13 +279,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2">
-				                    <?php esc_html_e('Column cells alignment', 'wpdatatables'); ?>
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right" title=""
+                                    <?php esc_html_e('Column cells alignment', 'wpdatatables'); ?>
+                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
+                                       title=""
                                        data-original-title="<?php esc_attr_e('You can override the default alignment for the column cells here.', 'wpdatatables'); ?>"></i>
                                 </h4>
                                 <div class="fg-line">
                                     <div class="select">
-                                        <select class="form-control selectpicker" id="wdt-column-align-fields" autocomplete="off"
+                                        <select class="form-control selectpicker" id="wdt-column-align-fields"
+                                                autocomplete="off"
                                                 title="<?php esc_attr_e('Default', 'wpdatatables'); ?>">
                                             <option value="left"><?php esc_html_e('Left', 'wpdatatables'); ?></option>
                                             <option value="center"><?php esc_html_e('Center', 'wpdatatables'); ?></option>
@@ -373,18 +385,24 @@
 
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2 wdt-beta-feature opacity-6">
-			                        <?php esc_html_e('Column header text rotation', 'wpdatatables'); ?>
+                                    <?php esc_html_e('Column header text rotation', 'wpdatatables'); ?>
                                     <p class="m-b-2 wdt-beta-feature"><?php esc_html_e('BETA', 'wpdatatables'); ?></p>
-                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right" title=""
+                                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
+                                       title=""
                                        data-original-title="<?php esc_attr_e('Here you can override the default rotation for the column header text.', 'wpdatatables'); ?>"></i>
                                 </h4>
                                 <div class="fg-line">
                                     <div class="select">
-                                        <select class="form-control selectpicker" id="wdt-column-rotate-header-name" autocomplete="off" data-toggle="html-premium-popover" data-placement="top" data-content="content"
+                                        <select class="form-control selectpicker" id="wdt-column-rotate-header-name"
+                                                autocomplete="off" data-toggle="html-premium-popover"
+                                                data-placement="top" data-content="content"
                                                 title="<?php esc_attr_e('Default', 'wpdatatables'); ?>">
-                                            <option value="360" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('-90', 'wpdatatables'); ?></span>"></option>
-                                            <option value="" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('0', 'wpdatatables'); ?></span>"></option>
-                                            <option value="180" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('90', 'wpdatatables'); ?></span>"></option>
+                                            <option value="360"
+                                                    data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('-90', 'wpdatatables'); ?></span>"></option>
+                                            <option value=""
+                                                    data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('0', 'wpdatatables'); ?></span>"></option>
+                                            <option value="180"
+                                                    data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('90', 'wpdatatables'); ?></span>"></option>
                                         </select>
                                     </div>
                                 </div>
@@ -450,12 +468,15 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="fg-line wdt-custom-number-input">
-                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-minus" data-type="minus" data-field="wdt-column-decimal-places">
+                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-minus"
+                                                data-type="minus" data-field="wdt-column-decimal-places">
                                             <i class="wpdt-icon-minus"></i>
                                         </button>
-                                        <input type="number" name="wdt-column-decimal-places" min="1" value="" class="form-control input-sm input-number"
+                                        <input type="number" name="wdt-column-decimal-places" min="1" value=""
+                                               class="form-control input-sm input-number"
                                                id="wdt-column-decimal-places">
-                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-plus" data-type="plus" data-field="wdt-column-decimal-places">
+                                        <button type="button" class="btn btn-default wdt-btn-number wdt-button-plus"
+                                                data-type="plus" data-field="wdt-column-decimal-places">
                                             <i class="wpdt-icon-plus-full"></i>
                                         </button>
                                     </div>
@@ -487,10 +508,14 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <div class="select">
-                                            <select class="selectpicker" id="wdt-column-values" data-toggle="html-premium-popover" data-placement="top" title="" data-content="content" >
+                                            <select class="selectpicker" id="wdt-column-values"
+                                                    data-toggle="html-premium-popover" data-placement="top" title=""
+                                                    data-content="content">
                                                 <option value="read"><?php esc_html_e('Read from table on page load', 'wpdatatables'); ?></option>
-                                                <option value="list" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span class='opacity-6' ><?php esc_html_e('Define values list', 'wpdatatables'); ?></span>"></option>
-                                                <option value="foreignkey" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span class='opacity-6' ><?php esc_html_e('Use values from another wpDataTable (foreign key)', 'wpdatatables'); ?></span>"></option>
+                                                <option value="list"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span class='opacity-6' ><?php esc_html_e('Define values list', 'wpdatatables'); ?></span>"></option>
+                                                <option value="foreignkey"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i><span class='opacity-6' ><?php esc_html_e('Use values from another wpDataTable (foreign key)', 'wpdatatables'); ?></span>"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -544,7 +569,9 @@
                                     <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
                                        title="<?php esc_attr_e('Enter the possible values for this column in this list, separate by pressing ENTER or comma. Click "Read from table" to fetch the list from existing column values. Values will be used in selectbox and checkbox filters and editors for the column.', 'wpdatatables'); ?>"></i>
                                     <button class="btn btn-danger btn-xs pull-right"
-                                            id="wdt-column-values-reset"><i class="wpdt-icon-exclamation-triangle"></i><?php esc_html_e('Reset', 'wpdatatables'); ?></button>
+                                            id="wdt-column-values-reset"><i
+                                                class="wpdt-icon-exclamation-triangle"></i><?php esc_html_e('Reset', 'wpdatatables'); ?>
+                                    </button>
                                     <button class="btn btn-xs pull-right"
                                             id="wdt-column-values-read-from-table"><?php esc_html_e('Read from table', 'wpdatatables'); ?></button>
                                     <div class="clear"></div>
@@ -561,7 +588,8 @@
                                 <div class="col-sm-6 wdt-foreign-values p-l-0">
                                     <h4 class="c-title-color m-b-2">
                                         <?php esc_html_e('Use values from another wpDataTable', 'wpdatatables'); ?>
-                                        <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="bottom"
+                                        <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip"
+                                           data-placement="bottom"
                                            title="<?php esc_attr_e('Configure a relation with a separate wpDataTable: values in this column will be used as a foreign key, and replaced with values of a remote table column (e.g.: user name instead of user ID).', 'wpdatatables'); ?>"></i>
                                     </h4>
                                     <div class="form-group">
@@ -592,28 +620,40 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-values-add-empty" type="checkbox" class="d-none wdt-premium-feature" >
-                                        <label for="wdt-column-values-add-empty" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Add an empty value to the list', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-values-add-empty" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-values-add-empty"
+                                               data-toggle="html-checkbox-premium-popover" data-placement="top"
+                                               title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Add an empty value to the list', 'wpdatatables'); ?></span></label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <h4 class="c-title-color m-b-2">
-                                    <span class="opacity-6" ><?php esc_html_e('Number of possible values to load', 'wpdatatables'); ?></span>
+                                    <span class="opacity-6"><?php esc_html_e('Number of possible values to load', 'wpdatatables'); ?></span>
                                     <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
                                        title="<?php esc_attr_e('Define here how many possible values per page will be loaded in selectbox filters and editor inputs. It is recommended not to be set to All if you have more than 50 possible values for this column. This option is not working when Cascade Filtering option from Powerful Filters add-on is enabled.', 'wpdatatables'); ?>"></i>
                                 </h4>
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <div class="select">
-                                            <select class="selectpicker" id="wdt-possible-values-ajax" data-toggle="html-premium-popover" data-placement="top" title="10" data-content="content" >
-                                                <option value="10" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>10</span>"></option>
-                                                <option value="25" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>25</span>"></option>
-                                                <option value="50" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>50</span>"></option>
-                                                <option value="100" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>100</span>"></option>
-                                                <option value="-1" data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('All', 'wpdatatables'); ?></span>"></option>
+                                            <select class="selectpicker" id="wdt-possible-values-ajax"
+                                                    data-toggle="html-premium-popover" data-placement="top" title="10"
+                                                    data-content="content">
+                                                <option value="10"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>10</span>"></option>
+                                                <option value="25"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>25</span>"></option>
+                                                <option value="50"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>50</span>"></option>
+                                                <option value="100"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'>100</span>"></option>
+                                                <option value="-1"
+                                                        data-content="<i class='wpdt-icon-star-full m-r-5' style='color: #FFC078;'></i> <span class='opacity-6'><?php esc_html_e('All', 'wpdatatables'); ?></span>"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -634,12 +674,19 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-calc-total" type="checkbox" class="d-none wdt-premium-feature">
-                                        <label for="wdt-column-calc-total" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Calculate a total for this column', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-calc-total" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-calc-total" data-toggle="html-checkbox-premium-popover"
+                                               data-placement="top" title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Calculate a total for this column', 'wpdatatables'); ?></span></label>
                                     </div>
                                     <div class="m-t-5 wdt-lite-disabled" id="wdt-column-calc-total-shortcode">
-                                        <a class="wdt-copy-shortcode" data-toggle="tooltip" data-shortcode-type="calc-total" title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the total for this column.', 'wpdatatables'); ?>" data-placement="right" >
+                                        <a class="wdt-copy-shortcode" data-toggle="tooltip"
+                                           data-shortcode-type="calc-total"
+                                           title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the total for this column.', 'wpdatatables'); ?>"
+                                           data-placement="right">
                                             <i class="wpdt-icon-copy"></i></a>
                                         <span id="wdt-calc-total-shortcode-id"></span>
                                     </div>
@@ -654,12 +701,19 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-calc-avg" type="checkbox" class="d-none wdt-premium-feature">
-                                        <label for="wdt-column-calc-avg" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Calculate average for this column', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-calc-avg" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-calc-avg" data-toggle="html-checkbox-premium-popover"
+                                               data-placement="top" title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Calculate average for this column', 'wpdatatables'); ?></span></label>
                                     </div>
                                     <div class="m-t-5 wdt-lite-disabled" id="wdt-column-calc-avg-shortcode">
-                                        <a class="wdt-copy-shortcode" data-toggle="tooltip" data-shortcode-type="calc-avg" title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the average for this column.', 'wpdatatables'); ?>" data-placement="right" >
+                                        <a class="wdt-copy-shortcode" data-toggle="tooltip"
+                                           data-shortcode-type="calc-avg"
+                                           title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the average for this column.', 'wpdatatables'); ?>"
+                                           data-placement="right">
                                             <i class="wpdt-icon-copy"></i></a>
                                         <span id="wdt-calc-avg-shortcode-id"></span>
                                     </div>
@@ -674,12 +728,19 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-calc-min" type="checkbox" class="d-none wdt-premium-feature">
-                                        <label for="wdt-column-calc-min" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Find a minimum value for this column', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-calc-min" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-calc-min" data-toggle="html-checkbox-premium-popover"
+                                               data-placement="top" title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Find a minimum value for this column', 'wpdatatables'); ?></span></label>
                                     </div>
                                     <div class="m-t-5 wdt-lite-disabled" id="wdt-column-calc-min-shortcode">
-                                        <a class="wdt-copy-shortcode" data-toggle="tooltip" data-shortcode-type="calc-min" title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the minimum for this column.', 'wpdatatables'); ?>" data-placement="right" >
+                                        <a class="wdt-copy-shortcode" data-toggle="tooltip"
+                                           data-shortcode-type="calc-min"
+                                           title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the minimum for this column.', 'wpdatatables'); ?>"
+                                           data-placement="right">
                                             <i class="wpdt-icon-copy"></i></a>
                                         <span id="wdt-calc-min-shortcode-id"></span>
                                     </div>
@@ -694,12 +755,19 @@
                                 </h4>
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-calc-max" type="checkbox" class="d-none wdt-premium-feature">
-                                        <label for="wdt-column-calc-max" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Find a maximum value for this column', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-calc-max" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-calc-max" data-toggle="html-checkbox-premium-popover"
+                                               data-placement="top" title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Find a maximum value for this column', 'wpdatatables'); ?></span></label>
                                     </div>
                                     <div class="m-t-5 wdt-lite-disabled" id="wdt-column-calc-max-shortcode">
-                                        <a class="wdt-copy-shortcode" data-toggle="tooltip" data-shortcode-type="calc-max" title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the maximum for this column.', 'wpdatatables'); ?>" data-placement="right" >
+                                        <a class="wdt-copy-shortcode" data-toggle="tooltip"
+                                           data-shortcode-type="calc-max"
+                                           title="<?php esc_attr_e('Click to copy this shortcode. By placing this shortcode anywhere in your posts or pages you can see the maximum for this column.', 'wpdatatables'); ?>"
+                                           data-placement="right">
                                             <i class="wpdt-icon-copy"></i></a>
                                         <span id="wdt-calc-max-shortcode-id"></span>
                                     </div>
@@ -741,7 +809,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-6 wdt-link-button-label-block" >
+                            <div class="col-sm-6 wdt-link-button-label-block">
                                 <h4 class="c-title-color m-b-2">
                                     <?php esc_html_e('Button text', 'wpdatatables'); ?>
                                     <i class="wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
@@ -915,9 +983,14 @@
 
                                 <div class="form-group">
                                     <div class="toggle-switch" data-ts-color="blue">
-                                        <input id="wdt-column-enable-filter" type="checkbox" class="d-none wdt-premium-feature">
-                                        <label for="wdt-column-enable-filter" data-toggle="html-checkbox-premium-popover" data-placement="top" title="title" data-content="content"
-                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6"><?php esc_html_e('Allow filtering', 'wpdatatables'); ?></span></label>
+                                        <input id="wdt-column-enable-filter" type="checkbox"
+                                               class="d-none wdt-premium-feature">
+                                        <label for="wdt-column-enable-filter"
+                                               data-toggle="html-checkbox-premium-popover" data-placement="top"
+                                               title="title" data-content="content"
+                                               class="ts-label"><i class="wpdt-icon-star-full m-r-5"
+                                                                   style="color: #FFC078;"></i><span
+                                                    class="opacity-6"><?php esc_html_e('Allow filtering', 'wpdatatables'); ?></span></label>
                                     </div>
                                 </div>
                             </div>
@@ -1033,7 +1106,7 @@
                                      hidden="hidden">
                                     <div class="fg-line">
                                         <input type="text" class="form-control input-sm" value=""
-                                               id="wdt-filter-default-value-to" placeholder="To" >
+                                               id="wdt-filter-default-value-to" placeholder="To">
                                     </div>
                                 </div>
                                 <div class="form-group wdt-filter-default-value-selectpicker-block" hidden="hidden">
@@ -1141,37 +1214,16 @@
 
                     <!-- Column conditional formatting settings -->
                     <div role="tabpanel" class="tab-pane" id="column-conditional-formatting-settings">
-
-                        <?php echo '<div class="alert alert-warning alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="wpdt-icon-times-full"></i></span>
-        </button>
+                        <?php echo '<div class="alert alert-warning" role="alert">
         This feature is available in the <a class="tms-store-checkout-wpdatatables">Premium version of wpDataTables.</a>
     </div>' ?>
-
-                        <div class="wdt-conditional-formatting-rules-container">
-
-                        </div>
-                        <!-- /.row -->
-
-                        <div class="row">
-
-                            <div class="col-sm-12 p-l-0">
-                                <button class="btn pull-left wdt-column-add-conditional-formatting-rule">
-                                    <i class="wpdt-icon-plus-thin"></i> <?php esc_html_e('Add New Rule', 'wpdatatables'); ?>
-                                </button>
-                            </div>
-
-                        </div>
-
                     </div>
+
                     <!--/#column-conditional-formatting-settings -->
 
                     <!-- Column transform value settings -->
-                    <div role="tabpanel" class="tab-pane"  id="column-transform-value">
-
-                        <?php echo '<div class="alert alert-warning alert-dismissible" role="alert">
-       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="wpdt-icon-times-full"></i></span>
-        </button>
+                    <div role="tabpanel" class="tab-pane" id="column-transform-value">
+                        <?php echo '<div class="alert alert-warning" role="alert">
         This feature is available in the <a class="tms-store-checkout-wpdatatables">Premium version of wpDataTables.</a>
     </div>' ?>
                     </div>
@@ -1196,7 +1248,7 @@
 
                 <div class="pull-right">
                     <button class="btn btn-danger btn-icon-text wdt-cancel-column-settings">
-                       <?php esc_html_e('Cancel', 'wpdatatables'); ?>
+                        <?php esc_html_e('Cancel', 'wpdatatables'); ?>
                     </button>
                     <button class="btn btn-primary btn-icon-text wdt-column-apply">
                         <i class="wpdt-icon-save"></i><?php esc_html_e('Save Changes', 'wpdatatables'); ?>

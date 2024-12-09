@@ -337,13 +337,12 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            Update with new features and bug fixes:
+                            New update with bug fixes:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><strong>Feature: </strong>New responsive option – Pagination Layout on mobile.</li>
-                                <li>Compatibility with WordPress 6.7 version approved.</li>
+                                <li><strong>Bugfix: </strong>Fixed issue with undefined method in WPDataChart class.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
@@ -482,7 +481,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                 <i class="wpdt-icon-check m-r-8"></i><?php esc_html_e('Premium support', 'wpdatatables'); ?>
                             </p>
                         </div>
-                        <a class="btn btn-primary m-t-20" target="_blank" href="https://wpdatatables.com/pricing/?utm_source=wpdt-lite&utm_medium=lite-upgrade&utm_content=wpdt&utm_campaign=wpdt">
+                        <a class="btn btn-primary m-t-20" target="_blank" href="https://wpdatatables.com/pricing/?utm_source=wpdt-lite&utm_medium=lite-upgrade-dashboard&utm_content=wpdt&utm_campaign=wpdt">
                             <?php esc_html_e('Get Premium Today', 'wpdatatables'); ?></a>
                     </div>
                 </div>

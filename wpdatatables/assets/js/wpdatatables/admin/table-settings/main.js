@@ -1036,11 +1036,13 @@
          * Switch tabs in table settings
          */
         $('.wdt-datatables-admin-wrap .wdt-table-settings .tab-nav a, ' +
-            '.wdt-datatables-admin-wrap .column-settings-panel .tab-nav li:not(.column-conditional-formatting-settings-tab) a').on('click',function (e) {
-            e.preventDefault()
-            $('.wdt-datatables-admin-wrap .wdt-table-settings .tab-content .tab-pane,' +
-            '.wdt-datatables-admin-wrap .column-settings-panel .tab-content .tab-pane').removeClass(' fade active in')
-            $($(this)[0].hash).addClass('active in')
+            '.wdt-datatables-admin-wrap .column-settings-panel .tab-nav li').on('click',function (e) {
+            e.preventDefault();
+            $('.wdt-datatables-admin-wrap .column-settings-panel .tab-content .tab-pane:not(.main-customize-table-settings)').removeClass(' fade active in');
+            const href = $(this).find('a').attr('href');
+            if (href) {
+                $(href).addClass('active in');
+            }
         });
 
         /**
