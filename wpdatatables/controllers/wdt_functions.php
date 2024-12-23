@@ -1069,7 +1069,15 @@ function wdtRegisterButtons($buttons) {
 
     return $buttons;
 }
+/**
+ * Loads the translations
+ */
+function wdtLoadTextdomain()
+{
+    WDTGutenbergBlocks::getInstance();
 
+    load_plugin_textdomain('wpdatatables', false, dirname(plugin_basename(dirname(__FILE__))) . '/languages/' . get_locale() . '/');
+}
 /**
  * Redirect on Welcome page after activate plugin
  */
