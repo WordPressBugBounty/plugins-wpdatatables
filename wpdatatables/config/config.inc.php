@@ -9,7 +9,7 @@ defined('ABSPATH') or die("Cannot access pages directly.");
 
 // Current version
 
-define('WDT_CURRENT_VERSION', '3.4.2.35');
+define('WDT_CURRENT_VERSION', '3.4.2.36');
 
 // Version when hooks are updated
 define('WDT_INITIAL_LITE_VERSION', '3.4.2.16');

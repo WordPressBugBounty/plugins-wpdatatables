@@ -321,7 +321,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="text" name="wdt-sum-function-label" id="wdt-sum-function-label"
-                                   class="form-control input-sm" placeholder="Enter the default SUM functions label"
+                                   class="form-control input-sm" disabled placeholder="Enter the default SUM functions label"
                                    value="" data-toggle="html-input-premium-popover" data-placement="top" title="" data-content="content"/>
                         </div>
                     </div>
@@ -341,7 +341,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="text" name="wdt-avg-function-label" id="wdt-avg-function-label"
-                                   class="form-control input-sm" placeholder="Enter the default AVG functions label"
+                                   class="form-control input-sm" disabled placeholder="Enter the default AVG functions label"
                                    value="" data-toggle="html-input-premium-popover" data-placement="top" title="" data-content="content"/>
                         </div>
                     </div>
@@ -366,7 +366,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="text" name="wdt-min-function-label" id="wdt-min-function-label"
-                                   class="form-control input-sm" placeholder="Enter the default MIN functions label"
+                                   class="form-control input-sm" disabled placeholder="Enter the default MIN functions label"
                                    value="" data-toggle="html-input-premium-popover" data-placement="top" title="" data-content="content"/>
                         </div>
                     </div>
@@ -386,7 +386,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <input type="text" name="wdt-max-function-label" id="wdt-max-function-label"
-                                   class="form-control input-sm" placeholder="Enter the default MAX functions label"
+                                   class="form-control input-sm" disabled placeholder="Enter the default MAX functions label"
                                    value="" data-toggle="html-input-premium-popover" data-placement="top" title="" data-content="content"/>
                         </div>
                     </div>
@@ -462,6 +462,19 @@
                 <input type="checkbox" name="wdt-getting-started-page-status" id="wdt-getting-started-page-status"/>
                 <label for="wdt-getting-started-page-status" class="ts-label"><?php esc_html_e('Remove "Getting Started" page from admin menu.', 'wpdatatables'); ?></label>
             </div>
+        </div>
+        <div class= "col-sm-4 wdt-global-loder">
+                <h4 class="c-title-color m-b-2">
+                    <i class="wpdt-icon-star-full" style="color: #FFC078;"></i>
+                    <span class="opacity-6" ><?php esc_html_e('Loader visibility', 'wpdatatables'); ?></span>
+                    <i class=" wpdt-icon-info-circle-thin" data-toggle="tooltip" data-placement="right"
+                       title="<?php esc_attr_e('Enable this option to display a loader for all tables while they are loading.', 'wpdatatables'); ?>"></i>
+                </h4>
+                <div class="toggle-switch opacity-5" data-ts-color="blue">
+                    <input type="checkbox" name="wdt-global-table-loader" id="wdt-global-table-loader" disabled checked="checked"/>
+                    <label for="wdt-global-table-loader"
+                           class="ts-label"><?php esc_html_e('Enable table loaders', 'wpdatatables'); ?></label>
+                </div>
         </div>
     </div>
 </div>
