@@ -2157,7 +2157,7 @@
 }
 
 .wpdt-c .col-xs-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
 }
 
 .wpdt-c .opacity-50 {
@@ -2176,6 +2176,7 @@
     .wpdt-c .col-sm-0-8,
     .wpdt-c .col-sm-0-1,
     .wpdt-c .col-sm-1,
+    .wpdt-c .col-sm-1-2,
     .wpdt-c .col-sm-2,
     .wpdt-c .col-sm-2-6,
     .wpdt-c .col-sm-3,
@@ -2246,6 +2247,10 @@
 
     .wpdt-c .col-sm-2-0 {
         width: 22.66666667%;
+    }
+
+    .wpdt-c .col-sm-1-2 {
+        width: 6%;
     }
 
     .wpdt-c .col-sm-1-0 {
@@ -2429,7 +2434,7 @@
     }
 
     .wpdt-c .col-sm-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
