@@ -2655,7 +2655,7 @@
     }
 
     .wpdt-c .col-md-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -2876,7 +2876,7 @@
     }
 
     .wpdt-c .col-lg-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -7149,8 +7149,8 @@ select.input-group-lg > .input-group-btn > .btn {
 
 .wpdt-c .popover {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0%;
+    left: 0%;
     z-index: 1200;
     display: none;
     max-width: 276px;
