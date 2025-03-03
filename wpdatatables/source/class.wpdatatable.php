@@ -1789,6 +1789,7 @@ class WPDataTable
                 unlink($tempFileName);
             }
             $objWorksheet = $objPHPExcel->getActiveSheet();
+            $objWorksheet = apply_filters('wpdatatables_before_get_excel_headers', $objWorksheet, $this->getWpId(), $xls_url);
             $highestRow = $objWorksheet->getHighestRow();
             $highestColumn = $objWorksheet->getHighestDataColumn();
 
