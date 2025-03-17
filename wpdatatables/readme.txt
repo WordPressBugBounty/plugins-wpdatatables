@@ -6,7 +6,7 @@ Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
 Tested up to: 6.7.2
 Requires PHP: 7.4
-Stable tag: 3.4.2.41
+Stable tag: 3.4.2.42
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -440,6 +440,10 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 13. Google chart settings
 
 == Changelog ==
+= 3.4.2.42 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
 = 3.4.2.41 =
 * Added Hook to Skip Initial Rows in Excel Sheet (wpdatatables_before_get_excel_headers).
 Other small bug fixes and stability improvements.

@@ -337,12 +337,12 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            New update:
+                            New update with minor fixes:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><strong>Improvement: </strong>Added Hook to Skip Initial Rows in Excel Sheet (wpdatatables_before_get_excel_headers).</li>
+                                <li><strong>Improvement: </strong>Minor CSS fixes.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
