@@ -343,6 +343,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
                                 <li><strong>BugFix: </strong>CSS fix for issue with the print page.</li>
+                                <li><strong>BugFix: </strong>CSS fix for issue with creating tables.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
