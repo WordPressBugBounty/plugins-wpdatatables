@@ -6,7 +6,7 @@ Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
 Tested up to: 6.7.2
 Requires PHP: 7.4
-Stable tag: 3.4.2.44
+Stable tag: 3.4.2.46
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -440,6 +440,13 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 13. Google chart settings
 
 == Changelog ==
+= 3.4.2.46 =
+* Minor library fixes.
+
+= 3.4.2.45 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
 = 3.4.2.44 =
 * CSS fix for creating tables.
 

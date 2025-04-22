@@ -1558,7 +1558,7 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                         </p>
                     </div>
                     <div class="row notice-images">
-                        <div class="wpdt-custom-center-flex" style="align-items: center;">
+                        <div class="wpdt-custom-center-flex wpdt-placeholder-images" style="align-items: center;">
                             <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-editing.gif" alt="Placeholders editing image notice"/>
                             <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-query.gif" alt="Placeholders query image notice"/>
                             <img style="height: 300px;margin-right: 10px;" src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/placeholders-filters.gif" alt="Placeholders filtering image notice"/>
@@ -2302,7 +2302,7 @@ $globalAutoUpdateOption = get_option('wdtAutoUpdateOption');
                         </p>
                     </div>
                     <div class="row">
-                        <div class="wpdt-custom-center-flex" style="align-items: center;">
+                        <div class="wpdt-custom-center-flex wpdt-advanced-table-settings-image" style="align-items: center;">
                             <img src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/fixed-columns-preview.gif" alt="Fixed columns"/>
                             <img src="<?php echo WDT_ASSETS_PATH ?>img/feature-preview-notice/starter/fixed-header-preview.gif" alt="Fixed header"/>
                         </div>
