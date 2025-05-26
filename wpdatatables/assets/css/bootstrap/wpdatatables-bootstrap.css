@@ -3403,7 +3403,7 @@
 }
 
 .wpdt-c .has-feedback .form-control {
-    padding-right: 43.75px;
+    padding-right: 44px;
 }
 
 .wpdt-c .form-control-feedback {
@@ -3644,15 +3644,12 @@
     border-radius: 2px;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
 .wpdt-c .btn:focus, .wpdt-c .btn:active:focus, .wpdt-c .btn.active:focus, .wpdt-c .btn.focus, .wpdt-c .btn:active.focus, .wpdt-c .btn.active.focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
     outline: none !important;
 }
