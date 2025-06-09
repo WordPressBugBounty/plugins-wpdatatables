@@ -13754,12 +13754,6 @@ input:focus {
         width: 50%;
 }
 
-@media (min-width: 1700px) {
-    .wpdt-c .wpdt-advanced-table-settings-image img,
-    .wpdt-c .wpdt-placeholder-images img {
-        width: auto;
-    }
-}
 .wpDataTables .dataTables_length select.selectpicker {
     display: inline-block !important;
     width: inherit;

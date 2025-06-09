@@ -342,7 +342,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Removed unnecessary CSS.</li>
+                                <li>Minor CSS fixes.</li>
                                 <li>Other small bug fixes and stability improvements</li>
                             </ul>
                         </div>
