@@ -342,8 +342,9 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
+                                <li>Security and stability improvements.</li>
                                 <li>Minor CSS fixes.</li>
-                                <li>Other small bug fixes and stability improvements</li>
+                                <li>Other small bug fixes.</li>
                             </ul>
                         </div>
 
@@ -401,6 +402,9 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                             </p>
                             <p class="wpdt-font">
                                 <i class="wpdt-icon-check m-r-8"></i><span style="color: #f43e3e;font-weight: bold;">NEW! </span><?php esc_html_e('Hidden (dynamic) columns', 'wpdatatables'); ?>
+                            </p>
+                            <p class="wpdt-font">
+                                <i class="wpdt-icon-check m-r-8"></i><span style="color: #f43e3e;font-weight: bold;">NEW! </span><?php esc_html_e('Index column', 'wpdatatables'); ?>
                             </p>
                             <p class="wpdt-font">
                                 <i class="wpdt-icon-check m-r-8"></i><?php esc_html_e('Create a table manually', 'wpdatatables'); ?>

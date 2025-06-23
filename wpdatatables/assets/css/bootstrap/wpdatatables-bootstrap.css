@@ -3403,7 +3403,7 @@
 }
 
 .wpdt-c .has-feedback .form-control {
-    padding-right: 44px;
+    padding-right: 43.5px;
 }
 
 .wpdt-c .form-control-feedback {
@@ -6816,7 +6816,7 @@ select.input-group-lg > .input-group-btn > .btn {
 
 .wpdt-c .close {
     float: right;
-    font-size: 20.5px;
+    font-size: 20px;
     font-weight: bold;
     line-height: 1;
     color: #000;

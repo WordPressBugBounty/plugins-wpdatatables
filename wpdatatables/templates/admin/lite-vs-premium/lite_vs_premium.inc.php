@@ -2509,6 +2509,32 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td data-title="Features"><?php esc_html_e('Index column', 'wpdatatables'); ?>
+                                    <span style="color: #ea0b0b;font-weight: bold;float: right;"><?php esc_html_e('NEW!', 'wpdatatables'); ?></span>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center bg-grey">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-starter">
+                                    <i class="wpdt-icon-times-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-standard">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-pro">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-dev">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class=" sticky bg-white" colspan="6">
                                     <strong>
                                         <?php esc_html_e('Creating dynamic charts', 'wpdatatables'); ?>
