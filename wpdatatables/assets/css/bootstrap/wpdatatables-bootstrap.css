@@ -4345,6 +4345,13 @@
     color: #e4e4e4;
 }
 
+.wpdt-c .dropdown-menu > .disabled > a:hover, .wpdt-c .dropdown-menu > .disabled > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    background-image: none;
+    cursor: not-allowed;
+}
+
 .wpdt-c .open > .dropdown-menu {
     display: block;
 }
