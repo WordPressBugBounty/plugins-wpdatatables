@@ -655,3 +655,13 @@ div.dt-button-collection a.dt-button.active:before {
 .wpdt-c.wpTableWCAG .wpDataTablesWrapper .DTTT_button>span {
     color: #1978c4;
 }
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-toggle .filter-option {
+    margin-left: 20px;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    font-family: var(--wpdt-inter-google-font, inherit);
+    left: 0px;
+    height: auto;
+}

@@ -140,13 +140,13 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpdt-c .wpDataTablesWrapp
     border: solid 1px #dcdfe6;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group .dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-menu {
     left: -39px;
     padding: 0;
     border-radius: 6px;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group ul.dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select ul.dropdown-menu {
     width: 116px;
     font-family: var(--wpdt-inter-google-font, inherit);
     font-size: 14px;
@@ -1039,9 +1039,9 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpdt-c .wpDataTablesWrapp
     padding: 3px 10px;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length span.filter-option {
-    margin-left: 0;
-    width: 30px;
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-toggle .filter-option {
+    margin-left: 4px;
+    width: 35px;
     height: 24px;
     font-family: var(--wpdt-inter-google-font, inherit);
     font-style: normal;

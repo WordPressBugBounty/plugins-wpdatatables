@@ -169,13 +169,13 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpDataTablesWrapper{
     color: #ffffff;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group .dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-menu {
     left: -1px;
     padding: 0;
     background: #1a1a1a;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group ul.dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select ul.dropdown-menu {
     width: 180px;
     font-family: Roboto;
     font-size: 14px;
@@ -1032,11 +1032,11 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpDataTablesWrapper{
 .wpdt-c .wpDataTablesWrapper table.wpDataTable .bootstrap-select .dropdown-menu > li > a,
 .wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select .dropdown-menu > li > a,
 .wpdt-c .modal#wdt-frontend-modal .bootstrap-select .dropdown-menu > li > a,
-.wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select.btn-group .dropdown-toggle .filter-option,
-.wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select.btn-group .dropdown-toggle .filter-option,
-.wpdt-c .modal#wdt-frontend-modal .bootstrap-select.btn-group .dropdown-toggle .filter-option,
-.wpdt-c .wpDataTablesWrapper table.wpDataTable thead .bootstrap-select.btn-group .dropdown-toggle .filter-option,
-.wpdt-c .wpDataTablesWrapper table.wpDataTable tfoot .bootstrap-select.btn-group .dropdown-toggle .filter-option{
+.wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select .dropdown-toggle .filter-option,
+.wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select .dropdown-toggle .filter-option,
+.wpdt-c .modal#wdt-frontend-modal .bootstrap-select .dropdown-toggle .filter-option,
+.wpdt-c .wpDataTablesWrapper table.wpDataTable thead .bootstrap-select .dropdown-toggle .filter-option,
+.wpdt-c .wpDataTablesWrapper table.wpDataTable tfoot .bootstrap-select .dropdown-toggle .filter-option{
     color: #ffffff80;
 }
 
@@ -1058,9 +1058,11 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpDataTablesWrapper{
     margin: 0 16px;
 }
 
-.wpDataTablesWrapper .dataTables_length span.filter-option {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-toggle .filter-option  {
     margin-left: 0;
     color: #606266;
+    font-family: var(--wpdt-inter-google-font, inherit);
+    height: auto;
 }
 .wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select > .btn-default:after,
 .wpdt-c .wpDataTablesWrapper table.wpDataTable .bootstrap-select > .btn-default:after,

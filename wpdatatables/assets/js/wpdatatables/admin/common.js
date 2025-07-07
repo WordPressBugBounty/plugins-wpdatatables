@@ -60,12 +60,14 @@ jQuery.fn.wdtBootstrapPopover = jQuery.fn.popover;
  * Extend jQuery to use our custom function for tabs
  */
 jQuery.fn.wdtBootstrapTabs = jQuery.fn.tab;
-
+let lastClickedElement = null;
+jQuery(document).on('click', '*', function (e) {
+    lastClickedElement = this;
+});
 /**
  * Extend jQuery to use our custom function for selectpicker
  */
 jQuery.fn.wdtBootstrapSelectPicker= jQuery.fn.selectpicker;
-
 /**
  * Extend jQuery to use AnimateCSS
  */
@@ -104,6 +106,9 @@ jQuery.fn.extend({
     },
     fadeOutRight: function () {
         var $this = jQuery(this);
+        if (!jQuery(lastClickedElement).is('.wdt-apply,.wdt-column-apply, .wdt-apply *')) {
+            return;
+        }
         jQuery(this).animateCss('fadeOutRight', function () {
             $this
                 .addClass('hidden')

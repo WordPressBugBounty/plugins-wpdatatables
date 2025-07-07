@@ -141,12 +141,12 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpDataTablesWrapper
     border: solid 1px #dcdfe6;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group .dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-menu {
     left: -1px;
     padding: 0;
 }
 
-.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.btn-group ul.dropdown-menu {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select ul.dropdown-menu {
     width: 180px;
     font-family: Roboto;
     font-size: 14px;
@@ -984,9 +984,11 @@ div#wpdatatable-preview-container.wpDataTablesWrapper .wpDataTablesWrapper
     margin: 0 16px;
 }
 
-.wpDataTablesWrapper .dataTables_length span.filter-option {
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-toggle .filter-option {
     margin-left: 0;
     color: #606266;
+    font-family: var(--wpdt-inter-google-font, inherit);
+    height: auto;
 }
 .wpdt-c .wpDataTablesWrapper .wpDataTableFilterBox .wpDataTableFilterSection .bootstrap-select > .btn-default:after,
 .wpdt-c .wpDataTablesWrapper table.wpDataTable .bootstrap-select > .btn-default:after,

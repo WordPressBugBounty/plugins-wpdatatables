@@ -547,3 +547,13 @@ table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before
 .wpdt-c.wpTableWCAG .wpDataTablesWrapper .filter_column button{
     color: #747474;
 }
+.wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select .dropdown-toggle .filter-option {
+    margin-left: 20px;
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    font-family: var(--wpdt-inter-google-font, inherit);
+    left: 0px;
+    height: auto;
+}
