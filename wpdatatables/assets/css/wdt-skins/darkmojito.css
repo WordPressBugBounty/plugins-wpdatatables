@@ -138,6 +138,10 @@
     bottom: 35%;
 }
 
+.wpDataTables .dataTables_length select.selectpicker {
+    display: none !important;
+}
+
 .wpdt-c .wpDataTablesWrapper .dataTables_length .bootstrap-select.length_menu {
     width: 180px;
     padding: 0 5px;

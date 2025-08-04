@@ -342,7 +342,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Compatibility with WordPress version 6.8.2 approved.</li>
+                                <li>Fixed issue with double dropdowns in the table length selector.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>
