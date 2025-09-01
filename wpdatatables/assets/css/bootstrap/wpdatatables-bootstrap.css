@@ -11242,7 +11242,6 @@ select.input-group-lg > .input-group-btn > .btn {
     -o-transition: all;
     transition: all;
     -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transition-duration: 250ms;
     transition-duration: 250ms;
@@ -11774,7 +11773,7 @@ input:focus {
 }
 
 .wpdt-c .input-group-addon {
-    border-width: 0px 0px 1px 0px;
+    border-width: 0 0 1px 0;
     min-width: 42px;
 }
 
@@ -11893,7 +11892,6 @@ input:focus {
     vertical-align: top;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
-    -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
@@ -12791,7 +12789,7 @@ input:focus {
 
 @media (min-width: 1280px) {
     .wpdt-c .breadcrumb {
-        padding: 10px 33px 11px 0px;
+        padding: 10px 33px 11px 0;
     }
 }
 
