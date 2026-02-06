@@ -399,6 +399,7 @@ function wdtSaveDataSimpleTable()
             $wpDataTableRows = WPDataTableRows::loadWpDataTableRows($tableID);
             $result->reload =  $wpDataTableRows->getTableSettingsData()->content->reloadCounter;
             $result->tableHTML = $wpDataTableRows->generateTable($tableID);
+            do_action('wpdatatables_after_save_table', $tableID);
         } catch (Exception $e) {
             $result->error = ltrim($e->getMessage(), '<br/><br/>');
         }

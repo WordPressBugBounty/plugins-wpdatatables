@@ -37,6 +37,19 @@
         </div>
 
         <div class="row wpdt-flex wdt-second-row">
+            <div class="wdt-constructor-type-selecter-block col-sm-6">
+                <div class="card" data-value="ivyforms">
+                    <div class="ribbon"><span>NEW</span></div>
+                    <div class="card-header">
+                        <img class="img-responsive"
+                             src="<?php echo WDT_ASSETS_PATH ?>img/constructor/ivyforms.svg">
+                    </div>
+                    <div class="card-body p-b-20 p-r-20 p-t-20">
+                        <h4 class="m-t-0 m-b-8 f-14"><?php esc_html_e('Create a data table linked to an IvyForms Form', 'wpdatatables'); ?>.</h4>
+                        <span><?php esc_html_e('Create a dynamic table from IvyForms submissions with customizable columns for all form fields and entry meta, perfect for managing and displaying form entry data in a clean, sortable layout.', 'wpdatatables'); ?></span>
+                    </div>
+                </div>
+            </div>
             <div class="wdt-constructor-type-selecter-block col-sm-6" >
                 <div class="card wdt-premium-feature" data-value="manual" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="card-header opacity-6">
@@ -48,6 +61,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="row wpdt-flex wdt-third-row">
             <div class="wdt-constructor-type-selecter-block col-sm-6">
                 <div class="card wdt-premium-feature" data-value="file" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="card-header opacity-6">
@@ -60,9 +76,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row wpdt-flex wdt-third-row">
             <div class="wdt-constructor-type-selecter-block col-sm-6">
                 <div class="card wdt-premium-feature" data-value="mysql" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="card-header opacity-6">
@@ -75,6 +88,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row wpdt-flex wdt-third-row">
             <div class="wdt-constructor-type-selecter-block col-sm-6">
                 <div class="card wdt-premium-feature" data-value="wp" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="card-header opacity-6">
@@ -87,8 +102,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row wpdt-flex wdt-third-row">
             <div class="wdt-constructor-type-selecter-block col-sm-6">
                 <div class="card wdt-premium-feature" data-value="woo_commerce" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="ribbon"><span>NEW</span></div>
@@ -98,10 +111,12 @@
                     </div>
                     <div class="card-body p-b-20 p-r-20 p-t-20">
                         <h4 class="m-t-0 m-b-8 f-14"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6 f-14"><?php esc_html_e('Build a WP Post Query', 'wpdatatables'); ?>.</span></h4>
-                        <span><?php esc_html_e('Automatically create a data table based on WordPress posts. Configure the columns to display post titles, authors, dates, and other post details, with data dynamically pulled from your site\'s content.', 'wpdatatables'); ?></span>
+                        <span class="opacity-6"><?php esc_html_e('Automatically create a data table based on WordPress posts. Configure the columns to display post titles, authors, dates, and other post details, with data dynamically pulled from your site\'s content.', 'wpdatatables'); ?></span>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row wpdt-flex wdt-fourth-row">
             <div class="wdt-constructor-type-selecter-block col-sm-6">
                 <div class="card wdt-premium-feature" data-value="wp_posts_query" data-toggle="html-premium-popover"  data-placement="top" title="title" data-content="content">
                     <div class="ribbon"><span>NEW</span></div>
@@ -111,7 +126,7 @@
                     </div>
                     <div class="card-body p-b-20 p-r-20 p-t-20">
                         <h4 class="m-t-0 m-b-8 f-14"><i class="wpdt-icon-star-full m-r-5" style="color: #FFC078;"></i><span class="opacity-6 f-14"><?php esc_html_e('Build a WooCommerce Table', 'wpdatatables'); ?>.</span></h4>
-                        <span><?php esc_html_e('Create a detailed WooCommerce product table with selectable columns for all product details, and optional \'Add to Cart\' buttons for a seamless shopping integration.', 'wpdatatables'); ?></span>
+                        <span class="opacity-6"><?php esc_html_e('Create a detailed WooCommerce product table with selectable columns for all product details, and optional \'Add to Cart\' buttons for a seamless shopping integration.', 'wpdatatables'); ?></span>
                     </div>
                 </div>
             </div>

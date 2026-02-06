@@ -47,14 +47,15 @@ var constructedTableData = {
                         previousStepButton.hide();
                         $('.wdt-constructor-create-custom-buttons').show();
                         break;
+                    case 'ivyforms':
+                        $('.wdt-preload-layer').animateFadeIn();
+                        window.location.replace(window.location.pathname + '?page=wpdatatables-constructor&source=ivyforms');
+                        break;
                     case 'source':
-
                     default:
                         $('.wdt-preload-layer').animateFadeIn();
                         window.location.replace(window.location.pathname + '?page=wpdatatables-constructor&source');
                         break;
-
-                    
                 }
                 break;
 

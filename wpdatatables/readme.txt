@@ -4,9 +4,9 @@ Author URI: https://tmsproducts.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 6.8.2
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 6.3.3.8
+Stable tag: 6.4.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -423,6 +423,9 @@ Date format can be changed in wpDataTables Settings page using the “Date forma
 
 This can be changed from the “Number format” drop-down menu in the wpDataTables Settings page.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the wpDataTables plugin through the [Patchstack Vulnerability Disclosure Program] (https://patchstack.com/database/vdp/9e5fb453-4d67-4ae9-8d4b-2aeOblec5589). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Screenshots ==
 1. New simple editor
@@ -440,6 +443,51 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 13. Google chart settings
 
 == Changelog ==
+= 6.4.0.5 =
+* Fixed activation issue with default values in alter query.
+Other small bug fixes and stability improvements.
+
+= 6.4.0.4 =
+* Minor CSS adjustments.
+Other small bug fixes and stability improvements.
+
+= 6.4.0.3 =
+* Minor CSS adjustments.
+* Removed unnecessary CSS.
+Other small bug fixes and stability improvements.
+
+= 6.4.0.2 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
+= 6.4.0.1 =
+* Compatibility with WordPress version 6.9 approved.
+* Fixed issue with Save button override affecting the Airtable Add-On.
+* Fixed source table types error when using a lower IvyForms version.
+Other small bug fixes and stability improvements.
+
+= 6.3.3.13 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
+= 6.3.3.12 =
+* Minor CSS adjustments.
+Other small bug fixes and stability improvements.
+
+= 6.3.3.11 =
+* Minor CSS fixes.
+Other small bug fixes and stability improvements.
+
+= 6.3.3.10 =
+* Integration with IvyForms plugin for creating tables from form submissions.
+* Upgraded PHPSpreadsheet library to a security-checked version.
+Other small bug fixes and stability improvements.
+
+= 6.3.3.9 =
+* Added a new hook wpdatatables_after_save_table triggered upon saving Simple tables.
+* Compatibility with WordPress version 6.8.3 approved.
+Other small bug fixes and stability improvements.
+
 = 6.3.3.8 =
 * Minor CSS fixes.
 Other small bug fixes and stability improvements.

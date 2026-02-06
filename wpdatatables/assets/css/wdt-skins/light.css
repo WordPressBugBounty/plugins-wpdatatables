@@ -44,7 +44,6 @@
     opacity: .6;
 }
 
-.wpDataTablesWrapper table.wpDataTable thead th.sorting:after,
 .wpDataTablesWrapper table.wpDataTable thead th.sorting_asc:after {
     border-top-width: 0;
 }
@@ -278,6 +277,7 @@
 
 .wpDataTablesWrapper .DTTT_button.disabled {
     opacity: 0.4;
+    pointer-events: none;
 }
 
 .wpDataTablesWrapper .DTTT_button.DTTT_button_md {

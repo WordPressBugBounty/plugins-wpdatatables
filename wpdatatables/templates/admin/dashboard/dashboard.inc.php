@@ -134,6 +134,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         $lastTableData = WDTTools::getLastTableData('table');
                         $tableType = WDTTools::getConvertedTableType($lastTableData->table_type);
                         $simpleType = $lastTableData->table_type == 'simple' ? '&simple': '';
+                        $ivyType = $lastTableData->table_type == 'ivyforms' ? '=ivyforms': '';
 
                         ?>
                         <div class="card-body wpdt-flex card-padding">
@@ -142,7 +143,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                 <p><?php esc_html_e('Created', 'wpdatatables'); ?></p>
                             </div>
                             <div class="wdt-table-last-created">
-                                <a href="admin.php?page=wpdatatables-constructor&source<?php echo $simpleType ?>&table_id=<?php echo (int)$lastTableData->id; ?>"
+                                <a href="admin.php?page=wpdatatables-constructor&source<?php echo $simpleType . $ivyType ?>&table_id=<?php echo (int)$lastTableData->id; ?>"
                                    class="wdt-table-link">
                                     <?php echo esc_html($lastTableData->title) ?>
                                 </a>
@@ -337,12 +338,12 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            New minor update:
+                            New update:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Minor CSS fixes.</li>
+                                <li>Fixed activation issue with default values in alter query.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>
@@ -372,6 +373,12 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                             <?php esc_html_e('Get the most out of wpDataTables by upgrading to Premium and unlocking all of the powerful features.', 'wpdatatables'); ?>
                         </p>
                         <div class="wdt-premium-features">
+                            <p class="wpdt-font">
+                                <i class="wpdt-icon-check m-r-8"></i><span style="color: red;font-weight: bold;">NEW! </span><?php esc_html_e('Custom Fields Integration for WP Posts Builder', 'wpdatatables'); ?>
+                            </p>
+                            <p class="wpdt-font">
+                                <i class="wpdt-icon-check m-r-8"></i><span style="color: red;font-weight: bold;">NEW! </span><?php esc_html_e('Custom Fields Integration for WooCommerce', 'wpdatatables'); ?>
+                            </p>
                             <p class="wpdt-font">
                                 <i class="wpdt-icon-check m-r-8"></i><span style="color: red;font-weight: bold;">NEW! </span><?php esc_html_e('WooCommerce Integration', 'wpdatatables'); ?>
                             </p>

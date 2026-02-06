@@ -2831,6 +2831,32 @@
                             </tr>
                             <tr>
                                 <td data-title="Features">
+                                    <?php esc_html_e('IvyForms', 'wpdatatables'); ?>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center bg-grey">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-starter">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-standard">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-pro">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-dev">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td data-title="Features">
                                     <?php esc_html_e('Visual Composer', 'wpdatatables'); ?>
                                     <hr>
                                 </td>
@@ -2959,7 +2985,32 @@
                                     <hr>
                                 </td>
                             </tr>
-
+                            <tr>
+                                <td data-title="Features">
+                                    <?php esc_html_e('WCAG compatibility', 'wpdatatables'); ?>
+                                    <hr>
+                                </td>
+                                <td data-title="Lite" class="text-center bg-grey">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-starter">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-standard">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-pro">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                                <td data-title="Premium" class="text-center bg-blue-dev">
+                                    <i class="wpdt-icon-check-full"></i>
+                                    <hr>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <!--  /Live vs Premium Table -->

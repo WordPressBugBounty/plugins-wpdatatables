@@ -5,6 +5,8 @@
   -moz-transition: 0s;
   -webkit-transition: 0s;
   transition: 0s;
+  padding: 0;
+  border: none !important;
 }
 .wpdt-c .wpDataTables.wpDataTablesWrapper {
   position: relative !important;
@@ -250,7 +252,7 @@
 }
 
 .wpdt-c .wdt-datetimepicker-modal .datepicker table td.active {
-  color: #fff;
+  color: #fff !important;
 }
 
 .wpdt-c .wdt-datetimepicker-modal .datepicker table td.active:before {

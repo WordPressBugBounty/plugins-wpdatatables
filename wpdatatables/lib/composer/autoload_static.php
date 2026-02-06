@@ -40,6 +40,7 @@ class ComposerStaticInitf0115dc08b8c8585e75c41ef6ed7cd87
         ),
         'C' => 
         array (
+            'Composer\\Pcre\\' => 14,
             'Complex\\' => 8,
         ),
     );
@@ -90,6 +91,10 @@ class ComposerStaticInitf0115dc08b8c8585e75c41ef6ed7cd87
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
+        'Composer\\Pcre\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/pcre/src',
+        ),
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -107,6 +112,7 @@ class ComposerStaticInitf0115dc08b8c8585e75c41ef6ed7cd87
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Stringable' => __DIR__ . '/..' . '/myclabs/php-enum/stubs/Stringable.php',
     );
 

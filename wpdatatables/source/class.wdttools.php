@@ -334,6 +334,8 @@ class WDTTools
             'exportTableWCAG' => __('Export table', 'wpdatatables'),
             'clearFiltersWCAG' => __('Clear filters', 'wpdatatables'),
             'colvisWCAG' => __('Column visibility', 'wpdatatables'),
+            'invalidResponseServer' => __('Invalid response from server', 'wpdatatables'),
+            'failedToLoadFormFields' => __('Failed to load form fields', 'wpdatatables'),
         );
     }
 
@@ -1368,6 +1370,11 @@ class WDTTools
             case 'serialized':
                 return 'Serialized PHP array';
                 break;
+            case 'ivyforms':
+                if (!class_exists('IvyForms\\Services\\API\\IvyFormsAPI')) {
+                    return 'Unknown';
+                }
+                return 'IvyForms';
             default:
                 if (in_array($tableType, WPDataTable::$allowedTableTypes)) {
                     return ucfirst($tableType);
