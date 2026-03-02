@@ -13,13 +13,16 @@ defined('ABSPATH') or die("Cannot access pages directly.");
 global $wp_version;
 
 
-function wdtActivationInsertTemplates() {
+function wdtActivationInsertTemplates()
+{
     WPDataTablesTemplates::importStandardSimpleTemplates();
 }
+
 /**
  * The installation/activation method, installs the plugin table
  */
-function wdtActivationCreateTables() {
+function wdtActivationCreateTables()
+{
     global $wpdb;
 
     $tablesTemplateTableName = $wpdb->prefix . 'wpdatatables_templates';
@@ -118,8 +121,8 @@ function wdtActivationCreateTables() {
                                   data TEXT NOT NULL,
                                   UNIQUE KEY id (id)
                                 ) DEFAULT CHARSET=utf8 COLLATE utf8_general_ci";
-	$cacheTableName = $wpdb->prefix . 'wpdatatables_cache';
-	$cacheSql = "CREATE TABLE {$cacheTableName} (
+    $cacheTableName = $wpdb->prefix . 'wpdatatables_cache';
+    $cacheSql = "CREATE TABLE {$cacheTableName} (
                                   id bigint(20) NOT NULL AUTO_INCREMENT,
                                   table_id bigint(20) NOT NULL,
                                   table_type varchar(55) NOT NULL default '',
@@ -135,7 +138,7 @@ function wdtActivationCreateTables() {
     dbDelta($columnsSql);
     dbDelta($chartsSql);
     dbDelta($rowsSql);
-	dbDelta($cacheSql);
+    dbDelta($cacheSql);
     dbDelta($tablesTemplateSql);
     if (!get_option('wdtUseSeparateCon')) {
         update_option('wdtUseSeparateCon', false);
@@ -197,12 +200,12 @@ function wdtActivationCreateTables() {
     if (!get_option('wdtDateFormat')) {
         update_option('wdtDateFormat', 'd/m/Y');
     }
-	if (get_option('wdtAutoUpdateOption') === false) {
-		update_option('wdtAutoUpdateOption', 0);
-	}
-	if (!get_option('wdtAutoUpdateHash')) {
-		update_option('wdtAutoUpdateHash', bin2hex(random_bytes(22)));
-	}
+    if (get_option('wdtAutoUpdateOption') === false) {
+        update_option('wdtAutoUpdateOption', 0);
+    }
+    if (!get_option('wdtAutoUpdateHash')) {
+        update_option('wdtAutoUpdateHash', bin2hex(random_bytes(22)));
+    }
     if (get_option('wdtParseShortcodes') === false) {
         update_option('wdtParseShortcodes', false);
     }
@@ -237,7 +240,7 @@ function wdtActivationCreateTables() {
         update_option('wdtPurchaseCode', '');
     }
     if (get_option('wdtGettingStartedPageStatus') === false) {
-        update_option('wdtGettingStartedPageStatus', 0 );
+        update_option('wdtGettingStartedPageStatus', 0);
     }
 
     if (get_option('wdtIncludeBootstrap') === false) {
@@ -253,28 +256,28 @@ function wdtActivationCreateTables() {
         update_option('wdtSiteLink', true);
     }
     if (get_option('wdtInstallDate') === false) {
-        update_option('wdtInstallDate', date( 'Y-m-d' ));
+        update_option('wdtInstallDate', date('Y-m-d'));
     }
     if (get_option('wdtRatingDiv') === false) {
-        update_option('wdtRatingDiv', 'no' );
+        update_option('wdtRatingDiv', 'no');
     }
     if (get_option('wdtShowForminatorNotice') === false) {
-        update_option('wdtShowForminatorNotice', 'yes' );
+        update_option('wdtShowForminatorNotice', 'yes');
     }
     if (get_option('wdtShowPromoNotice') === false) {
         delete_option('wdtShowPromoNotice');
     }
-	if (get_option('wdtShowPromoDiscountNotice') === false) {
-		update_option('wdtShowPromoDiscountNotice', 'yes' );
+    if (get_option('wdtShowPromoDiscountNotice') === false) {
+        update_option('wdtShowPromoDiscountNotice', 'yes');
     }
     if (get_option('wdtShowBundlesNotice') === false) {
-        update_option('wdtShowBundlesNotice', 'yes' );
+        update_option('wdtShowBundlesNotice', 'yes');
     }
     if (get_option('wdtSimpleTableAlert') === false) {
-        update_option('wdtSimpleTableAlert', true );
+        update_option('wdtSimpleTableAlert', true);
     }
     if (get_option('wdtTempFutureDate') === false) {
-        update_option('wdtTempFutureDate', date( 'Y-m-d'));
+        update_option('wdtTempFutureDate', date('Y-m-d'));
     }
     if (get_option('wdtGoogleStableVersion') === false) {
         update_option('wdtGoogleStableVersion', 1);
@@ -287,27 +290,28 @@ function wdtActivationCreateTables() {
 /**
  * Add rating massage on all admin pages after 2 weeks of using
  */
-function wdtAdminRatingMessages() {
+function wdtAdminRatingMessages()
+{
     global $wpdb;
     $query = "SELECT COUNT(*) FROM {$wpdb->prefix}wpdatatables ORDER BY id";
 
     $allTables = $wpdb->get_var($query);
     $wpdtPage = isset($_GET['page']) ? $_GET['page'] : '';
-    $installDate = get_option( 'wdtInstallDate' );
-    $currentDate = date( 'Y-m-d' );
-    $tempIgnoreDate = get_option( 'wdtTempFutureDate' );
+    $installDate = get_option('wdtInstallDate');
+    $currentDate = date('Y-m-d');
+    $tempIgnoreDate = get_option('wdtTempFutureDate');
 
     $tempIgnore = strtotime($currentDate) >= strtotime($tempIgnoreDate) ? true : false;
-    $datetimeInstallDate = new DateTime( $installDate );
-    $datetimeCurrentDate = new DateTime( $currentDate );
-    $diffIntrval = round( ($datetimeCurrentDate->format( 'U' ) - $datetimeInstallDate->format( 'U' )) / (60 * 60 * 24) );
-    if( is_admin() && strpos($wpdtPage,'wpdatatables') !== false &&
-        $diffIntrval >= 14 && get_option( 'wdtRatingDiv' ) == "no" && $tempIgnore && isset($allTables) && $allTables > 5) {
+    $datetimeInstallDate = new DateTime($installDate);
+    $datetimeCurrentDate = new DateTime($currentDate);
+    $diffIntrval = round(($datetimeCurrentDate->format('U') - $datetimeInstallDate->format('U')) / (60 * 60 * 24));
+    if (is_admin() && strpos($wpdtPage, 'wpdatatables') !== false &&
+        $diffIntrval >= 14 && get_option('wdtRatingDiv') == "no" && $tempIgnore && isset($allTables) && $allTables > 5) {
         include WDT_TEMPLATE_PATH . 'admin/common/ratingDiv.inc.php';
     }
 
-    if( is_admin() && strpos($wpdtPage,'wpdatatables') !== false &&
-        get_option( 'wdtShowForminatorNotice' ) == "yes" && defined( 'FORMINATOR_PLUGIN_BASENAME' )
+    if (is_admin() && strpos($wpdtPage, 'wpdatatables') !== false &&
+        get_option('wdtShowForminatorNotice') == "yes" && defined('FORMINATOR_PLUGIN_BASENAME')
         && !defined('WDT_FRF_ROOT_PATH')) {
         echo '<div class="notice notice-info is-dismissible wpdt-forminator-news-notice">
              <p class="wpdt-forminator-news"><strong style="color: #ff8c00">NEWS!</strong> wpDataTables just launched a new <strong style="color: #ff8c00">FREE</strong> addon - <strong style="color: #ff8c00">Forminator Forms integration for wpDataTables</strong>. You can download it and read more about it on wp.org on this <a class="wdt-forminator-link" href="https://wordpress.org/plugins/wpdatatables-forminator/" style="color: #ff8c00" target="_blank">link</a>.</p>
@@ -320,88 +324,96 @@ function wdtAdminRatingMessages() {
 //	    wp_enqueue_style('wdt-promo-css', WDT_CSS_PATH . 'admin/promo.css');
 //    }
 
-    if( is_admin() && strpos($wpdtPage,'wpdatatables') !== false && !($wpdtPage == 'wpdatatables-add-ons') &&
-        get_option( 'wdtShowBundlesNotice' ) == "yes"){
+    if (is_admin() && strpos($wpdtPage, 'wpdatatables') !== false && !($wpdtPage == 'wpdatatables-add-ons') &&
+        get_option('wdtShowBundlesNotice') == "yes") {
         include WDT_TEMPLATE_PATH . 'admin/common/bundles_banner.inc.php';
         wp_enqueue_style('wdt-bundles-css', WDT_CSS_PATH . 'admin/bundles.css');
     }
 }
 
-add_action( 'admin_notices', 'wdtAdminRatingMessages' );
+add_action('admin_notices', 'wdtAdminRatingMessages');
 
 /**
  * Remove rating message
  */
-function wdtHideRating() {
-    update_option( 'wdtRatingDiv', 'yes' );
-    echo json_encode( array("success") );
+function wdtHideRating()
+{
+    update_option('wdtRatingDiv', 'yes');
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdtHideRating', 'wdtHideRating' );
+add_action('wp_ajax_wdtHideRating', 'wdtHideRating');
 
 /**
  * Remove Forminator notice message
  */
-function wdtRemoveForminatorNotice() {
-    update_option( 'wdtShowForminatorNotice', 'no' );
-    echo json_encode( array("success") );
+function wdtRemoveForminatorNotice()
+{
+    update_option('wdtShowForminatorNotice', 'no');
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdt_remove_forminator_notice', 'wdtRemoveForminatorNotice' );
+add_action('wp_ajax_wdt_remove_forminator_notice', 'wdtRemoveForminatorNotice');
 /**
  * Remove Promo notice message
  */
-function wdtRemovePromoNotice() {
-    update_option( 'wdtShowPromoDiscountNotice', 'no' );
-    echo json_encode( array("success") );
+function wdtRemovePromoNotice()
+{
+    update_option('wdtShowPromoDiscountNotice', 'no');
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdt_remove_promo_notice', 'wdtRemovePromoNotice' );
+add_action('wp_ajax_wdt_remove_promo_notice', 'wdtRemovePromoNotice');
 /**
  * Remove Bundles notice message
  */
-function wdtRemoveBundlesNotice() {
-    update_option( 'wdtShowBundlesNotice', 'no' );
-    echo json_encode( array("success") );
+function wdtRemoveBundlesNotice()
+{
+    update_option('wdtShowBundlesNotice', 'no');
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdt_remove_bundles_notice', 'wdtRemoveBundlesNotice' );
+add_action('wp_ajax_wdt_remove_bundles_notice', 'wdtRemoveBundlesNotice');
 
 /**
  * Remove Simple Table alert message
  */
-function wdtHideSimpleTableAlert() {
-    update_option( 'wdtSimpleTableAlert', false );
-    echo json_encode( array("success") );
+function wdtHideSimpleTableAlert()
+{
+    update_option('wdtSimpleTableAlert', false);
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdtHideSimpleTableAlert', 'wdtHideSimpleTableAlert' );
+add_action('wp_ajax_wdtHideSimpleTableAlert', 'wdtHideSimpleTableAlert');
 
 /**
  * Temperary hide rating message for 7 days
  */
-function wpdtTempHideRatingDiv() {
+function wpdtTempHideRatingDiv()
+{
     $date = strtotime("+7 day");
-    update_option('wdtTempFutureDate', date( 'Y-m-d', $date));
-    echo json_encode( array("success") );
+    update_option('wdtTempFutureDate', date('Y-m-d', $date));
+    echo json_encode(array("success"));
     exit;
 }
 
-add_action( 'wp_ajax_wdtTempHideRating', 'wpdtTempHideRatingDiv' );
+add_action('wp_ajax_wdtTempHideRating', 'wpdtTempHideRatingDiv');
 
-function wdtDeactivation() {
+function wdtDeactivation()
+{
 
 }
 
 /**
  * Table and option deleting upon plugin deleting
  */
-function wdtUninstallDelete() {
+function wdtUninstallDelete()
+{
     global $wpdb;
     if (get_option('wdtPreventDeletingTables') == false) {
         delete_option('wdtUseSeparateCon');
@@ -438,8 +450,8 @@ function wdtUninstallDelete() {
         delete_option('wdtCSVDelimiter');
         delete_option('wdtSortingOrderBrowseTables');
         delete_option('wdtDateFormat');
-	    delete_option('wdtAutoUpdateOption');
-	    delete_option('wdtAutoUpdateHash');
+        delete_option('wdtAutoUpdateOption');
+        delete_option('wdtAutoUpdateHash');
         delete_option('wdtCustomJs');
         delete_option('wdtCustomCss');
         delete_option('wdtBaseSkin');
@@ -463,8 +475,8 @@ function wdtUninstallDelete() {
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_columns");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatacharts");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_rows");
-	    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_cache");
-	    $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_templates");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_cache");
+        $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_templates");
     }
 }
 
@@ -472,7 +484,8 @@ function wdtUninstallDelete() {
  * Activation hook
  * @param $networkWide
  */
-function wdtActivation($networkWide) {
+function wdtActivation($networkWide)
+{
     global $wpdb;
 
     if (function_exists('is_multisite') && is_multisite()) {
@@ -489,7 +502,7 @@ function wdtActivation($networkWide) {
                 //Insert standard templates if not exists
                 $tableName = $wpdb->prefix . 'wpdatatables_templates';
                 $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-                wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
+                wdtCheckSimpleTemplatesActivation($rowCount, $tableName);
             }
             switch_to_blog($oldBlog);
 
@@ -501,10 +514,11 @@ function wdtActivation($networkWide) {
     //Insert standard templates if not exists
     $tableName = $wpdb->prefix . 'wpdatatables_templates';
     $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-    wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
+    wdtCheckSimpleTemplatesActivation($rowCount, $tableName);
 }
 
-function wdtCheckSimpleTemplatesActivation ($rowCount, $tableName) {
+function wdtCheckSimpleTemplatesActivation($rowCount, $tableName)
+{
     global $wpdb;
     if (get_option('wdtActivationSimpleTableTemplates') !== 'yes') {
         if ((int)$rowCount !== 0) {
@@ -518,7 +532,8 @@ function wdtCheckSimpleTemplatesActivation ($rowCount, $tableName) {
 /**
  * Uninstall hook
  */
-function wdtUninstall() {
+function wdtUninstall()
+{
     if (function_exists('is_multisite') && is_multisite()) {
         global $wpdb;
         $oldBlog = $wpdb->blogid;
@@ -538,7 +553,8 @@ function wdtUninstall() {
  * Create tables on every new site (multisite)
  * @param $blogId
  */
-function wdtOnCreateSiteOnMultisiteNetwork($blogId) {
+function wdtOnCreateSiteOnMultisiteNetwork($blogId)
+{
     global $wpdb;
     if (is_plugin_active_for_network('wpdatatables/wpdatatables.php')) {
         switch_to_blog($blogId);
@@ -546,7 +562,7 @@ function wdtOnCreateSiteOnMultisiteNetwork($blogId) {
         //Insert standard templates if not exists
         $tableName = $wpdb->prefix . 'wpdatatables_templates';
         $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
-        wdtCheckSimpleTemplatesActivation ($rowCount, $tableName);
+        wdtCheckSimpleTemplatesActivation($rowCount, $tableName);
         restore_current_blog();
     }
 }
@@ -558,7 +574,8 @@ add_action('wpmu_new_blog', 'wdtOnCreateSiteOnMultisiteNetwork');
  * @param $tables
  * @return array
  */
-function wdtOnDeleteSiteOnMultisiteNetwork($tables) {
+function wdtOnDeleteSiteOnMultisiteNetwork($tables)
+{
     global $wpdb;
     $tables[] = $wpdb->prefix . 'wpdatatables';
     $tables[] = $wpdb->prefix . 'wpdatatables_columns';
@@ -572,7 +589,8 @@ function wdtOnDeleteSiteOnMultisiteNetwork($tables) {
 
 add_filter('wpmu_drop_tables', 'wdtOnDeleteSiteOnMultisiteNetwork');
 
-function wdtAddBodyClass($classes) {
+function wdtAddBodyClass($classes)
+{
 
     $classes .= ' wpdt-c';
 
@@ -589,7 +607,8 @@ if (!function_exists('add_action')) {
  * Helper func that prints out the table
  * @param $id
  */
-function wdtOutputTable($id) {
+function wdtOutputTable($id)
+{
     echo wdtWpDataTableShortcodeHandler(array('id' => $id));
 }
 
@@ -599,23 +618,28 @@ function wdtOutputTable($id) {
  * @param null $content
  * @return bool|string
  */
-function wdtWpDataChartShortcodeHandler($atts, $content = null) {
+function wdtWpDataChartShortcodeHandler($atts, $content = null)
+{
     extract(shortcode_atts(array(
         'id' => '0'
     ), $atts));
 
-	$id = absint($id);
+    $id = absint($id);
 
-    if (is_admin() && defined( 'AVADA_VERSION' ) && is_plugin_active('fusion-builder/fusion-builder.php') &&
+    if (is_admin() && defined('AVADA_VERSION') && is_plugin_active('fusion-builder/fusion-builder.php') &&
         class_exists('Fusion_Element') && class_exists('WPDataTables_Fusion_Elements') &&
-        isset($_POST['action']) && $_POST['action'] === 'get_shortcode_render')
-    {
+        isset($_POST['action']) && $_POST['action'] === 'get_shortcode_render') {
         return WPDataTables_Fusion_Elements::get_content_for_avada_live_builder($atts, 'chart');
     }
 
     /** @var mixed $id */
     if (!$id) {
         return false;
+    }
+
+    // Check permissions - user must have access to view this chart
+    if (!WDTPermissionsEnforcer::canUserViewChart($id)) {
+        return esc_html__('You do not have permission to view this chart.', 'wpdatatables');
     }
 
     try {
@@ -648,7 +672,8 @@ function wdtWpDataChartShortcodeHandler($atts, $content = null) {
  * @return mixed|string
  * @throws Exception
  */
-function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
+function wdtWpDataTableCellShortcodeHandler($atts, $content = null)
+{
     global $wpdb;
     extract(shortcode_atts(array(
         'table_id' => '0',
@@ -659,12 +684,17 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
         'sort' => '1'
     ), $atts));
 
-	$table_id = absint($table_id);
-	$row_id = absint($row_id);
-	$sort = absint($sort);
+    $table_id = absint($table_id);
+    $row_id = absint($row_id);
+    $sort = absint($sort);
 
     if (!$table_id)
         return esc_html__('wpDataTable with provided ID not found!', 'wpdatatables');
+
+    // Check permissions - user must have access to view this table cell content
+    if (!WDTPermissionsEnforcer::canUserViewTable($table_id)) {
+        return esc_html__('You do not have permission to view this content.', 'wpdatatables');
+    }
 
     /** @var int $row_id */
     $rowID = !$row_id ? 0 : $row_id;
@@ -681,9 +711,9 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
     /** @var mixed $column_id_value */
     $columnIDValue = $column_id_value !== '%%no_val%%' ? $column_id_value : '';
 
-    $rowID         = apply_filters('wpdatatables_cell_filter_row_id', $rowID, $columnKey, $columnID, $columnIDValue, $table_id);
-    $columnKey     = apply_filters('wpdatatables_cell_filter_column_key', $columnKey, $rowID, $columnID, $columnIDValue, $table_id);
-    $columnID      = apply_filters('wpdatatables_cell_filter_column_id', $columnID, $columnKey, $rowID, $columnIDValue, $table_id);
+    $rowID = apply_filters('wpdatatables_cell_filter_row_id', $rowID, $columnKey, $columnID, $columnIDValue, $table_id);
+    $columnKey = apply_filters('wpdatatables_cell_filter_column_key', $columnKey, $rowID, $columnID, $columnIDValue, $table_id);
+    $columnID = apply_filters('wpdatatables_cell_filter_column_id', $columnID, $columnKey, $rowID, $columnIDValue, $table_id);
     $columnIDValue = apply_filters('wpdatatables_cell_filter_column_id_value', $columnIDValue, $columnKey, $rowID, $columnID, $table_id);
 
     if ($columnKey == '')
@@ -709,7 +739,7 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
             $columnKey = strtoupper($columnKey);
             if (isset($columnHeaders[$columnKey])) {
                 $rowID = $rowID - 1;
-                if(isset($rowsData[$rowID])){
+                if (isset($rowsData[$rowID])) {
                     $columnKey = $columnHeaders[$columnKey];
                     $cellMetaClasses = array_unique($wpDataTableRows->getCellClassesByIndexes($rowsData, $rowID, $columnKey));
                     $cellValue = $wpDataTableRows->getCellDataByIndexes($rowsData, $rowID, $columnKey);
@@ -731,7 +761,7 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
             if (!isset($wpDataTable->getWdtColumnTypes()[$columnKey]))
                 return esc_html__('Column key for provided table ID not found!', 'wpdatatables');
 
-            if ($columnIDValue != '' || $columnID != ''){
+            if ($columnIDValue != '' || $columnID != '') {
                 if ($columnID == '')
                     return esc_html__('Column ID for provided table ID not found!', 'wpdatatables');
 
@@ -741,7 +771,7 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
                 if (!isset($wpDataTable->getWdtColumnTypes()[$columnID]))
                     return esc_html__('Column ID for provided table ID not found!', 'wpdatatables');
 
-                if (in_array($wpDataTable->getWdtColumnTypes()[$columnID],['date','datetime','time','float']))
+                if (in_array($wpDataTable->getWdtColumnTypes()[$columnID], ['date', 'datetime', 'time', 'float']))
                     return esc_html__('At the moment float, date, datetime and time columns can not be used as column_id. Please use other column that contains unique identifiers.', 'wpdatatables');
 
                 if ($columnKey == $columnID)
@@ -749,9 +779,9 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
             }
 
             $isTableSortable = $wpDataTable->sortEnabled();
-            if ($includeSort && $isTableSortable){
+            if ($includeSort && $isTableSortable) {
                 $sortDirection = $wpDataTable->getDefaultSortDirection();
-                if ( $wpDataTable->getDefaultSortColumn()){
+                if ($wpDataTable->getDefaultSortColumn()) {
                     $sortColumn = $wpDataTable->getColumns()[$wpDataTable->getDefaultSortColumn()]->getOriginalHeader();
                     $columnType = $wpDataTable->getColumns()[$wpDataTable->getDefaultSortColumn()]->getDataType();
                 } else {
@@ -763,7 +793,7 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
             $dataRows = $wpDataTable->getDataRows();
             if ($dataRows == [])
                 return esc_html__('Table do not have data for provided table ID!', 'wpdatatables');
-            if ($includeSort && $isTableSortable){
+            if ($includeSort && $isTableSortable) {
                 $sortDirection = $sortDirection == 'ASC' ? SORT_ASC : SORT_DESC;
                 $sortingType = in_array($columnType, array('float', 'int')) ? SORT_NUMERIC : SORT_REGULAR;
                 array_multisort(
@@ -793,7 +823,7 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
                     $entryIdName = 'entryid';
                     if (!isset($dataRows[0][$entryIdName]))
                         return esc_html__('Entry ID not found! Please provide existing entry id from form.', 'wpdatatables');
-                    $rowID = str_replace(array('.', ','), '' , $rowID);
+                    $rowID = str_replace(array('.', ','), '', $rowID);
                     $filteredData = array_filter($dataRows, function ($item) use ($rowID, $entryIdName) {
                         if ($item[$entryIdName] == $rowID) {
                             return true;
@@ -829,7 +859,8 @@ function wdtWpDataTableCellShortcodeHandler($atts, $content = null) {
  * @param null $content
  * @return mixed|string
  */
-function wdtWpDataTableShortcodeHandler($atts, $content = null) {
+function wdtWpDataTableShortcodeHandler($atts, $content = null)
+{
     global $wdtVar1, $wdtVar2, $wdtVar3, $wdtExportFileName;
 
     extract(shortcode_atts(array(
@@ -841,17 +872,21 @@ function wdtWpDataTableShortcodeHandler($atts, $content = null) {
         'table_view' => 'regular'
     ), $atts));
 
-	$id = absint($id);
+    $id = absint($id);
 
-    if (is_admin() && defined( 'AVADA_VERSION' ) && is_plugin_active('fusion-builder/fusion-builder.php') &&
+    if (is_admin() && defined('AVADA_VERSION') && is_plugin_active('fusion-builder/fusion-builder.php') &&
         class_exists('Fusion_Element') && class_exists('WPDataTables_Fusion_Elements') &&
-        isset($_POST['action']) && $_POST['action'] === 'get_shortcode_render')
-    {
+        isset($_POST['action']) && $_POST['action'] === 'get_shortcode_render') {
         return WPDataTables_Fusion_Elements::get_content_for_avada_live_builder($atts, 'table');
     }
 
     if (!$id) {
         return false;
+    }
+
+    // Check permissions - user must have access to view this table
+    if (!WDTPermissionsEnforcer::canUserViewTable($id)) {
+        return esc_html__('You do not have permission to view this table.', 'wpdatatables');
     }
 
     do_action('wpdatatables_before_render_table_config_data', $id);
@@ -873,7 +908,7 @@ function wdtWpDataTableShortcodeHandler($atts, $content = null) {
     /** @var mixed $export_file_name */
     $wdtExportFileName = $export_file_name !== '%%no_val%%' ? $export_file_name : '';
 
-    if ($tableData->table_type === 'simple'){
+    if ($tableData->table_type === 'simple') {
         try {
             $wpDataTableRows = WPDataTableRows::loadWpDataTableRows($id);
             $output = $wpDataTableRows->generateTable($id);
@@ -882,7 +917,7 @@ function wdtWpDataTableShortcodeHandler($atts, $content = null) {
         }
     } else {
 
-	    $wpDataTable = new WPDataTable();
+        $wpDataTable = new WPDataTable();
 
         $wpDataTable->setWpId($id);
 
@@ -894,10 +929,10 @@ function wdtWpDataTableShortcodeHandler($atts, $content = null) {
 
             $output = '';
             if ($tableData->show_title && $tableData->title) {
-                $output .= apply_filters('wpdatatables_filter_table_title', (empty($tableData->title) ? '' : '<h3 class="wpdt-c" id="wdt-table-title-'. $id .'">' . $tableData->title . '</h3>'), $id);
+                $output .= apply_filters('wpdatatables_filter_table_title', (empty($tableData->title) ? '' : '<h3 class="wpdt-c" id="wdt-table-title-' . $id . '">' . $tableData->title . '</h3>'), $id);
             }
             if ($tableData->show_table_description && $tableData->table_description) {
-                $output .= apply_filters('wpdatatables_filter_table_description_text', (empty($tableData->table_description) ? '' : '<p class="wpdt-c" id="wdt-table-description-'. $id .'">' . $tableData->table_description . '</p>'), $id);
+                $output .= apply_filters('wpdatatables_filter_table_description_text', (empty($tableData->table_description) ? '' : '<p class="wpdt-c" id="wdt-table-description-' . $id . '">' . $tableData->table_description . '</p>'), $id);
             }
             $output .= $wpDataTable->generateTable();
         } catch (Exception $e) {
@@ -910,11 +945,12 @@ function wdtWpDataTableShortcodeHandler($atts, $content = null) {
 }
 
 
-function wdtRenderScriptStyleBlock($tableID) {
+function wdtRenderScriptStyleBlock($tableID)
+{
     $customJs = get_option('wdtCustomJs');
     $scriptBlockHtml = '';
     $styleBlockHtml = '';
-    $wpDataTable = WDTConfigController::loadTableFromDB($tableID,false);
+    $wpDataTable = WDTConfigController::loadTableFromDB($tableID, false);
 
     if ($customJs) {
         $scriptBlockHtml .= '<script type="text/javascript">' . stripslashes_deep(html_entity_decode($customJs)) . '</script>';
@@ -935,24 +971,26 @@ function wdtRenderScriptStyleBlock($tableID) {
     return $returnHtml;
 }
 
-function wdt_sanitize_multi_upload( $fields ) {
-    return array_map( function( $field ) {
-        return array_map( 'sanitize_file_name', $field );
-    }, $fields );
+function wdt_sanitize_multi_upload($fields)
+{
+    return array_map(function ($field) {
+        return array_map('sanitize_file_name', $field);
+    }, $fields);
 }
 
-function wdt_get_super_global_value( $super_global, $key ) {
-    if ( ! isset( $super_global[ $key ] ) ) {
+function wdt_get_super_global_value($super_global, $key)
+{
+    if (!isset($super_global[$key])) {
         return null;
     }
 
-    if ( $_FILES === $super_global ) {
-        return isset( $super_global[ $key ]['name'] ) ?
-            sanitize_file_name( $super_global[ $key ] ) :
-            wdt_sanitize_multi_upload( $super_global[ $key ] );
+    if ($_FILES === $super_global) {
+        return isset($super_global[$key]['name']) ?
+            sanitize_file_name($super_global[$key]) :
+            wdt_sanitize_multi_upload($super_global[$key]);
     }
 
-    return wp_kses_post_deep( wp_unslash( $super_global[ $key ] ) );
+    return wp_kses_post_deep(wp_unslash($super_global[$key]));
 }
 
 function wdtSaveDeactivationinfo()
@@ -961,12 +999,12 @@ function wdtSaveDeactivationinfo()
         wp_send_json_error();
     }
 
-    if (!current_user_can( 'activate_plugins' )) {
+    if (!current_user_can('activate_plugins')) {
         wp_send_json_error();
     }
 
-    $reason = wdt_get_super_global_value( $_POST, 'choice' ) ?? '';
-    $reason_caption = wdt_get_super_global_value( $_POST, "textareaDescription" ) ?? '';
+    $reason = wdt_get_super_global_value($_POST, 'choice') ?? '';
+    $reason_caption = wdt_get_super_global_value($_POST, "textareaDescription") ?? '';
 
     $reason = sanitize_key($reason);
     $reason_caption = sanitize_textarea_field($reason_caption);
@@ -980,11 +1018,12 @@ add_action('wp_ajax_wdtSaveDeactivationinfo', 'wdtSaveDeactivationinfo');
 
 function wdtEnqueueDeactivationModal()
 {
-    if((strpos($_SERVER['REQUEST_URI'],'plugins.php') !== false)) {
+    if ((strpos($_SERVER['REQUEST_URI'], 'plugins.php') !== false)) {
         wp_enqueue_script('wdt-deactivate-info-js', WDT_ROOT_URL . 'assets/js/deactivation/deactivation-modal.js', array(), WDT_CURRENT_VERSION, true);
         wp_localize_script('wdt-deactivate-info-js', 'wpdatatables_deactivate_info', WDTTools::getDeactivationInfo());
     }
 }
+
 add_action('admin_enqueue_scripts', 'wdtEnqueueDeactivationModal');
 
 /**
@@ -993,7 +1032,8 @@ add_action('admin_enqueue_scripts', 'wdtEnqueueDeactivationModal');
  * @param $id
  * @return bool|mixed
  */
-function wdtCurrentUserCanEdit($tableEditorRoles, $id) {
+function wdtCurrentUserCanEdit($tableEditorRoles, $id)
+{
     $wpRoles = new WP_Roles();
     $userCanEdit = false;
 
@@ -1028,7 +1068,8 @@ function wdtCurrentUserCanEdit($tableEditorRoles, $id) {
  * @param $query
  * @return mixed|string
  */
-function wdtSanitizeQuery($query) {
+function wdtSanitizeQuery($query)
+{
     $query = str_replace('DELETE', '', $query);
     $query = str_replace('DROP', '', $query);
     $query = str_replace('INSERT', '', $query);
@@ -1040,7 +1081,8 @@ function wdtSanitizeQuery($query) {
 /**
  * Buttons for "insert wpDataTable" and "insert wpDataCharts" in WP MCE editor
  */
-function wdtMCEButtons() {
+function wdtMCEButtons()
+{
     add_filter("mce_external_plugins", "wdtAddButtons");
     add_filter('mce_buttons', 'wdtRegisterButtons');
 }
@@ -1052,7 +1094,8 @@ add_action('init', 'wdtMCEButtons');
  * @param $pluginArray
  * @return mixed
  */
-function wdtAddButtons($pluginArray) {
+function wdtAddButtons($pluginArray)
+{
     $pluginArray['wpdatatables'] = WDT_JS_PATH . '/wpdatatables/wdt.mce.js';
 
     return $pluginArray;
@@ -1063,12 +1106,14 @@ function wdtAddButtons($pluginArray) {
  * @param $buttons
  * @return mixed
  */
-function wdtRegisterButtons($buttons) {
+function wdtRegisterButtons($buttons)
+{
     $buttons[] = 'wpdatatable';
     $buttons[] = 'wpdatachart';
 
     return $buttons;
 }
+
 /**
  * Loads the translations
  */
@@ -1078,20 +1123,22 @@ function wdtLoadTextdomain()
 
     load_plugin_textdomain('wpdatatables', false, dirname(plugin_basename(dirname(__FILE__))) . '/languages/' . get_locale() . '/');
 }
+
 /**
  * Redirect on Welcome page after activate plugin
  */
-function welcome_page_activation_redirect( $plugin ) {
+function welcome_page_activation_redirect($plugin)
+{
     $filePath = plugin_basename(__FILE__);
     $filePathArr = explode('/', $filePath);
     $wdtPluginSlug = $filePathArr[0] . '/wpdatatables.php';
 
-    if( $plugin == plugin_basename( $wdtPluginSlug ) && (isset($_GET['action']) && $_GET['action'] == 'activate')) {
-        exit( wp_redirect( admin_url( 'admin.php?page=wpdatatables-welcome-page' ) ) );
+    if ($plugin == plugin_basename($wdtPluginSlug) && (isset($_GET['action']) && $_GET['action'] == 'activate')) {
+        exit(wp_redirect(admin_url('admin.php?page=wpdatatables-welcome-page')));
     }
 }
 
-add_action( 'activated_plugin', 'welcome_page_activation_redirect' );
+add_action('activated_plugin', 'welcome_page_activation_redirect');
 
 /**
  * Workaround for NULLs in WP
@@ -1099,7 +1146,8 @@ add_action( 'activated_plugin', 'welcome_page_activation_redirect' );
 if ($wp_version < 4.4) {
     add_filter('query', 'wdtSupportNulls');
 
-    function wdtSupportNulls($query) {
+    function wdtSupportNulls($query)
+    {
         $query = str_ireplace("'NULL'", "NULL", $query);
         $query = str_replace('null_str', 'null', $query);
 
@@ -1110,52 +1158,55 @@ if ($wp_version < 4.4) {
 /**
  *  Add plugin action links Plugins page
  */
-function wpdt_add_plugin_action_links( $links ) {
+function wpdt_add_plugin_action_links($links)
+{
 
     // Settings link.
-    $settings_links= '<a href="' . admin_url( 'admin.php?page=wpdatatables-settings' ) . '" aria-label="' . esc_attr( __( 'Go to Settings', 'wpdatatables' ) ) . '">' . esc_html__( 'Settings', 'wpdatatables' ) . '</a>';
+    $settings_links = '<a href="' . admin_url('admin.php?page=wpdatatables-settings') . '" aria-label="' . esc_attr(__('Go to Settings', 'wpdatatables')) . '">' . esc_html__('Settings', 'wpdatatables') . '</a>';
 
-    array_unshift( $links, $settings_links );
+    array_unshift($links, $settings_links);
 
-     // Go Premium link.
-    $links['go_premium'] = '<a href="' .  esc_url( 'https://wpdatatables.com/pricing/?utm_source=lite&utm_medium=plugin&utm_campaign=wpdtlite' )  . '" aria-label="' . esc_attr( __( 'Go Premium', 'wpdatatables' ) ) . '" style="color: #ff8c00;font-weight:700" target="_blank">' . esc_html__( 'Go Premium', 'wpdatatables' ) . '</a>';
+    // Go Premium link.
+    $links['go_premium'] = '<a href="' . esc_url('https://wpdatatables.com/pricing/?utm_source=lite&utm_medium=plugin&utm_campaign=wpdtlite') . '" aria-label="' . esc_attr(__('Go Premium', 'wpdatatables')) . '" style="color: #ff8c00;font-weight:700" target="_blank">' . esc_html__('Go Premium', 'wpdatatables') . '</a>';
 
     return $links;
 }
-add_filter( 'plugin_action_links_' . WDT_BASENAME , 'wpdt_add_plugin_action_links'  );
+
+add_filter('plugin_action_links_' . WDT_BASENAME, 'wpdt_add_plugin_action_links');
 
 /**
  *  Add links next to plugin details on Plugins page
  */
-function wpdt_plugin_row_meta( $links, $file, $plugin_data ) {
+function wpdt_plugin_row_meta($links, $file, $plugin_data)
+{
 
-    if ( WDT_BASENAME === $file ) {
+    if (WDT_BASENAME === $file) {
         // Show network meta links only when activated network wide.
-        if ( is_network_admin() ) {
+        if (is_network_admin()) {
             return $links;
         }
 
         // Change AuthorURI link.
-        if ( isset( $links[1] ) ){
+        if (isset($links[1])) {
             $author_uri = sprintf(
                 '<a href="%s" target="_blank">%s</a>',
                 $plugin_data['AuthorURI'],
                 $plugin_data['Author']
             );
-            $links[1] = sprintf( __( 'By %s' ), $author_uri );
+            $links[1] = sprintf(__('By %s'), $author_uri);
         }
 
         // Documentation link.
-        $row_meta['docs'] = '<a href="' . esc_url( 'https://wpdatatables.com/documentation/general/features-overview/' ) . '" aria-label="' . esc_attr( __( 'Docs', 'wpdatatables' ) ) . '" target="_blank">' . esc_html__( 'Docs', 'wpdatatables' ) . '</a>';
+        $row_meta['docs'] = '<a href="' . esc_url('https://wpdatatables.com/documentation/general/features-overview/') . '" aria-label="' . esc_attr(__('Docs', 'wpdatatables')) . '" target="_blank">' . esc_html__('Docs', 'wpdatatables') . '</a>';
 
         // Add Support Center page link
-        $row_meta['support'] = '<a href="' . admin_url( 'admin.php?page=wpdatatables-support' ) . '" aria-label="' . esc_attr__( 'Support Center', 'wpdatatables' ) . '" target="_blank">' . esc_html__( 'Support Center', 'wpdatatables' ) . '</a>';
+        $row_meta['support'] = '<a href="' . admin_url('admin.php?page=wpdatatables-support') . '" aria-label="' . esc_attr__('Support Center', 'wpdatatables') . '" target="_blank">' . esc_html__('Support Center', 'wpdatatables') . '</a>';
 
-        return array_merge( $links, $row_meta );
+        return array_merge($links, $row_meta);
     }
 
     return $links;
 
 }
 
-add_filter( 'plugin_row_meta', 'wpdt_plugin_row_meta' , 10, 3 );
+add_filter('plugin_row_meta', 'wpdt_plugin_row_meta', 10, 3);

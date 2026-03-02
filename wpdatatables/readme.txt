@@ -1,12 +1,12 @@
 === wpDataTables - WordPress Data Table, Dynamic Tables & Table Charts Plugin ===
-Contributors: wpDataTables, ameliabooking, isidoramarkovic, jelenicdanijela, stefke89
+Contributors: wpDataTables, ameliabooking, isidoramarkovic, jelenicdanijela, stefke89, alexandergilmanov
 Author URI: https://tmsproducts.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 6.9
+Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 6.4.0.5
+Stable tag: 6.5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -425,7 +425,7 @@ This can be changed from the “Number format” drop-down menu in the wpDataTab
 
 = Where do I report security bugs found in this plugin? =
 
-Please report security bugs found in the source code of the wpDataTables plugin through the [Patchstack Vulnerability Disclosure Program] (https://patchstack.com/database/vdp/9e5fb453-4d67-4ae9-8d4b-2aeOblec5589). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+Please report security bugs found in the source code of the wpDataTables plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fb453-4d67-4ae9-8d4b-2aeOblec5589). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
 
 == Screenshots ==
 1. New simple editor
@@ -443,8 +443,12 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.5.0.1 =
+* Added wpDataTables capabilities for viewing tables and charts.
+Other small bug fixes and stability improvements.
+
 = 6.4.0.5 =
-* Fixed activation issue with default values in alter query.
+* Added a new page for managing user permissions with wpDataTables capabilities for viewing tables and charts.
 Other small bug fixes and stability improvements.
 
 = 6.4.0.4 =
