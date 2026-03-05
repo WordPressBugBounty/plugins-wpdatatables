@@ -327,6 +327,17 @@ class WPDataTableCache
 					$format = substr(strrchr($source, "."), 1);
 					$objReader = WPDataTable::createObjectReader($source);
                 if (isset($tableData) && $tableData->file_location == 'wp_any_url'){
+                    // Security Fix: Validate URL before file_get_contents to prevent SSRF/LFI
+                    if (!filter_var($source, FILTER_VALIDATE_URL)) {
+                        throw new Exception('Invalid URL format!');
+                    }
+
+                    // Prevent access to local files via file:// protocol
+                    $parsedUrl = parse_url($source);
+                    if (!isset($parsedUrl['scheme']) || !in_array(strtolower($parsedUrl['scheme']), array('http', 'https'), true)) {
+                        throw new Exception('Only HTTP and HTTPS protocols are allowed!');
+                    }
+
                     $file = @file_get_contents($source);
                     if ($file === false){
                         throw new Exception('There is an error opening the file!');

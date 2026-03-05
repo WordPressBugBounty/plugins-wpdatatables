@@ -670,8 +670,23 @@ class WDTColumn
         if (!$wdtColumnType) {
             $wdtColumnType = 'string';
         }
+
+        // Security Fix: Whitelist valid column types to prevent LFI
+        $validColumnTypes = array(
+            'string', 'int', 'float', 'date', 'datetime', 'time', 'link', 'email',
+            'image', 'file', 'formula', 'masterdetail', 'attachment'
+        );
+
+        // Normalize and validate column type
+        $wdtColumnType = strtolower(sanitize_text_field($wdtColumnType));
+
+        if (!in_array($wdtColumnType, $validColumnTypes, true)) {
+            // Invalid column type, default to string
+            $wdtColumnType = 'string';
+        }
+
         $columnObj = ucfirst($wdtColumnType) . 'WDTColumn';
-        $columnFormatterFileName = 'class.' . strtolower($wdtColumnType) . '.wpdatacolumn.php';
+        $columnFormatterFileName = 'class.' . $wdtColumnType . '.wpdatacolumn.php';
         require_once($columnFormatterFileName);
         return new $columnObj($properties);
     }

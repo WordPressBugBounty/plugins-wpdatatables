@@ -465,8 +465,18 @@ class WPDataChart
      */
     public static function build($constructedChartData, $loadFromDB = false)
     {
-        $wdtChart = 'Wdt' . ucfirst($constructedChartData['engine']) . 'Chart' . '\Wdt' . ucfirst($constructedChartData['engine']) . 'Chart';
-        $chartClassFileName = 'class.' . $constructedChartData['engine'] . '.wpdatachart.php';
+        // Security Fix: Whitelist valid chart engines to prevent LFI
+        $validEngines = array('google', 'chartjs', 'highcharts', 'apexcharts');
+
+        $engine = isset($constructedChartData['engine']) ? strtolower(sanitize_text_field($constructedChartData['engine'])) : 'google';
+
+        if (!in_array($engine, $validEngines, true)) {
+            // Invalid engine, default to google
+            $engine = 'google';
+        }
+
+        $wdtChart = 'Wdt' . ucfirst($engine) . 'Chart' . '\Wdt' . ucfirst($engine) . 'Chart';
+        $chartClassFileName = 'class.' . $engine . '.wpdatachart.php';
         require_once(WDT_ROOT_PATH . 'source/' . $chartClassFileName);
         return new $wdtChart($constructedChartData, $loadFromDB);
     }
