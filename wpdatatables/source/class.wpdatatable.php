@@ -548,17 +548,13 @@ class WPDataTable
 
         // Verify the resolved path is still within the lang directory
         $realPath = realpath($safePath);
-        $realLangDir = realpath(WDT_ROOT_PATH . 'source/lang/');
+        $realLangDir = rtrim(realpath(WDT_ROOT_PATH . 'source/lang/'), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 
         if ($realPath === false || strpos($realPath, $realLangDir) !== 0) {
             throw new WDTException('Language file not found or path traversal detected!');
         }
 
-        if (!file_exists($safePath)) {
-            throw new WDTException('Language file not found');
-        }
-
-        $this->_interfaceLanguage = $safePath;
+        $this->_interfaceLanguage = $realPath;
     }
 
     public function getInterfaceLanguage()

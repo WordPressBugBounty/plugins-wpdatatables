@@ -4,9 +4,9 @@ Author URI: https://tmsproducts.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 6.9.1
+Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 6.5.0.2
+Stable tag: 6.5.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -442,6 +442,10 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.5.0.3 =
+* Compatibility with WordPress 6.9.4 approved.
+Other small bug fixes and stability improvements.
+
 = 6.5.0.2 =
 * Fixed vulnerability issue with Local File Inclusion (LFI).
 Other small bug fixes and stability improvements.
