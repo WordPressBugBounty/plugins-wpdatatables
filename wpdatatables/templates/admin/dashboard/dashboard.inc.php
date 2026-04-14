@@ -343,7 +343,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Compatibility with WordPress 6.9.4 approved.</li>
+                                <li>Minor CSS fixes.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

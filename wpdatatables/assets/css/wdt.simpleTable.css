@@ -1,7 +1,8 @@
 @font-face {
     font-family: 'wpDataTablesIcons' !important;
-    src: url(../fonts/wpDataTablesIcons.eot);
-    src: url(../fonts/wpDataTablesIcons.eot?#iefix) format('embedded-opentype'), url(../fonts/wpDataTablesIcons.woff) format('woff'), url(../fonts/wpDataTablesIcons.ttf) format('truetype'), url(../fonts/wpDataTablesIcons.svg#wpDataTablesIcons) format('svg');
+    src: url(../fonts/wpDataTablesIcons.woff) format('woff'),
+         url(../fonts/wpDataTablesIcons.ttf) format('truetype'),
+         url(../fonts/wpDataTablesIcons.svg#wpDataTablesIcons) format('svg');
 }
 
 .wpdt-c.wpDataTableContainerSimpleTable {
@@ -323,7 +324,6 @@ a[data-link-content="wpdt-link-content"] button,
 .wdt-res-wrapper.active {
     max-height: 310px;
     overflow: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .wpdt-c table.bt.bt--no-header tfoot td::before,
@@ -366,8 +366,6 @@ table.wpdtSimpleTable.bt[data-has-header='1'] td.wpdt-header-classes {
 .wpdt-c table.wpdtSimpleTable.bt tr,
 .wpdt-c table.wpdtSimpleTable.columnBlock tr {
     border: 1px solid #ccc;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
