@@ -11753,7 +11753,7 @@ input:focus {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2/1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     .wpdt-c html:not(.ie9) .select:before {
-        background-image: url("../../img/select@2x.png");
+        background-image: url("../../img/select2x.png");
         background-size: 12px 12px;
     }
 }

@@ -29,11 +29,26 @@ class ImageWDTColumn extends WDTColumn
         if (empty($content)) {
             return '';
         }
-        if (FALSE !== strpos($content, '||')) {
-            list($image, $link) = explode('||', $content);
-            $formattedValue = "<a href='{$link}' target='_blank' rel='lightbox[-1]'><img src='{$image}' /></a>";
+
+        if (false !== strpos($content, '||')) {
+            $parts = explode('||', $content, 2);
+            $image = isset($parts[0]) ? trim($parts[0]) : '';
+            $link = isset($parts[1]) ? trim($parts[1]) : '';
+            $image = esc_url($image);
+            $link = esc_url($link);
+            if ($image === '' && $link === '') {
+                $formattedValue = '';
+            } elseif ($image !== '' && $link !== '') {
+                $formattedValue = '<a href="' . $link . '" target="_blank" rel="lightbox[-1] noopener noreferrer">'
+                    . '<img src="' . $image . '" alt="" /></a>';
+            } elseif ($image !== '') {
+                $formattedValue = '<img src="' . $image . '" alt="" />';
+            } else {
+                $formattedValue = '';
+            }
         } else {
-            $formattedValue = "<img src='{$content}' />";
+            $src = esc_url(trim($content));
+            $formattedValue = $src !== '' ? '<img src="' . $src . '" alt="" />' : '';
         }
         return apply_filters('wpdatatables_filter_image_cell', $formattedValue, $this->getParentTable()->getWpId());
     }
