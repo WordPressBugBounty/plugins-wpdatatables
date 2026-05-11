@@ -6,7 +6,7 @@ Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 6.5.0.6
+Stable tag: 6.5.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -442,6 +442,10 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.5.0.7 =
+* Added support for HTML, Rating, and Signature fileds for the Ivyforms integration.
+Other small bug fixes and stability improvements.
+
 = 6.5.0.6 =
 * Minor CSS adjustments.
 Other small bug fixes and stability improvements.

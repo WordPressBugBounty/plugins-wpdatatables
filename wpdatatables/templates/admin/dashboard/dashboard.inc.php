@@ -338,12 +338,12 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            Minor security update:
+                            New update:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Minor CSS adjustments.</li>
+                                <li>Added support for HTML, Rating, and Signature fileds for the Ivyforms integration.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>
