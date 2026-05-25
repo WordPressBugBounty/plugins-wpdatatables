@@ -343,7 +343,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Added support for HTML, Rating, and Signature fileds for the Ivyforms integration.</li>
+                                <li>Compatibility with WordPress version 7.0 approved.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

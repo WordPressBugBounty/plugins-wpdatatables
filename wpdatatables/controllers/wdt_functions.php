@@ -288,6 +288,29 @@ function wdtActivationCreateTables()
 }
 
 /**
+ * Whether the IvyForms promo banner should render for the current user.
+ *
+ * @return bool
+ */
+function wdt_ivyforms_promo_should_show_for_current_user()
+{
+    if (get_option('wdtShowIvyFormsBanner', 'yes') != "yes") {
+        return false;
+    }
+
+    if (wdt_is_ivyforms_plugin_active()) {
+        return false;
+    }
+
+    $user_id = (int) get_current_user_id();
+    if ($user_id && '1' === (string) get_user_meta($user_id, 'wdt_ivyforms_promo_dismissed', true)) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * Add rating massage on all admin pages after 2 weeks of using
  */
 function wdtAdminRatingMessages()
@@ -329,9 +352,47 @@ function wdtAdminRatingMessages()
         include WDT_TEMPLATE_PATH . 'admin/common/bundles_banner.inc.php';
         wp_enqueue_style('wdt-bundles-css', WDT_CSS_PATH . 'admin/bundles.css');
     }
+
+    if (is_admin() && strpos($wpdtPage, 'wpdatatables') !== false &&
+        wdt_ivyforms_promo_should_show_for_current_user()) {
+        include WDT_TEMPLATE_PATH . 'admin/common/promote_ivyforms.php';
+    }
 }
 
 add_action('admin_notices', 'wdtAdminRatingMessages');
+
+/**
+ * Enqueue IvyForms promo assets when the banner is eligible (same rules as markup in wdtAdminRatingMessages).
+ *
+ * @return void
+ */
+function wdt_ivyforms_promo_enqueue_admin_scripts()
+{
+    if (!is_admin()) {
+        return;
+    }
+
+    $wpdt_page = isset($_GET['page']) ? $_GET['page'] : '';
+    if (strpos($wpdt_page, 'wpdatatables') === false) {
+        return;
+    }
+
+    if (!wdt_ivyforms_promo_should_show_for_current_user()) {
+        return;
+    }
+
+    wp_enqueue_style('wdt-ivyforms-promo-css', WDT_CSS_PATH . 'admin/ivyforms_promo_banner.css', array(), WDT_CURRENT_VERSION);
+    wp_enqueue_script('wdt-ivyforms-promo', WDT_JS_PATH . 'wpdatatables/admin/wdtIvyformsPromo.js', array('jquery'), WDT_CURRENT_VERSION, true);
+    wp_localize_script(
+        'wdt-ivyforms-promo',
+        'wdtIvyformsPromo',
+        array(
+            'install_failed' => __('Install failed.', 'wpdatatables'),
+        )
+    );
+}
+
+add_action('admin_enqueue_scripts', 'wdt_ivyforms_promo_enqueue_admin_scripts');
 
 /**
  * Remove rating message
@@ -378,6 +439,67 @@ function wdtRemoveBundlesNotice()
 }
 
 add_action('wp_ajax_wdt_remove_bundles_notice', 'wdtRemoveBundlesNotice');
+
+/**
+ * Whether IvyForms is active (matches integration wizard detection).
+ *
+ * @return bool
+ */
+function wdt_is_ivyforms_plugin_active()
+{
+    if (!class_exists('IvyForms\Services\API\IvyFormsAPI')) {
+        return false;
+    }
+
+    if (!method_exists('IvyForms\Services\API\IvyFormsAPI', 'isPluginActive')) {
+        return false;
+    }
+
+    return \IvyForms\Services\API\IvyFormsAPI::isPluginActive();
+}
+
+/**
+ * Permanently dismiss IvyForms promo admin notice.
+ *
+ * @return void
+ */
+function wdtRemoveIvyFormsPromoNotice()
+{
+    if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'wdt_ivyforms_promo_dismiss')) {
+        wp_send_json_error(array('message' => esc_html__('Security check failed.', 'wpdatatables')), 403);
+    }
+
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(array('message' => esc_html__('Unauthorized', 'wpdatatables')), 403);
+    }
+
+    update_option('wdtShowIvyFormsBanner', 'no');
+    wp_send_json_success();
+}
+
+add_action('wp_ajax_wdt_remove_ivyforms_promo_notice', 'wdtRemoveIvyFormsPromoNotice');
+
+/**
+ * Dismiss IvyForms promo for the current user only (stored in user meta; no browser storage).
+ *
+ * @return void
+ */
+function wdt_dismiss_ivyforms_promo_user()
+{
+    if (!isset($_POST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'wdt_ivyforms_promo_user_dismiss')) {
+        wp_send_json_error(array('message' => esc_html__('Security check failed.', 'wpdatatables')), 403);
+    }
+
+    if (!is_user_logged_in() || !current_user_can('manage_options')) {
+        wp_send_json_error(array('message' => esc_html__('Unauthorized', 'wpdatatables')), 403);
+    }
+
+    update_user_meta(get_current_user_id(), 'wdt_ivyforms_promo_dismissed', '1');
+
+    wp_send_json_success();
+}
+
+add_action('wp_ajax_wdt_dismiss_ivyforms_promo_user', 'wdt_dismiss_ivyforms_promo_user');
 
 /**
  * Remove Simple Table alert message
@@ -462,6 +584,7 @@ function wdtUninstallDelete()
         delete_option('wdtShowPromoNotice');
         delete_option('wdtShowPromoDiscountNotice');
         delete_option('wdtShowBundlesNotice');
+        delete_option('wdtShowIvyFormsBanner');
         delete_option('wdtSimpleTableAlert');
         delete_option('wdtTempFutureDate');
         delete_option('wdtVersion');
