@@ -3403,7 +3403,7 @@
 }
 
 .wpdt-c .has-feedback .form-control {
-    padding-right: 43.5px;
+    padding-right: 44px;
 }
 
 .wpdt-c .form-control-feedback {
@@ -5324,8 +5324,8 @@ select.input-group-lg > .input-group-btn > .btn {
 }
 
 .wpdt-c .navbar-btn {
-    margin-top: 7.5px;
-    margin-bottom: 7.5px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .wpdt-c .navbar-btn.btn-sm {
