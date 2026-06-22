@@ -9,12 +9,18 @@ class ComposerStaticInitf0115dc08b8c8585e75c41ef6ed7cd87
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '2d223b650b5c56928c1affa16ee5cfe2' => __DIR__ . '/..' . '/wordpress/abilities-api/includes/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'Z' => 
         array (
             'ZipStream\\' => 10,
+        ),
+        'W' => 
+        array (
+            'WP\\McpSchema\\' => 13,
+            'WP\\MCP\\' => 7,
         ),
         'S' => 
         array (
@@ -49,6 +55,14 @@ class ComposerStaticInitf0115dc08b8c8585e75c41ef6ed7cd87
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'WP\\McpSchema\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wordpress/php-mcp-schema/src',
+        ),
+        'WP\\MCP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wordpress/mcp-adapter/includes',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (

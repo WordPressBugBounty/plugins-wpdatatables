@@ -343,7 +343,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Minor CSS fixes.</li>
+                                <li>Added WordPress MCP integration with 17 AI agent abilities for tables, charts, data, media, settings, and system info.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>
