@@ -319,7 +319,7 @@ function wdtAdminRatingMessages()
     $query = "SELECT COUNT(*) FROM {$wpdb->prefix}wpdatatables ORDER BY id";
 
     $allTables = $wpdb->get_var($query);
-    $wpdtPage = isset($_GET['page']) ? $_GET['page'] : '';
+    $wpdtPage = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
     $installDate = get_option('wdtInstallDate');
     $currentDate = date('Y-m-d');
     $tempIgnoreDate = get_option('wdtTempFutureDate');
@@ -372,7 +372,7 @@ function wdt_ivyforms_promo_enqueue_admin_scripts()
         return;
     }
 
-    $wpdt_page = isset($_GET['page']) ? $_GET['page'] : '';
+    $wpdt_page = isset($_GET['page']) ? sanitize_text_field(wp_unslash($_GET['page'])) : '';
     if (strpos($wpdt_page, 'wpdatatables') === false) {
         return;
     }

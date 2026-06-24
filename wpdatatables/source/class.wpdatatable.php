@@ -2543,7 +2543,7 @@ class WPDataTable
         $columnIndex = 1;
         // Check the search values passed from URL
         if (isset($_GET['wdt_search'])) {
-            $this->setDefaultSearchValue($_GET['wdt_search']);
+            $this->setDefaultSearchValue(sanitize_text_field(wp_unslash($_GET['wdt_search'])));
         }
 
         // Define all column-dependent rendering rules
@@ -2953,7 +2953,7 @@ class WPDataTable
 
         $obj = apply_filters('wpdatatables_filter_table_description', $obj, $this->getWpId(), $this);
 
-        return json_encode($obj, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG);
+        return json_encode($obj, JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_TAG | JSON_HEX_AMP);
     }
 
 

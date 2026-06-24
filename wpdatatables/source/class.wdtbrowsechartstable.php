@@ -70,10 +70,11 @@ class WDTBrowseChartsTable extends WP_List_Table
         $query = "SELECT COUNT(*) FROM {$wpdb->prefix}wpdatacharts";
 
         if (isset($_REQUEST['s'])) {
-            if (is_numeric($_REQUEST['s'])){
-                $query .= " WHERE id LIKE '" . sanitize_text_field($_REQUEST['s']) . "'";
+            $searchTerm = sanitize_text_field(wp_unslash($_REQUEST['s']));
+            if (is_numeric($searchTerm)){
+                $query .= $wpdb->prepare(" WHERE id LIKE %s", $searchTerm);
             }else{
-                $query .= " WHERE title LIKE '%" . sanitize_text_field($_REQUEST['s']) . "%'";
+                $query .= $wpdb->prepare(" WHERE title LIKE %s", '%' . $wpdb->esc_like($searchTerm) . '%');
             }
         }
 
@@ -97,10 +98,11 @@ class WDTBrowseChartsTable extends WP_List_Table
                     FROM {$wpdb->prefix}wpdatacharts ";
 
         if (isset($_REQUEST['s'])) {
-            if (is_numeric($_REQUEST['s'])){
-                $query .= " WHERE id LIKE '" . sanitize_text_field($_REQUEST['s']) . "'";
+            $searchTerm = sanitize_text_field(wp_unslash($_REQUEST['s']));
+            if (is_numeric($searchTerm)){
+                $query .= $wpdb->prepare(" WHERE id LIKE %s", $searchTerm);
             }else{
-                $query .= " WHERE title LIKE '%" . sanitize_text_field($_REQUEST['s']) . "%'";
+                $query .= $wpdb->prepare(" WHERE title LIKE %s", '%' . $wpdb->esc_like($searchTerm) . '%');
             }
         }
 
@@ -343,7 +345,7 @@ class WDTBrowseChartsTable extends WP_List_Table
         $current_url = remove_query_arg('paged', $current_url);
 
         if (isset($_GET['orderby'])) {
-            $current_orderby = $_GET['orderby'];
+            $current_orderby = sanitize_text_field(wp_unslash($_GET['orderby']));
         } else {
             $current_orderby = '';
         }

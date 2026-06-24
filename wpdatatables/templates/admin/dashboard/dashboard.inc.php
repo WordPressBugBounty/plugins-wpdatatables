@@ -343,7 +343,8 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Added WordPress MCP integration with 17 AI agent abilities for tables, charts, data, media, settings, and system info.</li>
+                                <li><strong>Security:</strong> Fixed a reflected Cross-Site Scripting (XSS) vulnerability via the <code>wdt_search</code> URL parameter.</li>
+                                <li><strong>Security:</strong> Hardened input sanitization for additional URL parameters and fixed a potential SQL injection in the Browse Tables and Browse Charts search.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

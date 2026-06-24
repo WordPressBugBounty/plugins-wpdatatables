@@ -19,7 +19,7 @@
 ?>
 <?php do_action('wpdatatables_before_table', $this->getWpId()); ?>
 <?php wp_nonce_field('wdtFrontendEditTableNonce', 'wdtNonceFrontendEdit'); ?>
-    <input type="hidden" id="<?php echo esc_attr($this->getId()) ?>_desc" value='<?php echo $this->getJsonDescription(); ?>'/>
+    <input type="hidden" id="<?php echo esc_attr($this->getId()) ?>_desc" value='<?php echo esc_attr($this->getJsonDescription()); ?>'/>
 
     <table id="<?php echo esc_attr($this->getId()) ?>"
            class="<?php if ($this->isScrollable()) { ?>scroll<?php } ?>
