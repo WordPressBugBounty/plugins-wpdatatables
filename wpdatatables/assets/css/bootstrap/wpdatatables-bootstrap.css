@@ -218,7 +218,6 @@
     border-spacing: 0;
 }
 
-/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 
 @media print {
     .wpdt-c *:before,
@@ -425,7 +424,7 @@
 }
 
 .wpdt-c .glyphicon-trash:before {
-    content: "\e020";
+    content: "\f273";
 }
 
 .wpdt-c .glyphicon-home:before {
@@ -3764,7 +3763,7 @@
     border: none;
     box-sizing: border-box;
     border-radius: 3px;
-    font-family: Inter;
+    font-family: var(--wpdt-inter-google-font, inherit);
     font-style: normal;
     font-weight: 600;
     font-size: 14px;

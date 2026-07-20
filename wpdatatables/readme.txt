@@ -4,9 +4,9 @@ Author URI: https://tmsproducts.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 7.0
+Tested up to: 7.0.2
 Requires PHP: 7.4
-Stable tag: 6.5.1.2
+Stable tag: 6.5.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -442,6 +442,11 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.5.1.3 =
+* Compatibility with WordPress version 7.0.2 approved.
+* Minor CSS improvements.
+Other small bug fixes and stability improvements.
+
 = 6.5.1.2 =
 * Security: Fixed a reflected Cross-Site Scripting (XSS) vulnerability where the unauthenticated `wdt_search` URL parameter was reflected into the table description and rendered without proper output escaping.
 * Security: Hardened input sanitization for additional URL parameters (`orderby`, `table_view`, `page`).
