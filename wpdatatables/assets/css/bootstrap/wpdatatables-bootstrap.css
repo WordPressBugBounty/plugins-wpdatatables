@@ -3847,6 +3847,10 @@
     border-color: #449d48;
 }
 
+.wpdt-c .wpTableWCAG .btn-success {
+    background-color: #39853c;
+}
+
 .wpdt-c .btn-success:focus, .wpdt-c .btn-success.focus {
     color: #fff;
     background-color: #3d8b40;
@@ -5598,7 +5602,7 @@ select.input-group-lg > .input-group-btn > .btn {
 }
 
 .wpdt-c .breadcrumb > li + li:before {
-    font-family: 'wpDataTablesIcons';
+    font-family: 'wpDataTablesIcons', sans-serif;
     content: "\f531";
     padding: 0 5px;
     color: #ccc;
@@ -5952,7 +5956,7 @@ select.input-group-lg > .input-group-btn > .btn {
     border-radius: 3px;
 }
 
-.wpdt-c.alert h4
+.wpdt-c.alert h4,
 .wpdt-c .alert h4 {
     margin-top: 0;
     color: inherit;
@@ -6054,6 +6058,13 @@ select.input-group-lg > .input-group-btn > .btn {
     border-color: transparent;
 }
 
+.wpdt-c .alert-danger.alert-medium {
+    background: rgba(243, 216, 0, 0.08);
+    color: #756033;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
 .wpdt-c.alert-danger hr,
 .wpdt-c .alert-danger hr {
     border-top-color: rgba(0, 0, 0, 0);
@@ -6096,7 +6107,7 @@ select.input-group-lg > .input-group-btn > .btn {
 
 .wpdt-c .progress-bar {
     float: left;
-    width: 0%;
+    width: 0;
     height: 100%;
     font-size: 12px;
     line-height: 18px;
