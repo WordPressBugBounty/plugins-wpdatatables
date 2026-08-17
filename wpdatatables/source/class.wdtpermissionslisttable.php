@@ -166,7 +166,7 @@ class WDTPermissionsListTable extends WP_List_Table
         $current_url = remove_query_arg($removable_query_args, $current_url);
         $search_term = '';
         if (isset($_REQUEST['s'])) {
-            $search_term = sanitize_text_field($_REQUEST['s']);
+            $search_term = sanitize_text_field(wp_unslash($_REQUEST['s']));
             $current_url = add_query_arg('s', $search_term, $current_url);
         }
 

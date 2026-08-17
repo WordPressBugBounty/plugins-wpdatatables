@@ -2054,3 +2054,8 @@ div.mce-widget button i.mce-i-wpdatachart{
 .wpdt-c .wdt-upgrade-btn a:hover {
     opacity: .8;
 }
+
+.tooltip .tooltip-inner a {
+    color: #fff;
+    text-decoration: underline;
+}

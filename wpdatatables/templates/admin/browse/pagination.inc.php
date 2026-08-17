@@ -35,10 +35,12 @@
         //	Link to current page, plus 2 pages in either direction if necessary
         sort($links);
         foreach ((array)$links as $link) {
-            $search_term_temp = '';
             $class = $paged == $link ? ' class="active"' : '';
-            $search_term_temp = $search_term != '' ? '&s=' . $search_term : '';
-            printf('<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url(get_pagenum_link($link)) . $search_term_temp, $link);
+            $page_url = get_pagenum_link($link, false);
+            if ($search_term != '') {
+                $page_url = add_query_arg('s', $search_term, $page_url);
+            }
+            printf('<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url($page_url), (int)$link);
         }
 
         // Ellipse sign on right side

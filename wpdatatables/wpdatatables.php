@@ -3,7 +3,7 @@
 Plugin Name: wpDataTables - Tables & Table Charts
 Plugin URI: https://wpdatatables.com
 Description: Create responsive, sortable tables & charts from Excel, CSV or PHP. Add tables & charts to any post in minutes with DataTables.
-Version: 6.5.1.4
+Version: 6.5.1.5
 Author: Melograno Ventures
 Author URI: https://melograno.io
 Text Domain: wpdatatables
@@ -79,6 +79,13 @@ require_once(WDT_ROOT_PATH . 'controllers/wdt_functions.php');
 // Load dependencies
 require_once WDT_ROOT_PATH . 'lib/autoload.php';
 
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
+use Melograno\UsageTracker\Core\UsageTracker;
+
+if (!defined('MELOGRANO_BI_GATE_URL')) {
+    define('MELOGRANO_BI_GATE_URL', 'https://bi.melograno.io');
+}
+
 function wpdatatables_load()
 {
     if (is_admin()) {
@@ -113,6 +120,11 @@ function wpdatatables_load()
     require_once(WDT_ROOT_PATH . 'integrations/ivyforms/ivyforms-integration.php');
 
     add_action('plugins_loaded', 'wdtLoadTextdomain');
+
+    add_action('plugins_loaded', static function () {
+        UsageTracker::init(new WpDataTablesCollector(), __FILE__);
+    });
+
     if (is_admin()) {
 
         if (WDT_CURRENT_VERSION !== get_option('wdtVersion')) {

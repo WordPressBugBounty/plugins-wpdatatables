@@ -2,6 +2,9 @@
 
 defined('ABSPATH') or die("Cannot access pages directly.");
 
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
+use Melograno\UsageTracker\Core\UsageTracker;
+
 
 
 /**
@@ -34,7 +37,28 @@ function wdtSavePluginSettings() {
         exit();
     }
 
-    WDTSettingsController::saveSettings(apply_filters('wpdatatables_before_save_settings', $_POST['settings']));
+    $settings = apply_filters('wpdatatables_before_save_settings', $_POST['settings']);
+
+    if (is_array($settings) && array_key_exists('wdtUsageTrackingEnabled', $settings)) {
+        $enabled = (bool) $settings['wdtUsageTrackingEnabled'];
+        $armNotice = false;
+
+        if (
+            !$enabled
+            && get_option('wpdatatables_usage_tracking_settings_optout_notice_handled') !== 'yes'
+        ) {
+            $armNotice = true;
+            update_option('wpdatatables_usage_tracking_settings_optout_notice_handled', 'yes', true);
+        }
+
+        $usageSettings = [
+            'usageTrackingEnabled' => $enabled,
+        ];
+        UsageTracker::updateSettings($usageSettings, new WpDataTablesCollector(), $armNotice);
+        unset($settings['wdtUsageTrackingEnabled']);
+    }
+
+    WDTSettingsController::saveSettings($settings);
     exit();
 }
 

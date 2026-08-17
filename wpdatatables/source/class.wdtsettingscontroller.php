@@ -2,6 +2,9 @@
 
 defined('ABSPATH') or die("Cannot access pages directly.");
 
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
+use Melograno\UsageTracker\Core\UsageTracker;
+
 /**
  * Created by PhpStorm.
  * User: miljkomilosevic
@@ -79,7 +82,7 @@ class WDTSettingsController {
 	}
 
 	public static function getCurrentPluginConfig() {
-		return array(
+		$settings = array(
 
 		    'wdtSiteLink'               => get_option('wdtSiteLink'),
 
@@ -121,6 +124,11 @@ class WDTSettingsController {
 		    'wdtAutoUpdateOption'       => get_option('wdtAutoUpdateOption'),
             'wdtGoogleStableVersion' => get_option('wdtGoogleStableVersion'),
 		);
+
+        $usageSettings = UsageTracker::getSettings(new WpDataTablesCollector());
+        $settings['wdtUsageTrackingEnabled'] = !empty($usageSettings['usageTrackingEnabled']) ? 1 : 0;
+
+        return $settings;
 	}
 
 	/**

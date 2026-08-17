@@ -306,6 +306,20 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                     <i class="wpdt-icon-times-circle-full"></i>
                                 <?php } ?>
                             </li>
+                            <li>
+                                <span>
+                                    <?php esc_html_e('Usage tracking', 'wpdatatables'); ?>
+                                </span>
+                                <?php
+                                $wdtUsageTrackingEnabled = \Melograno\UsageTracker\Core\UsageTracker::isConsentEnabled(
+                                    new \Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector()
+                                );
+                                if ($wdtUsageTrackingEnabled) { ?>
+                                    <i class="wpdt-icon-check-circle-full"></i>
+                                <?php } else { ?>
+                                    <i class="wpdt-icon-times-circle-full"></i>
+                                <?php } ?>
+                            </li>
                         </ul>
                         <p class="wdt-link pull-right m-b-0">
                             <a href="<?php echo admin_url('admin.php?page=wpdatatables-system-info'); ?>">
@@ -343,7 +357,8 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><strong>Improvement:</strong> Minor CSS improvements.</li>
+                                <li><strong>Security:</strong> Fixed a reflected Cross-Site Scripting (XSS) vulnerability in Browse Tables pagination where the <code>s</code> search parameter was appended to page links after URL escaping.</li>
+                                <li><strong>Security:</strong> Hardened search-parameter handling in Browse Tables, Browse Charts, and Permissions list pagination by unslashing input before sanitization.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

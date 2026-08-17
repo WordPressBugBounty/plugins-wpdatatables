@@ -9272,3 +9272,19 @@ msgid ""
 "MCP integration is unavailable because required components are missing: %s. "
 "Try reinstalling or updating wpDataTables."
 msgstr ""
+
+#: templates/admin/settings/tabs/main_plugin_settings.php
+msgid "Improve WPDataTables"
+msgstr "Improve WPDataTables"
+
+#: templates/admin/settings/tabs/main_plugin_settings.php
+msgid "Enable data usage"
+msgstr "Enable data usage"
+
+#: templates/admin/settings/tabs/main_plugin_settings.php
+msgid "Help us improve WPDataTables by sharing anonymous data about your plugin usage. No personal data is collected."
+msgstr "Help us improve WPDataTables by sharing anonymous data about your plugin usage. No personal data is collected."
+
+#: templates/admin/dashboard/dashboard.inc.php
+msgid "Usage tracking"
+msgstr "Usage tracking"

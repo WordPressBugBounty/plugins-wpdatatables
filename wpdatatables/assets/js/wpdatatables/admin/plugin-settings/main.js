@@ -235,6 +235,13 @@
         });
 
         /**
+         * Toggle usage tracking
+         */
+        $('#wdt-usage-tracking-enabled').change(function (e) {
+            wpdatatable_plugin_config.setUsageTrackingEnabled($(this).is(':checked') ? 1 : 0);
+        });
+
+        /**
          * Load current config on load
          */
         wpdatatable_plugin_config.setLanguage           ( wdt_current_config.wdtInterfaceLanguage );
@@ -267,6 +274,7 @@
         wpdatatable_plugin_config.setBorderRemoval(wdt_current_config.wdtBorderRemoval == 1 ? 1 : 0);
         wpdatatable_plugin_config.setBorderRemovalHeader(wdt_current_config.wdtBorderRemovalHeader == 1 ? 1 : 0);
         wpdatatable_plugin_config.setGoogleStableVersion(wdt_current_config.wdtGoogleStableVersion == 1 ? 1 : 0);
+        wpdatatable_plugin_config.setUsageTrackingEnabled(wdt_current_config.wdtUsageTrackingEnabled == 1 ? 1 : 0);
 
         for (var value in wdt_current_config.wdtFontColorSettings) {
             wpdatatable_plugin_config.setColorFontSetting(value, wdt_current_config.wdtFontColorSettings[value]);

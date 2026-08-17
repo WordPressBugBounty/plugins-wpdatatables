@@ -176,6 +176,20 @@ function wdtmcp_is_main_license_active() {
 }
 
 /**
+ * Detect the wpDataTables Lite tier for usage telemetry.
+ *
+ * Lite is a separate product — always report the lite SKU. The $integrations
+ * argument is accepted for API compatibility with the shared usage-tracker
+ * collector and is ignored.
+ *
+ * @param array $integrations Feature => boolean map (unused on Lite).
+ * @return string Always 'lite'.
+ */
+function wdtmcp_detect_tier_from_features( array $integrations ) {
+    return 'lite';
+}
+
+/**
  * Detect the wpDataTables tier from loaded integration constants.
  *
  * The tiers are cumulative — Developer ⊃ Pro ⊃ Standard ⊃ Starter ⊃ Free.
@@ -184,7 +198,8 @@ function wdtmcp_is_main_license_active() {
  * integrations directory.
  *
  * Paid tiers require an activated main licence; copied integration files without
- * activation are reported as free.
+ * activation are reported as free. For file-only / telemetry SKU detection on
+ * Lite, use {@see wdtmcp_detect_tier_from_features()}.
  *
  * @param array $integrations Feature => boolean map.
  * @return string One of: developer, pro, standard, starter, free.

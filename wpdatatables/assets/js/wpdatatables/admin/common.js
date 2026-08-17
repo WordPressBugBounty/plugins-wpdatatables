@@ -32,17 +32,76 @@ var popoverOptions = {
 /**
  * Hide tooltip on button click or on mouseout event
  */
+var wdtInteractiveTooltipHideTimeout;
+
 var wdtHideTooltip = function () {
-    jQuery('.wdt-datatables-admin-wrap [data-toggle="tooltip"]').on('click', function () {
+    jQuery('.wdt-datatables-admin-wrap [data-toggle="tooltip"]:not(.wdt-tooltip-interactive)').on('click', function () {
         jQuery(this).wdtBootstrapTooltip('hide');
     });
 
-    jQuery('.wdt-datatables-admin-wrap [data-toggle="tooltip"]').mouseout(function (event) {
+    jQuery('.wdt-datatables-admin-wrap [data-toggle="tooltip"]:not(.wdt-tooltip-interactive)').mouseout(function (event) {
         var e = event.toElement || event.relatedTarget;
         if (e != null && (e.parentNode == this || e == this)) {
             return;
         }
         jQuery(this).wdtBootstrapTooltip('hide');
+    });
+};
+
+/**
+ * Keep tooltips with links open while hovering over the tooltip itself
+ */
+var wdtInteractiveTooltip = function () {
+    if (typeof jQuery.fn.wdtBootstrapTooltip === 'undefined') {
+        return;
+    }
+
+    var $tooltips = jQuery('.wdt-datatables-admin-wrap .wdt-tooltip-interactive[data-toggle="tooltip"]');
+
+    if (!$tooltips.length) {
+        return;
+    }
+
+    $tooltips.wdtBootstrapTooltip({
+        html: true,
+        trigger: 'manual'
+    });
+
+    var wdtShowInteractiveTooltip = function ($el) {
+        clearTimeout(wdtInteractiveTooltipHideTimeout);
+        $tooltips.not($el).wdtBootstrapTooltip('hide');
+        $el.wdtBootstrapTooltip('show');
+    };
+
+    var wdtScheduleHideInteractiveTooltip = function ($el) {
+        wdtInteractiveTooltipHideTimeout = setTimeout(function () {
+            if (!jQuery('.tooltip:hover').length && !jQuery('.tooltip').has(document.activeElement).length) {
+                $el.wdtBootstrapTooltip('hide');
+            }
+        }, 100);
+    };
+
+    $tooltips.on('mouseenter focusin', function () {
+        wdtShowInteractiveTooltip(jQuery(this));
+    }).on('mouseleave focusout', function () {
+        wdtScheduleHideInteractiveTooltip(jQuery(this));
+    });
+
+    jQuery(document).on('mouseenter focusin', '.tooltip', function () {
+        clearTimeout(wdtInteractiveTooltipHideTimeout);
+    }).on('mouseleave focusout', '.tooltip', function () {
+        wdtInteractiveTooltipHideTimeout = setTimeout(function () {
+            if (!jQuery('.tooltip').has(document.activeElement).length) {
+                jQuery('.wdt-tooltip-interactive[data-toggle="tooltip"]').wdtBootstrapTooltip('hide');
+            }
+        }, 100);
+    });
+
+    // Close the open interactive tooltip on Escape for keyboard users.
+    jQuery(document).on('keydown', function (event) {
+        if (event.key === 'Escape' || event.keyCode === 27) {
+            $tooltips.wdtBootstrapTooltip('hide');
+        }
     });
 };
 
@@ -187,9 +246,10 @@ jQuery.fn.extend({
         /**
          * Attach tooltips
          */
-        $('.wdt-datatables-admin-wrap [data-toggle="tooltip"]').wdtBootstrapTooltip();
+        $('.wdt-datatables-admin-wrap [data-toggle="tooltip"]:not(.wdt-tooltip-interactive)').wdtBootstrapTooltip();
 
         wdtHideTooltip();
+        wdtInteractiveTooltip();
 
         /**
          * Attach HTML Popovers (Hints with images)

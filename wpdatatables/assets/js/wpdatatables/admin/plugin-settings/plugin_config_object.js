@@ -359,4 +359,11 @@ var wpdatatable_plugin_config = {
             jQuery('#wdt-use-google-stable-version').prop('checked', googleStableVersion);
         }
     },
+
+    setUsageTrackingEnabled: function (usageTrackingEnabled) {
+        wdt_current_config.wdtUsageTrackingEnabled = usageTrackingEnabled;
+        if (jQuery('#wdt-usage-tracking-enabled').prop('checked') != usageTrackingEnabled) {
+            jQuery('#wdt-usage-tracking-enabled').prop('checked', usageTrackingEnabled);
+        }
+    }
 };

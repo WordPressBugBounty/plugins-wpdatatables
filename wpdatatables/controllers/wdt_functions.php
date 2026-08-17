@@ -2,6 +2,9 @@
 
 defined('ABSPATH') or die("Cannot access pages directly.");
 
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
+use Melograno\UsageTracker\Core\UsageTracker;
+
 /**
  * Main wpDataTables functions
  * @package wpDataTables
@@ -593,6 +596,9 @@ function wdtUninstallDelete()
         delete_option('wdtGoogleStableVersion');
         delete_option('wdtActivationSimpleTableTemplates');
         delete_option('wdtSiteLink');
+
+        UsageTracker::deleteStoredOptions(new WpDataTablesCollector());
+        delete_option('wpdatatables_usage_tracking_settings_optout_notice_handled');
 
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables");
         $wpdb->query("DROP TABLE IF EXISTS {$wpdb->prefix}wpdatatables_columns");
