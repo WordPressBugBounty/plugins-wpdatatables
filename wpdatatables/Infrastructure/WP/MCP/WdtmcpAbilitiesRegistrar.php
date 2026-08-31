@@ -38,13 +38,19 @@ class WdtmcpAbilitiesRegistrar
             return;
         }
 
-        wp_register_ability_category('wpdatatables-data', array(
+        $category = array(
             'label' => __('wpDataTables - Data', 'wpdatatables'),
             'description' => __(
                 'Abilities for interacting with wpDataTables data, configuration, media, table creation, and charts.',
                 'wpdatatables'
             ),
-        ));
+        );
+
+        try {
+            wp_register_ability_category('wpdatatables-data', $category);
+        } catch (\Throwable $exception) {
+            error_log('wpDataTables MCP: ability category registration failed - ' . $exception->getMessage());
+        }
     }
 
     public static function registerAbilities(): void
@@ -58,8 +64,17 @@ class WdtmcpAbilitiesRegistrar
         foreach (self::ABILITY_FILES as $file => $registrationFunction) {
             require_once WDT_ROOT_PATH . 'Infrastructure/WP/MCP/Abilities/' . $file;
 
-            if (function_exists($registrationFunction)) {
+            if (! function_exists($registrationFunction)) {
+                continue;
+            }
+
+            // A conflicting Abilities API copy must cost us that one ability, not the request.
+            try {
                 $registrationFunction();
+            } catch (\Throwable $exception) {
+                error_log(
+                    'wpDataTables MCP: registering ability from ' . $file . ' failed - ' . $exception->getMessage()
+                );
             }
         }
     }

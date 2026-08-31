@@ -12,6 +12,8 @@ defined('ABSPATH') or die('Access denied.');
 
 class WdtmcpMcpServerRegistrar
 {
+    private const SERVER_ID = 'wpdatatables-mcp-server';
+
     private const ABILITY_IDS = array(
         'wpdatatables/update-table-settings',
         'wpdatatables/edit-table',
@@ -37,16 +39,57 @@ class WdtmcpMcpServerRegistrar
      */
     public static function init($adapter): void
     {
-        $result = $adapter->create_server(
-            'wpdatatables-mcp-server',
+        if (! is_object($adapter) || ! method_exists($adapter, 'create_server')) {
+            self::reportFailure(
+                __('the loaded MCP Adapter does not provide create_server().', 'wpdatatables'),
+                'adapter unusable'
+            );
+
+            return;
+        }
+
+        // Another copy of the integration - Lite running next to Pro, or a second init pass -
+        // already registered the server, so leave it alone instead of triggering a duplicate error.
+        if (method_exists($adapter, 'get_server') && null !== $adapter->get_server(self::SERVER_ID)) {
+            return;
+        }
+
+        try {
+            $result = self::createServer($adapter);
+        } catch (\Throwable $exception) {
+            // A foreign MCP Adapter copy can expose a different create_server() signature or
+            // internals; report the mismatch instead of taking the whole request down.
+            self::reportFailure($exception->getMessage(), 'create_server failed');
+
+            return;
+        }
+
+        if ($result instanceof \WP_Error) {
+            self::reportFailure($result->get_error_message(), 'create_server failed');
+        }
+    }
+
+    /**
+     * Register the wpDataTables MCP server on the given adapter.
+     *
+     * @param object $adapter The adapter instance.
+     * @return mixed Adapter return value, typically the adapter itself or a WP_Error.
+     */
+    private static function createServer(object $adapter)
+    {
+        $description = 'Exposes wpDataTables functionality as MCP tools for data discovery, '
+            . 'table creation, configuration, media, and charts.';
+
+        return $adapter->create_server(
+            self::SERVER_ID,
             'mcp',
-            'wpdatatables-mcp-server',
+            self::SERVER_ID,
             'wpDataTables MCP Server',
-            'Exposes wpDataTables functionality as MCP tools for data discovery, table creation, configuration, media, and charts.',
+            $description,
             defined('WDT_CURRENT_VERSION') ? 'v' . WDT_CURRENT_VERSION : '1.0.0',
             array(WdtmcpMcpHttpTransport::class),
-            \WP\MCP\Infrastructure\ErrorHandling\ErrorLogMcpErrorHandler::class,
-            \WP\MCP\Infrastructure\Observability\NullMcpObservabilityHandler::class,
+            null,
+            null,
             self::ABILITY_IDS,
             array(),
             array(),
@@ -69,25 +112,38 @@ class WdtmcpMcpServerRegistrar
                 return $user instanceof \WP_User && user_can($user, 'manage_options');
             }
         );
+    }
 
-        if ($result instanceof \WP_Error) {
-            $error_message = $result->get_error_message();
-            error_log('wpDataTables MCP: create_server failed - ' . $error_message);
+    /**
+     * Log the reason the MCP server could not be registered and show it to administrators.
+     *
+     * The notice is limited to wpDataTables screens, so an MCP conflict never shows up while an
+     * admin is editing unrelated content.
+     *
+     * @param string $reason Human-readable reason.
+     * @param string $stage  Short label for where registration failed.
+     */
+    private static function reportFailure(string $reason, string $stage = 'server registration failed'): void
+    {
+        $message = 'wpDataTables MCP: ' . $stage . ' - ' . $reason;
 
-            // Also surface the failure to the current admin so it's not only in the PHP debug log.
-            if (is_admin() && current_user_can('manage_options')) {
-                add_action(
-                    'admin_notices',
-                    static function () use ($error_message): void {
-                        echo '<div class="notice notice-error"><p>'
-                            . esc_html('wpDataTables MCP: create_server failed - ' . $error_message)
-                            . '</p></div>';
-                    }
-                );
-            } else {
-                // If we're not in wp-admin, at least let WP_DEBUG_DISPLAY show something useful.
-                trigger_error('wpDataTables MCP: create_server failed - ' . $error_message, E_USER_WARNING);
-            }
+        error_log($message);
+
+        if (! is_admin() || ! current_user_can('manage_options')) {
+            return;
         }
+
+        $page = (string) (filter_input(INPUT_GET, 'page', FILTER_UNSAFE_RAW) ?? '');
+
+        if (strpos($page, 'wpdatatables') === false) {
+            return;
+        }
+
+        add_action(
+            'admin_notices',
+            static function () use ($message): void {
+                echo '<div class="notice notice-error is-dismissible"><p>' . esc_html($message) . '</p></div>';
+            }
+        );
     }
 }

@@ -22,7 +22,23 @@ class WdtmcpMcpHttpTransport extends HttpTransport
     {
         parent::__construct($transportContext);
 
+        // A different MCP Adapter copy may not expose route registration at all.
+        if (! method_exists($this, 'register_routes')) {
+            return;
+        }
+
+        // Outside a REST request the parent hook still fires at the right time, and registering
+        // routes here would only trigger a _doing_it_wrong notice.
+        if (! doing_action('rest_api_init') && ! did_action('rest_api_init')) {
+            return;
+        }
+
         remove_action('rest_api_init', array($this, 'register_routes'), 16);
-        $this->register_routes();
+
+        try {
+            $this->register_routes();
+        } catch (\Throwable $exception) {
+            error_log('wpDataTables MCP: route registration failed - ' . $exception->getMessage());
+        }
     }
 }

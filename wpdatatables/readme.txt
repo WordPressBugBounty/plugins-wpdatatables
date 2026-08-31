@@ -4,9 +4,9 @@ Author URI: https://melograno.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 7.0.3
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 6.5.1.5
+Stable tag: 6.5.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -442,6 +442,10 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.5.1.6 =
+* Fixed MCP Compatibility issue throwing an error message.
+Other small bug fixes and stability improvements.
+
 = 6.5.1.5 =
 * Security: Fixed a reflected Cross-Site Scripting (XSS) vulnerability in Browse Tables pagination where the `s` search parameter was appended to page links after URL escaping.
 * Security: Hardened search-parameter handling in Browse Tables, Browse Charts, and Permissions list pagination by unslashing input before sanitization.
