@@ -1,9 +1,5 @@
 .wpdt-c .wpDataTablesWrapper table.wpDataTable .wdt-datetimepicker-modal.bootstrap-datetimepicker-widget table td {
   background: transparent;
-  -o-transition: 0s;
-  -ms-transition: 0s;
-  -moz-transition: 0s;
-  -webkit-transition: 0s;
   transition: 0s;
   padding: 0;
   border: none !important;

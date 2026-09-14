@@ -151,7 +151,6 @@
     text-align: center;
     line-height: 20px;
     transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
     width: 100px;
     display: block;
     background: #79a70a;

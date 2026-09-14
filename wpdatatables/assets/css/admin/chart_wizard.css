@@ -352,7 +352,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
     background-color: #2196f3;
 }
 
@@ -567,7 +566,6 @@
 }
 .render-engine .dropdown-menu .wdt-premium-option-disabled {
     user-select: none;
-    -webkit-user-select: none;
     cursor: not-allowed !important;
 }
 .wpdt-c .charts-type.highstock-charts-type.highstock-not-available-notice,

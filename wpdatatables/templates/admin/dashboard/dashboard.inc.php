@@ -357,8 +357,7 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li><strong>Security:</strong> Fixed a reflected Cross-Site Scripting (XSS) vulnerability in Browse Tables pagination where the <code>s</code> search parameter was appended to page links after URL escaping.</li>
-                                <li><strong>Security:</strong> Hardened search-parameter handling in Browse Tables, Browse Charts, and Permissions list pagination by unslashing input before sanitization.</li>
+                                <li>Minor CSS improvements.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

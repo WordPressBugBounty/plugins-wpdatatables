@@ -137,11 +137,7 @@
 }
 
 .wdt-datatables-admin-wrap .card-columns {
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
     column-count: 1;
-    -webkit-column-gap: 1.25rem;
-    -moz-column-gap: 1.25rem;
     column-gap: 1.25rem;
 }
 
@@ -749,7 +745,6 @@
     text-align: center;
     line-height: 20px;
     transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
     width: 100px;
     display: block;
     background: #79a70a;

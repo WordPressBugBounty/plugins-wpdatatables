@@ -1,6 +1,5 @@
 .wpdt-c .wdt-datatables-admin-wrap #color-and-font-settings a, .wpdt-c .wdt-datatables-admin-wrap #wdt-activation a {
     box-shadow: none !important;
-    -webkit-box-shadow: none !important;
 }
 
 .wpdt-c .wdt-datatables-admin-wrap tr:first-child > td {
