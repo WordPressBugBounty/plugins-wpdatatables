@@ -12,6 +12,101 @@ defined('ABSPATH') or die('Access denied.');
 
 class WdtmcpAbilitiesHelper
 {
+    /**
+     * Admin URL for the table configuration / editor screen.
+     *
+     * Matches browse-list deep links:
+     * `admin.php?page=wpdatatables-constructor&source[&simple|=ivyforms]&table_id={id}`.
+     *
+     * @param int    $tableId   Table ID.
+     * @param string $tableType Optional table_type (simple, ivyforms, …). Looked up when empty.
+     * @return string Absolute admin URL, or empty string for invalid IDs.
+     */
+    public static function adminTableUrl(int $tableId, string $tableType = ''): string
+    {
+        if ($tableId <= 0) {
+            return '';
+        }
+
+        if ($tableType === '') {
+            global $wpdb;
+            $looked_up = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT table_type FROM {$wpdb->prefix}wpdatatables WHERE id = %d",
+                    $tableId
+                )
+            );
+
+            if (null === $looked_up) {
+                return '';
+            }
+
+            $tableType = (string) $looked_up;
+        }
+
+        // list-tables may expose SQL instead of mysql; both are non-simple constructors.
+        if ($tableType === 'SQL') {
+            $tableType = 'mysql';
+        }
+
+        $simpleSuffix = ($tableType === 'simple') ? '&simple' : '';
+        $ivySuffix = ($tableType === 'ivyforms') ? '=ivyforms' : '';
+
+        return admin_url(
+            'admin.php?page=wpdatatables-constructor&source' . $simpleSuffix . $ivySuffix . '&table_id=' . $tableId
+        );
+    }
+
+    /**
+     * Admin URL for the chart wizard / editor screen.
+     *
+     * Matches browse-list deep links:
+     * `admin.php?page=wpdatatables-chart-wizard&chart_id={id}&engine={engine}`.
+     *
+     * @param int    $chartId Chart ID.
+     * @param string $engine  Optional render engine. Looked up when empty.
+     * @return string Absolute admin URL, or empty string for invalid IDs.
+     */
+    public static function adminChartUrl(int $chartId, string $engine = ''): string
+    {
+        if ($chartId <= 0) {
+            return '';
+        }
+
+        if ($engine === '') {
+            global $wpdb;
+            $looked_up = $wpdb->get_var(
+                $wpdb->prepare(
+                    "SELECT engine FROM {$wpdb->prefix}wpdatacharts WHERE id = %d",
+                    $chartId
+                )
+            );
+
+            if (null === $looked_up) {
+                return '';
+            }
+
+            $engine = (string) $looked_up;
+        }
+
+        $url = 'admin.php?page=wpdatatables-chart-wizard&chart_id=' . $chartId;
+        if ($engine !== '') {
+            $url .= '&engine=' . rawurlencode($engine);
+        }
+
+        return admin_url($url);
+    }
+
+    /**
+     * Admin URL for the empty chart wizard (create flow).
+     *
+     * @return string
+     */
+    public static function adminChartWizardUrl(): string
+    {
+        return admin_url('admin.php?page=wpdatatables-chart-wizard');
+    }
+
     public static function getTableCustomCss(int $tableId): string
     {
         $all = get_option('wdtmcp_table_css', array());
@@ -485,6 +580,35 @@ class WdtmcpAbilitiesHelper
 namespace {
 
 use WDTMCP\Helpers\McpHelpers\WdtmcpAbilitiesHelper;
+
+if (! function_exists('wdtmcp_admin_table_url')) {
+/**
+ * @param int         $table_id
+ * @param string|null $table_type
+ */
+function wdtmcp_admin_table_url($table_id, $table_type = ''): string
+{
+    return WdtmcpAbilitiesHelper::adminTableUrl((int) $table_id, (string) $table_type);
+}
+}
+
+if (! function_exists('wdtmcp_admin_chart_url')) {
+/**
+ * @param int         $chart_id
+ * @param string|null $engine
+ */
+function wdtmcp_admin_chart_url($chart_id, $engine = ''): string
+{
+    return WdtmcpAbilitiesHelper::adminChartUrl((int) $chart_id, (string) $engine);
+}
+}
+
+if (! function_exists('wdtmcp_admin_chart_wizard_url')) {
+function wdtmcp_admin_chart_wizard_url(): string
+{
+    return WdtmcpAbilitiesHelper::adminChartWizardUrl();
+}
+}
 
 if (! function_exists('wdtmcp_get_table_custom_css')) {
 function wdtmcp_get_table_custom_css($table_id): string

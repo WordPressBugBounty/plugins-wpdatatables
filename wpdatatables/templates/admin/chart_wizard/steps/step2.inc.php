@@ -13,7 +13,17 @@
                     <select class="selectpicker" name="wpdatatables-chart-source" id="wpdatatables-chart-source"
                             data-live-search="true">
                         <option value=""><?php _e('Pick a wpDataTable', 'wpdatatables'); ?></option>
-                        <?php foreach (WPDataTable::getAllTables() as $table) { ?>
+                        <?php
+                        $wdtChartSourceTables = WPDataTable::getAllTables();
+                        if (function_exists('wdt_user_can_use_table_as_chart_source')) {
+                            $wdtChartSourceTables = array_values(array_filter(
+                                (array) $wdtChartSourceTables,
+                                static function ($table) {
+                                    return wdt_user_can_use_table_as_chart_source((int) ($table['id'] ?? 0));
+                                }
+                            ));
+                        }
+                        foreach ($wdtChartSourceTables as $table) { ?>
                             <option value="<?php echo esc_attr($table['id']) ?>"
                                     data-table-type="<?php echo esc_attr($table['table_type']) ?>">
                             <?php echo esc_html("{$table['title']} (id: {$table['id']})");?>

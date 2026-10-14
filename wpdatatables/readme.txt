@@ -4,9 +4,9 @@ Author URI: https://melograno.io
 Plugin URI: https://wpdatatables.com/
 Tags: table, table builder, datatable, csv, chart
 Requires at least: 4.0
-Tested up to: 7.1
+Tested up to: 7.1.3
 Requires PHP: 7.4
-Stable tag: 6.5.1.7
+Stable tag: 6.6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -442,6 +442,14 @@ Please report security bugs found in the source code of the wpDataTables plugin 
 13. Google chart settings
 
 == Changelog ==
+= 6.6.1.1 =
+* Feature: Role- and user-based permissions are now available in Lite.
+* Feature: Angie AI can use wpDataTables tools when the Angie plugin is active.
+* Feature: AI chart suggester in the chart wizard recommends a render engine, chart type, title, and axis columns.
+* Feature: Setting to enable or disable MCP for AI assistants.
+* Compatibility with WordPress 7.1.3 approved.
+Other small bug fixes and stability improvements.
+
 = 6.5.1.7 =
 * Minor CSS improvements.
 Other small bug fixes and stability improvements.

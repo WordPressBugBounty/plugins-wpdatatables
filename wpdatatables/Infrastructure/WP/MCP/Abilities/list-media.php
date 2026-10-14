@@ -69,8 +69,10 @@ function wdtmcp_register_list_media_ability() {
 
             'execute_callback' => 'wdtmcp_execute_list_media',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/list-media', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(

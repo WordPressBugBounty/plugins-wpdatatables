@@ -632,6 +632,7 @@ function wdtActivation($networkWide)
                 $tableName = $wpdb->prefix . 'wpdatatables_templates';
                 $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
                 wdtCheckSimpleTemplatesActivation($rowCount, $tableName);
+                wdt_permissions_on_activation();
             }
             switch_to_blog($oldBlog);
 
@@ -644,6 +645,116 @@ function wdtActivation($networkWide)
     $tableName = $wpdb->prefix . 'wpdatatables_templates';
     $rowCount = $wpdb->get_var("SELECT COUNT(*) FROM {$tableName}");
     wdtCheckSimpleTemplatesActivation($rowCount, $tableName);
+    wdt_permissions_on_activation();
+}
+
+/**
+ * Grant administrator caps and migrate legacy view-manager meta into access rules.
+ *
+ * @return void
+ */
+function wdt_permissions_on_activation()
+{
+    \WPDataTables\Services\InstallActions\ActivationCapabilitiesHook::ensureAdministratorCaps();
+    \WPDataTables\Services\Permissions\AccessRulesMigrator::runIfNeeded();
+}
+
+/**
+ * Application permissions service.
+ *
+ * @return \WPDataTables\Services\Permissions\PermissionsService
+ */
+function wdt_permissions_service()
+{
+    return \WPDataTables\Services\Permissions\WpdtPermissionsLocator::service();
+}
+
+/**
+ * Whether the current user may read a table in order to build a chart from it.
+ *
+ * `view_tables` is not implied by list/edit grants, so browse and edit grants
+ * count as well. Null from the allow-list means every table.
+ *
+ * @param int $tableId
+ * @return bool
+ */
+function wdt_user_can_use_table_as_chart_source($tableId)
+{
+    $tableId = (int) $tableId;
+    if ($tableId <= 0) {
+        return false;
+    }
+
+    if (!function_exists('wdt_permissions_service')) {
+        return current_user_can('manage_options');
+    }
+
+    $permissions = wdt_permissions_service();
+    if ($permissions->canViewTable($tableId) || $permissions->canEditTable($tableId)) {
+        return true;
+    }
+
+    $allowed = $permissions->getAllowedTableIds();
+
+    return $allowed === null || in_array($tableId, $allowed, true);
+}
+
+/**
+ * Register capability sync and the permissions admin-ajax actions.
+ *
+ * @return void
+ */
+function wdt_register_permissions_hooks()
+{
+    add_action('init', static function () {
+        \WPDataTables\Services\Permissions\WpdtPermissionsLocator::adminService()->registerCapabilities();
+    }, 1);
+
+    $actions = array(
+        'wpdatatables_load_permissions' => 'loadPermissions',
+        'wpdatatables_save_permission' => 'savePermission',
+        'wpdatatables_update_permission' => 'updatePermission',
+        'wpdatatables_delete_permission' => 'deletePermission',
+        'wpdatatables_get_permission' => 'getPermission',
+        'wpdatatables_permissions_meta' => 'getPermissionsMeta',
+        'wpdatatables_search_permission_users' => 'searchPermissionUsers',
+    );
+
+    foreach ($actions as $action => $method) {
+        add_action('wp_ajax_' . $action, static function () use ($method) {
+            \WPDataTables\Services\Permissions\WpdtPermissionsLocator::controller()->{$method}();
+        });
+    }
+}
+
+/**
+ * Block a page unless the user may open wpDataTables admin at all.
+ *
+ * @return void
+ */
+function wdt_die_unless_plugin_access()
+{
+    if (\WPDataTables\Services\Permissions\WpdtAccess::hasImplicitElevatedAccess()
+        || \WPDataTables\Services\Permissions\WpdtAccess::currentUserCanAccessPlugin()
+    ) {
+        return;
+    }
+
+    wp_die(__('You do not have sufficient permissions to access this page.', 'wpdatatables'));
+}
+
+/**
+ * Settings, system info, and Lite vs Premium stay on site-admin access.
+ *
+ * @return void
+ */
+function wdt_die_unless_elevated()
+{
+    if (!\WPDataTables\Services\Permissions\WpdtAccess::hasImplicitElevatedAccess()
+        && !current_user_can('manage_options')
+    ) {
+        wp_die(__('You do not have sufficient permissions to access this page.', 'wpdatatables'));
+    }
 }
 
 function wdtCheckSimpleTemplatesActivation($rowCount, $tableName)

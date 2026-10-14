@@ -100,6 +100,7 @@ class WDTSettingsController {
 			'wdtMobileWidth'            => get_option('wdtMobileWidth'),
 			'wdtPurchaseCode'           => get_option('wdtPurchaseCode'),
             'wdtGettingStartedPageStatus'=> get_option('wdtGettingStartedPageStatus'),
+            'wdtMcpEnabled'             => (int) (get_option('wdtMcpEnabled', 1) ? 1 : 0),
 			'wdtIncludeBootstrap'       => get_option('wdtIncludeBootstrap'),
             'wdtIncludeBootstrapBackEnd'=> get_option('wdtIncludeBootstrapBackEnd'),
             'wdtPreventDeletingTables'  => get_option('wdtPreventDeletingTables'),

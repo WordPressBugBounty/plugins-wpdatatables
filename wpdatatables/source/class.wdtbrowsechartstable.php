@@ -78,6 +78,11 @@ class WDTBrowseChartsTable extends WP_List_Table
             }
         }
 
+        $query = \WPDataTables\Services\Permissions\BrowseListScope::constrainQueryByIds(
+            $query,
+            'id',
+            \WPDataTables\Services\Permissions\BrowseListScope::allowedChartIds()
+        );
         $count = $wpdb->get_var($query);
 
         return $count;
@@ -136,6 +141,11 @@ class WDTBrowseChartsTable extends WP_List_Table
         $tables_per_page = get_option('wdtTablesPerPage') ? get_option('wdtTablesPerPage') : 10;
 
         $query .= " LIMIT " . ($paged - 1) * $tables_per_page . ", " . $tables_per_page;
+        $query = \WPDataTables\Services\Permissions\BrowseListScope::constrainQueryByIds(
+            $query,
+            'id',
+            \WPDataTables\Services\Permissions\BrowseListScope::allowedChartIds()
+        );
 
         $allCharts = apply_filters('wpdatatables_filter_browse_charts', $wpdb->get_results($query, ARRAY_A));
 

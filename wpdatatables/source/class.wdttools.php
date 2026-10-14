@@ -58,6 +58,13 @@ class WDTTools
      */
 	public static function curlGetData($url)
 	{
+		$restrictSources = self::shouldRestrictDelegatedSources();
+		$checked = null;
+		if ($restrictSources) {
+			$checked = self::assertPublicHttpUrl($url);
+			$url = $checked['url'];
+		}
+
 		$ch = curl_init();
 		$timeout = 100;
 		$agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36';
@@ -67,11 +74,22 @@ class WDTTools
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
 		curl_setopt($ch, CURLOPT_USERAGENT, $agent);
 		curl_setopt($ch, CURLOPT_REFERER, site_url());
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, !$restrictSources);
+		if ($restrictSources) {
+			if (defined('CURLPROTO_HTTP') && defined('CURLPROTO_HTTPS')) {
+				curl_setopt($ch, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
+				curl_setopt($ch, CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
+			}
+			curl_setopt($ch, CURLOPT_RESOLVE, $checked['resolve']);
+		}
 
 		$data = apply_filters('wpdatatables_curl_get_data', null, $ch, $url);
 		if( null === $data ) {
-			$data = curl_exec($ch);
+			if ($restrictSources) {
+				$data = self::curlFetchRestricted($ch, $url);
+			} else {
+				$data = curl_exec($ch);
+			}
 			if (curl_error($ch)) {
 				$error = curl_error($ch);
 				curl_close($ch);
@@ -80,6 +98,7 @@ class WDTTools
 			}
 			if (strpos($data, '<TITLE>Moved Temporarily</TITLE>') ||
 			    strpos($data, 'Error 400 (Bad Request)')) {
+				curl_close($ch);
 				throw new Exception(__('wpDataTables was unable to read your Google Spreadsheet, as it\'s not been published correctly. <br/> You can publish it by going to <b>File ->Share -> Publish to the web</b> ', 'wpdatatables'));
 			}
 			$info = curl_getinfo($ch);
@@ -93,9 +112,443 @@ class WDTTools
 			}
 
 			$data = apply_filters('wpdatatables_curl_get_data_complete', $data, $url);
+		} else {
+			curl_close($ch);
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Delegated admin users must not choose remote or filesystem sources.
+	 * Front-end and cron reads keep using sources already stored by an administrator.
+	 *
+	 * @return bool
+	 */
+	public static function shouldRestrictDelegatedSources()
+	{
+		if (current_user_can('manage_options')) {
+			return false;
+		}
+		if (function_exists('wp_doing_cron') && wp_doing_cron()) {
+			return false;
+		}
+
+		return is_admin();
+	}
+
+	/**
+	 * Reject table sources a delegated user must not pass into the loaders.
+	 *
+	 * @param string $type
+	 * @param mixed  $content
+	 * @param string $fileLocation
+	 * @return void
+	 * @throws WDTException
+	 */
+	public static function assertDelegatedTableSource($type, $content, $fileLocation = '')
+	{
+		if (!self::shouldRestrictDelegatedSources()) {
+			return;
+		}
+
+		$type = (string) $type;
+		$fileLocation = (string) $fileLocation;
+
+		if (in_array($type, array('csv', 'xls'), true)) {
+			if ($fileLocation === 'wp_any_url') {
+				self::assertPublicHttpUrl(self::sourceContentString($content));
+				return;
+			}
+			self::resolveUploadSourcePath(self::sourceContentString($content));
+			return;
+		}
+
+		if (in_array($type, array('json', 'serialized'), true)) {
+			self::assertPublicHttpUrl(self::sourceContentString($content));
+			return;
+		}
+
+		if ($type === 'xml') {
+			$source = self::sourceContentString($content);
+			if (self::isHttpUrl($source)) {
+				self::assertPublicHttpUrl($source);
+			} else {
+				self::resolveUploadSourcePath($source);
+			}
+			return;
+		}
+
+		if ($type === 'nested_json') {
+			$params = is_object($content) ? $content : json_decode(self::sourceContentString($content));
+			$url = (is_object($params) && isset($params->url)) ? $params->url : '';
+			self::assertPublicHttpUrl($url);
+		}
+	}
+
+	/**
+	 * HTTP(S) URL whose host does not resolve to an internal address.
+	 *
+	 * @param string $url
+	 * @return array{url:string,resolve:array}
+	 * @throws WDTException
+	 */
+	public static function assertPublicHttpUrl($url)
+	{
+		$url = trim((string) $url);
+		$parts = parse_url($url);
+		if (!is_array($parts) || empty($parts['scheme']) || empty($parts['host'])) {
+			throw new WDTException(__('Remote sources must be public HTTP(S) URLs.', 'wpdatatables'));
+		}
+		$scheme = strtolower($parts['scheme']);
+		if (!in_array($scheme, array('http', 'https'), true) || isset($parts['user']) || isset($parts['pass'])) {
+			throw new WDTException(__('Remote sources must be public HTTP(S) URLs.', 'wpdatatables'));
+		}
+
+		$host = strtolower(trim($parts['host'], '[]'));
+		if ($host === '' || self::isBlockedSourceHost($host)) {
+			throw new WDTException(__('Remote sources must not target internal or local addresses.', 'wpdatatables'));
+		}
+
+		$port = isset($parts['port']) ? (int) $parts['port'] : ($scheme === 'https' ? 443 : 80);
+		if ($port < 1 || $port > 65535) {
+			throw new WDTException(__('Remote sources must be public HTTP(S) URLs.', 'wpdatatables'));
+		}
+
+		$ips = self::resolveHostAddresses($host);
+		if ($ips === array()) {
+			throw new WDTException(__('Remote sources must not target internal or local addresses.', 'wpdatatables'));
+		}
+		$resolve = array();
+		foreach ($ips as $ip) {
+			if (self::isInternalIp($ip)) {
+				throw new WDTException(__('Remote sources must not target internal or local addresses.', 'wpdatatables'));
+			}
+			$resolveIp = strpos($ip, ':') !== false ? '[' . $ip . ']' : $ip;
+			$resolve[] = $host . ':' . $port . ':' . $resolveIp;
+		}
+
+		return array(
+			'url' => $url,
+			'resolve' => $resolve,
+		);
+	}
+
+	/**
+	 * Request a URL already accepted by assertPublicHttpUrl().
+	 * cURL is pinned to those addresses and redirects are not followed.
+	 *
+	 * @param array $checked Return value of assertPublicHttpUrl().
+	 * @param array $args    Arguments for the WordPress HTTP API.
+	 * @return array|WP_Error
+	 */
+	public static function remoteRequestPinned($checked, $args = array())
+	{
+		if (!is_array($checked) || empty($checked['url']) || empty($checked['resolve']) || !is_array($checked['resolve'])) {
+			return new WP_Error(
+				'wdt_invalid_remote_source',
+				__('Remote sources must be public HTTP(S) URLs.', 'wpdatatables')
+			);
+		}
+		if (!function_exists('curl_init')) {
+			return new WP_Error(
+				'wdt_http_curl_required',
+				__('Remote sources require the cURL transport.', 'wpdatatables')
+			);
+		}
+
+		$args['redirection'] = 0;
+		$args['reject_unsafe_urls'] = true;
+		$resolve = $checked['resolve'];
+		$pin = static function ($handle) use ($resolve) {
+			if (is_resource($handle) || is_object($handle)) {
+				curl_setopt($handle, CURLOPT_RESOLVE, $resolve);
+				if (defined('CURLPROTO_HTTP') && defined('CURLPROTO_HTTPS')) {
+					curl_setopt($handle, CURLOPT_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS);
+				}
+			}
+		};
+		$onlyCurl = static function () {
+			return array('curl');
+		};
+
+		add_action('http_api_curl', $pin, 10, 1);
+		add_filter('http_api_transports', $onlyCurl, 999);
+		try {
+			return wp_safe_remote_request($checked['url'], $args);
+		} finally {
+			remove_action('http_api_curl', $pin, 10);
+			remove_filter('http_api_transports', $onlyCurl, 999);
+		}
+	}
+
+	/**
+	 * Media-library input as an attachment ID or a path inside uploads.
+	 *
+	 * @param string $source
+	 * @return string Absolute path inside the uploads directory.
+	 * @throws WDTException
+	 */
+	public static function resolveUploadSourcePath($source)
+	{
+		$source = trim((string) $source);
+		if ($source === '' || strpos($source, "\0") !== false) {
+			throw new WDTException(__('The file must be a Media Library file inside the uploads directory.', 'wpdatatables'));
+		}
+
+		if (ctype_digit($source)) {
+			$path = get_attached_file((int) $source);
+			if (!is_string($path) || $path === '') {
+				throw new WDTException(__('The file must be a Media Library file inside the uploads directory.', 'wpdatatables'));
+			}
+		} elseif (self::isHttpUrl($source)) {
+			$path = self::urlToPath($source);
+			if ($path === $source) {
+				throw new WDTException(__('The file must be a Media Library file inside the uploads directory.', 'wpdatatables'));
+			}
+		} else {
+			$path = $source;
+		}
+
+		$uploads = wp_upload_dir();
+		$base = isset($uploads['basedir']) ? realpath($uploads['basedir']) : false;
+		$real = realpath($path);
+		if ($base === false || $real === false || !is_file($real)) {
+			throw new WDTException(__('The file must be a Media Library file inside the uploads directory.', 'wpdatatables'));
+		}
+
+		$base = wp_normalize_path($base);
+		$real = wp_normalize_path($real);
+		if ($real !== $base && strpos($real, trailingslashit($base)) !== 0) {
+			throw new WDTException(__('The file must be a Media Library file inside the uploads directory.', 'wpdatatables'));
+		}
+
+		return $real;
+	}
+
+	/**
+	 * @param string $value
+	 * @return bool
+	 */
+	public static function isHttpUrl($value)
+	{
+		return (bool) preg_match('#^https?://#i', trim((string) $value));
+	}
+
+	/**
+	 * @param string $ip
+	 * @return bool
+	 */
+	public static function isInternalIp($ip)
+	{
+		if (!is_string($ip) || filter_var($ip, FILTER_VALIDATE_IP) === false) {
+			return true;
+		}
+
+		if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+			$long = ip2long($ip);
+			if ($long === false) {
+				return true;
+			}
+			$ranges = array(
+				array('0.0.0.0', '0.255.255.255'),
+				array('10.0.0.0', '10.255.255.255'),
+				array('100.64.0.0', '100.127.255.255'),
+				array('127.0.0.0', '127.255.255.255'),
+				array('169.254.0.0', '169.254.255.255'),
+				array('172.16.0.0', '172.31.255.255'),
+				array('192.0.0.0', '192.0.0.255'),
+				array('192.0.2.0', '192.0.2.255'),
+				array('192.168.0.0', '192.168.255.255'),
+				array('198.18.0.0', '198.19.255.255'),
+				array('198.51.100.0', '198.51.100.255'),
+				array('203.0.113.0', '203.0.113.255'),
+				array('224.0.0.0', '255.255.255.255'),
+			);
+			foreach ($ranges as $range) {
+				if ($long >= ip2long($range[0]) && $long <= ip2long($range[1])) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		$packed = inet_pton($ip);
+		if ($packed === false) {
+			return true;
+		}
+		if (substr($packed, 0, 12) === (str_repeat("\x00", 10) . "\xff\xff")) {
+			$mapped = substr($packed, 12);
+			return self::isInternalIp(
+				ord($mapped[0]) . '.' . ord($mapped[1]) . '.' . ord($mapped[2]) . '.' . ord($mapped[3])
+			);
+		}
+		if ($packed === inet_pton('::') || $packed === inet_pton('::1')) {
+			return true;
+		}
+		$first = ord($packed[0]);
+		$second = ord($packed[1]);
+		if (($first & 0xfe) === 0xfc || $first === 0xff) {
+			return true;
+		}
+		if ($first === 0xfe && ($second & 0xc0) === 0x80) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Follow redirects only when every hop stays on a public HTTP(S) host.
+	 *
+	 * @param resource|\CurlHandle $ch
+	 * @param string               $url
+	 * @return string
+	 * @throws Exception
+	 */
+	private static function curlFetchRestricted($ch, $url)
+	{
+		$current = $url;
+		for ($hop = 0; $hop <= 5; $hop++) {
+			curl_setopt($ch, CURLOPT_URL, $current);
+			curl_setopt($ch, CURLOPT_HEADER, true);
+			$raw = curl_exec($ch);
+			if ($raw === false || curl_error($ch)) {
+				return $raw;
+			}
+			$status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+			$headerSize = (int) curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+			$headers = substr($raw, 0, $headerSize);
+			$body = substr($raw, $headerSize);
+			$location = self::headerLocation($headers);
+			if ($status >= 300 && $status < 400 && $location !== '') {
+				if ($hop === 5) {
+					curl_close($ch);
+					throw new Exception(__('Remote source redirected too many times.', 'wpdatatables'));
+				}
+				$current = self::resolveRedirectUrl($current, $location);
+				try {
+					$checked = self::assertPublicHttpUrl($current);
+				} catch (Exception $e) {
+					curl_close($ch);
+					throw $e;
+				}
+				$current = $checked['url'];
+				curl_setopt($ch, CURLOPT_RESOLVE, $checked['resolve']);
+				continue;
+			}
+			curl_setopt($ch, CURLOPT_HEADER, false);
+			return $body;
+		}
+
+		return '';
+	}
+
+	/**
+	 * @param mixed $content
+	 * @return string
+	 */
+	private static function sourceContentString($content)
+	{
+		if (is_string($content)) {
+			return $content;
+		}
+		if (is_scalar($content) || $content === null) {
+			return (string) $content;
+		}
+
+		return wp_json_encode($content);
+	}
+
+	/**
+	 * @param string $host
+	 * @return bool
+	 */
+	private static function isBlockedSourceHost($host)
+	{
+		if ($host === 'localhost' || substr($host, -10) === '.localhost' || substr($host, -6) === '.local' || substr($host, -9) === '.internal') {
+			return true;
+		}
+		if (!preg_match('/[a-z]/i', $host) && strpos($host, ':') === false && filter_var($host, FILTER_VALIDATE_IP) === false) {
+			return true;
+		}
+
+		return $host === 'metadata.google.internal' || $host === '0' || strpos($host, '0x') === 0;
+	}
+
+	/**
+	 * @param string $host
+	 * @return array
+	 */
+	private static function resolveHostAddresses($host)
+	{
+		if (filter_var($host, FILTER_VALIDATE_IP)) {
+			return array($host);
+		}
+
+		$ips = array();
+		if (function_exists('dns_get_record')) {
+			$records = @dns_get_record($host, DNS_A + DNS_AAAA);
+			if (is_array($records)) {
+				foreach ($records as $record) {
+					if (!empty($record['ip'])) {
+						$ips[] = $record['ip'];
+					}
+					if (!empty($record['ipv6'])) {
+						$ips[] = $record['ipv6'];
+					}
+				}
+			}
+		}
+		if ($ips === array() && function_exists('gethostbynamel')) {
+			$resolved = gethostbynamel($host);
+			if (is_array($resolved)) {
+				$ips = $resolved;
+			}
+		}
+
+		return array_values(array_unique($ips));
+	}
+
+	/**
+	 * @param string $headers
+	 * @return string
+	 */
+	private static function headerLocation($headers)
+	{
+		if (preg_match('/^Location:\s*(\S+)/im', (string) $headers, $matches)) {
+			return trim($matches[1]);
+		}
+
+		return '';
+	}
+
+	/**
+	 * @param string $currentUrl
+	 * @param string $location
+	 * @return string
+	 */
+	private static function resolveRedirectUrl($currentUrl, $location)
+	{
+		$location = trim($location);
+		if (preg_match('#^https?://#i', $location)) {
+			return $location;
+		}
+		$parts = parse_url($currentUrl);
+		$scheme = isset($parts['scheme']) ? $parts['scheme'] : 'https';
+		$host = isset($parts['host']) ? $parts['host'] : '';
+		$port = isset($parts['port']) ? ':' . $parts['port'] : '';
+		if (strpos($location, '//') === 0) {
+			return $scheme . ':' . $location;
+		}
+		$origin = $scheme . '://' . $host . $port;
+		if (isset($location[0]) && $location[0] === '/') {
+			return $origin . $location;
+		}
+		$path = isset($parts['path']) ? $parts['path'] : '/';
+		$dir = substr($path, 0, (int) strrpos($path, '/') + 1);
+
+		return $origin . $dir . $location;
 	}
 
 

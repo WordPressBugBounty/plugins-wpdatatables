@@ -724,6 +724,7 @@ class WDTConfigController {
         // Trying to generate the table and returning
         // an error message in case of thrown exception
         try {
+            WDTTools::assertDelegatedTableSource($type, $content, $fileLocation);
             $tbl->fillFromData($tableData, array());
             if ($tbl->getNoData()) {
                 throw new WDTException(__('Table in data source has no rows.', 'wpdatatables'));

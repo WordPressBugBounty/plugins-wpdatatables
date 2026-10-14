@@ -46,8 +46,10 @@ function wdtmcp_register_get_mcp_license_matrix_ability()
 
             'execute_callback' => 'wdtmcp_execute_get_mcp_license_matrix',
 
-            'permission_callback' => function () {
-                return current_user_can('manage_options');
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/get-mcp-license-matrix', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(

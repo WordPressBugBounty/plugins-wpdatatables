@@ -77,13 +77,19 @@ function wdtmcp_register_get_table_info_ability() {
                         ),
                     ),
                     'column_count' => array( 'type' => 'integer', 'description' => 'Total number of columns.' ),
+                    'adminLink'    => array(
+                        'type'        => 'string',
+                        'description' => 'Admin URL to open this table in the editor.',
+                    ),
                 ),
             ),
 
             'execute_callback' => 'wdtmcp_execute_get_table_info',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/get-table-info', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -185,6 +191,9 @@ function wdtmcp_execute_get_table_info( $input ) {
         'cache_source_data' => ! empty( $table_data->cache_source_data ),
         'columns'           => $columns,
         'column_count'      => count( $columns ),
+        'adminLink'         => function_exists( 'wdtmcp_admin_table_url' )
+            ? wdtmcp_admin_table_url( (int) $table_data->id, (string) $table_type_raw )
+            : '',
     );
     $stored_css = function_exists( 'wdtmcp_get_table_custom_css' ) ? wdtmcp_get_table_custom_css( $table_id ) : '';
     if ( '' !== $stored_css ) {

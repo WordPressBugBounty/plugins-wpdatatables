@@ -72,6 +72,11 @@ class WDTBrowseTable extends WP_List_Table {
                 $query .= $wpdb->prepare(" WHERE title LIKE %s", '%' . $wpdb->esc_like($searchTerm) . '%');
             }
         }
+        $query = \WPDataTables\Services\Permissions\BrowseListScope::constrainQueryByIds(
+            $query,
+            'id',
+            \WPDataTables\Services\Permissions\BrowseListScope::allowedTableIds()
+        );
         $count = $wpdb->get_var($query);
         return $count;
     }
@@ -126,6 +131,11 @@ class WDTBrowseTable extends WP_List_Table {
 
         $tablesPerPage = get_option('wdtTablesPerPage') ? get_option('wdtTablesPerPage') : 10;
         $query .= " LIMIT " . ($paged - 1) * $tablesPerPage . ", " . $tablesPerPage;
+        $query = \WPDataTables\Services\Permissions\BrowseListScope::constrainQueryByIds(
+            $query,
+            'id',
+            \WPDataTables\Services\Permissions\BrowseListScope::allowedTableIds()
+        );
         $allTables = $wpdb->get_results($query, ARRAY_A);
         $allTables = apply_filters('wpdatatables_filter_browse_tables', $allTables);
 

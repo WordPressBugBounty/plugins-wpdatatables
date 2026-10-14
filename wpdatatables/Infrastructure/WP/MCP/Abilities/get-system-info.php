@@ -47,8 +47,10 @@ function wdtmcp_register_get_system_info_ability() {
 
             'execute_callback' => 'wdtmcp_execute_get_system_info',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/get-system-info', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(

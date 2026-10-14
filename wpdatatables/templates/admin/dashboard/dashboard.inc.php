@@ -352,12 +352,16 @@ $tableChartsCount = (int)WDTTools::getTablesCount('chart');
                                  </span>
                         </p>
                         <p class="wpdt-text wpdt-font m-b-18">
-                            New update:
+                            New update with new features:
                         </p>
                         <div class="alert alert-info m-b-0" role="alert">
                             <i class="wpdt-icon-info-circle-full"></i>
                             <ul>
-                                <li>Minor CSS improvements.</li>
+                                <li><strong>Feature:</strong> Role- and user-based permissions are now available in Lite.</li>
+                                <li><strong>Feature:</strong> Angie AI can use wpDataTables tools when the Angie plugin is active.</li>
+                                <li><strong>Feature:</strong> AI chart suggester in the chart wizard recommends a render engine, chart type, title, and axis columns.</li>
+                                <li><strong>Feature:</strong> Setting to enable or disable MCP for AI assistants.</li>
+                                <li>Compatibility with WordPress 7.1.3 approved.</li>
                                 <li>Other small bug fixes and stability improvements.</li>
                             </ul>
                         </div>

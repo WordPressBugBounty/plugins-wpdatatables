@@ -83,6 +83,7 @@ function wdtmcp_register_edit_chart_ability() {
                 'properties' => array(
                     'chart_id'  => array( 'type' => 'integer', 'description' => 'Updated chart ID.' ),
                     'shortcode' => array( 'type' => 'string',  'description' => 'Embed shortcode.' ),
+                    'adminLink' => array( 'type' => 'string',  'description' => 'Admin URL to open the chart in the wizard.' ),
                     'updated'   => array(
                         'type'  => 'array',
                         'items' => array( 'type' => 'string' ),
@@ -93,8 +94,10 @@ function wdtmcp_register_edit_chart_ability() {
 
             'execute_callback' => 'wdtmcp_execute_edit_chart',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/edit-chart', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -283,6 +286,10 @@ function wdtmcp_execute_edit_chart( $input ) {
                     sprintf( __( 'Table with ID %d was not found.', 'wpdatatables' ), $new_tid )
                 );
             }
+            if ( ! function_exists( 'wdtmcp_can_read_table' )
+                || ! wdtmcp_can_read_table( array( 'table_id' => $new_tid ) ) ) {
+                return new \WP_Error( 'wdtmcp_forbidden', __( 'You cannot access the source table.', 'wpdatatables' ) );
+            }
             $chart->setwpDataTableId( $new_tid );
             $table_id = $new_tid;
             $chart->loadChildWPDataTable();
@@ -420,5 +427,8 @@ function wdtmcp_execute_edit_chart( $input ) {
         'chart_id'  => $chart_id,
         'shortcode' => $chart->getShortCode(),
         'updated'   => array_values( array_unique( $updated ) ),
+        'adminLink' => function_exists( 'wdtmcp_admin_chart_url' )
+            ? wdtmcp_admin_chart_url( (int) $chart_id, $stored_engine )
+            : '',
     );
 }

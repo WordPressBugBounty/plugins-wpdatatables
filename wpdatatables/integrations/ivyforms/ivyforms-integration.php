@@ -167,7 +167,17 @@ class WdtIvyFormsIntegration {
     public static function saveTableConfig() {
         $nonce = sanitize_text_field($_POST['nonce'] ?? '');
 
-        if (!current_user_can('manage_options') || !wp_verify_nonce($nonce, 'wdtEditNonce')) {
+        if (!wp_verify_nonce($nonce, 'wdtEditNonce')) {
+            wp_send_json_error(esc_html__('Permission denied.', 'wpdatatables') );
+            exit();
+        }
+
+        $postedTable = json_decode(stripslashes_deep($_POST['table'] ?? ''));
+        $tableId = (is_object($postedTable) && isset($postedTable->id)) ? (int) $postedTable->id : 0;
+        $canSave = $tableId > 0
+            ? wdt_permissions_service()->canEditTable($tableId)
+            : wdt_permissions_service()->canCreateTables();
+        if (!$canSave) {
             wp_send_json_error(esc_html__('Permission denied.', 'wpdatatables') );
             exit();
         }

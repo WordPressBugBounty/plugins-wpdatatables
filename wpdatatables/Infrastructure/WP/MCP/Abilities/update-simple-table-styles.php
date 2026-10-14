@@ -70,14 +70,17 @@ function wdtmcp_register_update_simple_table_styles_ability() {
                 'properties' => array(
                     'table_id'   => array( 'type' => 'integer', 'description' => 'Updated table ID.' ),
                     'updated'    => array( 'type' => 'array', 'description' => 'List of what was changed.', 'items' => array( 'type' => 'string' ) ),
+                    'adminLink'  => array( 'type' => 'string', 'description' => 'Admin URL to open the table in the editor.' ),
                     'custom_css' => array( 'type' => 'string',  'description' => 'Custom CSS to add to page (if provided).' ),
                 ),
             ),
 
             'execute_callback' => 'wdtmcp_execute_update_simple_table_styles',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/update-simple-table-styles', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -341,8 +344,11 @@ function wdtmcp_execute_update_simple_table_styles( $input ) {
     }
 
     $out = array(
-        'table_id' => $table_id,
-        'updated'  => array_values( array_unique( $updated ) ),
+        'table_id'  => $table_id,
+        'updated'   => array_values( array_unique( $updated ) ),
+        'adminLink' => function_exists( 'wdtmcp_admin_table_url' )
+            ? wdtmcp_admin_table_url( (int) $table_id, 'simple' )
+            : '',
     );
     if ( '' !== $css_substituted ) {
         $out['custom_css'] = $css_substituted;

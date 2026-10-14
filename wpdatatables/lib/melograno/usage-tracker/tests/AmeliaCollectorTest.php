@@ -308,7 +308,8 @@ class AmeliaCollectorTest extends TestCase
         $payload = $this->invokePluginPayload($collector);
 
         $this->assertArrayHasKey('features', $payload);
-        $this->assertSame([], $payload['features']);
+        $this->assertInstanceOf(\stdClass::class, $payload['features']);
+        $this->assertSame([], (array) $payload['features']);
     }
 
     public function testPluginPayloadOmitsFeaturesWhenCollectionFails(): void

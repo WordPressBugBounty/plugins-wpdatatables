@@ -73,14 +73,17 @@ function wdtmcp_register_create_simple_table_ability() {
                 'properties' => array(
                     'table_id'   => array( 'type' => 'integer', 'description' => 'Created table ID.' ),
                     'shortcode'  => array( 'type' => 'string',  'description' => 'WordPress shortcode to embed the table.' ),
+                    'adminLink'  => array( 'type' => 'string',  'description' => 'Admin URL to open the created table in the editor.' ),
                     'custom_css' => array( 'type' => 'string',  'description' => 'Custom CSS to add to the page (if provided). Use #wpdtSimpleTable-{id} with the actual table_id.' ),
                 ),
             ),
 
             'execute_callback' => 'wdtmcp_execute_create_simple_table',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/create-simple-table', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -328,6 +331,9 @@ function wdtmcp_execute_create_simple_table( $input ) {
     $out = array(
         'table_id'  => $table_id,
         'shortcode' => '[wpdatatable id=' . $table_id . ']',
+        'adminLink' => function_exists( 'wdtmcp_admin_table_url' )
+            ? wdtmcp_admin_table_url( (int) $table_id, 'simple' )
+            : '',
     );
     if ( '' !== $css_substituted ) {
         $out['custom_css'] = $css_substituted;

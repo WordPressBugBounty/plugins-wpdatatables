@@ -8,6 +8,18 @@ if (!defined('ABSPATH')) {
     define('ABSPATH', '/tmp/wordpress/');
 }
 
+if (!defined('OBJECT')) {
+    define('OBJECT', 'OBJECT');
+}
+
+if (!defined('ARRAY_A')) {
+    define('ARRAY_A', 'ARRAY_A');
+}
+
+if (!defined('ARRAY_N')) {
+    define('ARRAY_N', 'ARRAY_N');
+}
+
 if (!function_exists('__')) {
     function __(string $text, string $domain = 'default'): string
     {

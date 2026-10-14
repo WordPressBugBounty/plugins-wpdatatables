@@ -67,13 +67,16 @@ function wdtmcp_register_update_table_settings_ability() {
                 'properties' => array(
                     'table_id' => array( 'type' => 'integer', 'description' => 'Updated table ID.' ),
                     'updated'  => array( 'type' => 'array',   'description' => 'List of properties that were changed.', 'items' => array( 'type' => 'string' ) ),
+                    'adminLink' => array( 'type' => 'string', 'description' => 'Admin URL to open the table in the editor.' ),
                 ),
             ),
 
             'execute_callback' => 'wdtmcp_execute_update_table_settings',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/update-table-settings', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -303,7 +306,10 @@ function wdtmcp_execute_update_table_settings( $input ) {
     }
 
     return array(
-        'table_id' => $table_id,
-        'updated'  => array_values( array_unique( $updated ) ),
+        'table_id'  => $table_id,
+        'updated'   => array_values( array_unique( $updated ) ),
+        'adminLink' => function_exists( 'wdtmcp_admin_table_url' )
+            ? wdtmcp_admin_table_url( (int) $table_id )
+            : '',
     );
 }

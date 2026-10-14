@@ -5,6 +5,81 @@ defined('ABSPATH') or die("Cannot access pages directly.");
 use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
 use Melograno\UsageTracker\Core\UsageTracker;
 
+/**
+ * Keep rows whose id is in the allow-list. Null means every row.
+ *
+ * @param mixed          $items
+ * @param list<int>|null $allowedIds
+ * @return array
+ */
+function wdt_filter_items_by_allowed_ids($items, $allowedIds)
+{
+    if ($allowedIds === null || !is_array($items)) {
+        return is_array($items) ? $items : array();
+    }
+
+    if ($allowedIds === array()) {
+        return array();
+    }
+
+    $allowedLookup = array_fill_keys($allowedIds, true);
+
+    return array_values(array_filter(
+        $items,
+        static function ($item) use ($allowedLookup) {
+            $id = is_array($item) ? (int) ($item['id'] ?? 0) : (int) ($item->id ?? 0);
+
+            return isset($allowedLookup[$id]);
+        }
+    ));
+}
+
+/**
+ * @param mixed $chartData
+ * @return int
+ */
+function wdt_extract_chart_id($chartData)
+{
+    if (is_string($chartData)) {
+        $decoded = json_decode($chartData, true);
+        if (is_array($decoded)) {
+            return (int) ($decoded['id'] ?? $decoded['chart_id'] ?? 0);
+        }
+    }
+    if (is_array($chartData)) {
+        return (int) ($chartData['id'] ?? $chartData['chart_id'] ?? 0);
+    }
+    if (is_object($chartData)) {
+        return (int) ($chartData->id ?? $chartData->chart_id ?? 0);
+    }
+
+    return 0;
+}
+
+/**
+ * Source table id from chart wizard payloads (JSON string, array, or object).
+ *
+ * @param mixed $chartData
+ * @return int
+ */
+function wdt_extract_chart_table_id($chartData)
+{
+    if (is_string($chartData)) {
+        $decoded = json_decode($chartData, true);
+        if (is_array($decoded)) {
+            return (int) ($decoded['wpdatatable_id'] ?? 0);
+        }
+    }
+    if (is_array($chartData)) {
+        return (int) ($chartData['wpdatatable_id'] ?? 0);
+    }
+    if (is_object($chartData)) {
+        return (int) ($chartData->wpdatatable_id ?? 0);
+    }
+
+    return 0;
+}
+
 
 
 /**
@@ -12,7 +87,7 @@ use Melograno\UsageTracker\Core\UsageTracker;
  */
 function wdtSaveTableWithColumns() {
 
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
         exit();
     }
 
@@ -22,6 +97,15 @@ function wdtSaveTableWithColumns() {
             stripslashes_deep($_POST['table'])
         )
     );
+
+    $tableId = isset($table->id) ? (int) $table->id : 0;
+    if ($tableId > 0) {
+        if (!wdt_permissions_service()->canEditTable($tableId)) {
+            exit();
+        }
+    } elseif (!wdt_permissions_service()->canCreateTables()) {
+        exit();
+    }
 
     WDTConfigController::saveTableConfig($table);
 }
@@ -70,13 +154,18 @@ add_action('wp_ajax_wpdatatables_save_plugin_settings', 'wdtSavePluginSettings')
 function wdtDuplicateTable() {
     global $wpdb;
 
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtDuplicateTableNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtDuplicateTableNonce')) {
         exit();
     }
 
     $tableId = (int)$_POST['table_id'];
     if (empty($tableId)) {
         return false;
+    }
+    if (!wdt_permissions_service()->canCreateTables()
+        || !wdt_permissions_service()->canEditTable($tableId)
+    ) {
+        exit();
     }
     $manualDuplicateInput = (int)$_POST['manual_duplicate_input'];
     $newTableName = sanitize_text_field($_POST['new_table_name']);
@@ -238,7 +327,9 @@ add_action('wp_ajax_wpdatatables_duplicate_table', 'wdtDuplicateTable');
 
 function wdtCreateSimpleTable()
 {
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtConstructorNonce')) {
+    if (!wdt_permissions_service()->canCreateTables()
+        || !wp_verify_nonce($_POST['wdtNonce'], 'wdtConstructorNonce')
+    ) {
         exit();
     }
     $tableTemplateID = 0;
@@ -284,11 +375,14 @@ add_action('wp_ajax_wpdatatables_create_simple_table', 'wdtCreateSimpleTable');
 
 function wdtGetHandsontableData()
 {
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
         exit();
     }
 
     $tableID = (int)$_POST['tableID'];
+    if (!wdt_permissions_service()->canEditTable($tableID)) {
+        exit();
+    }
     $res = new stdClass();
 
     try {
@@ -361,13 +455,16 @@ function wdtSaveDataSimpleTable()
 {
     global $wpdb;
 
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce')) {
         exit();
     }
     $turnOffSimpleHeader = 0;
     $tableSettings = json_decode(stripslashes_deep($_POST['tableSettings']));
     $tableSettings = WDTConfigController::sanitizeTableConfig($tableSettings);
     $tableID = intval($tableSettings->id);
+    if (!wdt_permissions_service()->canEditTable($tableID)) {
+        exit();
+    }
     $rowsData = json_decode(stripslashes_deep($_POST['rowsData']));
     $rowsData = WDTConfigController::sanitizeRowDataSimpleTable($rowsData, $tableID);
     $result = new stdClass();
@@ -441,14 +538,20 @@ add_action('wp_ajax_wpdatatables_save_simple_table_data', 'wdtSaveDataSimpleTabl
  * Return all columns for a provided table
  */
 function wdtGetColumnsDataByTableId() {
-    if (!current_user_can('manage_options') ||
-        !(wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce') ||
+    if (!(wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce') ||
             wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce'))
     ) {
         exit();
     }
 
     $tableId = (int)$_POST['table_id'];
+    $permissions = wdt_permissions_service();
+    $canEditTable = $permissions->canEditTable($tableId);
+    $canChartFromTable = ($permissions->canCreateCharts() || $permissions->canEditChart(null))
+        && wdt_user_can_use_table_as_chart_source($tableId);
+    if (!$canEditTable && !$canChartFromTable) {
+        exit();
+    }
 
     echo json_encode(WDTConfigController::loadColumnsFromDB($tableId));
     exit();
@@ -484,11 +587,18 @@ add_action('wp_ajax_wpdatatables_delete_log_errors_cache', 'wdtDeleteLogErrorsCa
  * List all tables in JSON
  */
 function wdtListAllTables() {
-    if (!current_user_can('manage_options')) {
+    if (!wdt_permissions_service()->canCreateCharts()
+        && !wdt_permissions_service()->canEditChart(null)
+        && !wdt_permissions_service()->canListTables()
+    ) {
         exit();
     }
 
-    echo json_encode(WPDataTable::getAllTables());
+    $tables = wdt_filter_items_by_allowed_ids(
+        WPDataTable::getAllTables(),
+        \WPDataTables\Services\Permissions\BrowseListScope::allowedTableIds()
+    );
+    echo json_encode($tables);
     exit();
 }
 
@@ -497,11 +607,24 @@ add_action('wp_ajax_wpdatatable_list_all_tables', 'wdtListAllTables');
 
 function wdtShowChartFromData()
 {
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce')) {
         exit();
     }
 
     $chartData = stripslashes_deep($_POST['chart_data']);
+    $chartId = wdt_extract_chart_id($chartData);
+    if ($chartId > 0) {
+        if (!wdt_permissions_service()->canEditChart($chartId)) {
+            exit();
+        }
+    } elseif (!wdt_permissions_service()->canCreateCharts()
+        && !wdt_permissions_service()->canEditChart(null)
+    ) {
+        exit();
+    }
+    if (!wdt_user_can_use_table_as_chart_source(wdt_extract_chart_table_id($chartData))) {
+        exit();
+    }
     $wpDataChart = WPDataChart::build($chartData);
 
     echo json_encode($wpDataChart->returnData());
@@ -512,11 +635,22 @@ add_action('wp_ajax_wpdatatable_show_chart_from_data', 'wdtShowChartFromData');
 
 function wdtSaveChart()
 {
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtChartWizardNonce')) {
         exit();
     }
 
     $chartData = stripslashes_deep($_POST['chart_data']);
+    $chartId = wdt_extract_chart_id($chartData);
+    if ($chartId > 0) {
+        if (!wdt_permissions_service()->canEditChart($chartId)) {
+            exit();
+        }
+    } elseif (!wdt_permissions_service()->canCreateCharts()) {
+        exit();
+    }
+    if (!wdt_user_can_use_table_as_chart_source(wdt_extract_chart_table_id($chartData))) {
+        exit();
+    }
     $wpDataChart = WPDataChart::build($chartData);
     $wpDataChart->save();
 
@@ -531,11 +665,15 @@ add_action('wp_ajax_wpdatatable_save_chart_get_shortcode', 'wdtSaveChart');
  */
 function wdtListAllCharts()
 {
-    if (!current_user_can('manage_options')) {
+    if (!wdt_permissions_service()->canListCharts()) {
         exit();
     }
 
-    echo json_encode(WPDataChart::getAll());
+    $charts = wdt_filter_items_by_allowed_ids(
+        WPDataChart::getAll(),
+        \WPDataTables\Services\Permissions\BrowseListScope::allowedChartIds()
+    );
+    echo json_encode($charts);
     exit();
 }
 
@@ -549,13 +687,18 @@ function wdtDuplicateChart()
 {
     global $wpdb;
 
-    if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtDuplicateChartNonce')) {
+    if (!wp_verify_nonce($_POST['wdtNonce'], 'wdtDuplicateChartNonce')) {
         exit();
     }
 
     $chartId = (int)$_POST['chart_id'];
     if (empty($chartId)) {
         return false;
+    }
+    if (!wdt_permissions_service()->canCreateCharts()
+        || !wdt_permissions_service()->canEditChart($chartId)
+    ) {
+        exit();
     }
     $newChartName = sanitize_text_field($_POST['new_chart_name']);
 
@@ -588,11 +731,21 @@ add_action('wp_ajax_wpdatatables_duplicate_chart', 'wdtDuplicateChart');
  */
 function wdtGetNestedJsonRoots()
 {
-	if ( !current_user_can('manage_options') || !wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce') ) {
+	if ( !wp_verify_nonce($_POST['wdtNonce'], 'wdtEditNonce') ) {
 		exit();
 	}
 	global $wdtVar1, $wdtVar2, $wdtVar3, $wdtVar4, $wdtVar5, $wdtVar6, $wdtVar7, $wdtVar8, $wdtVar9;
 	$tableConfig = json_decode(stripslashes_deep($_POST['tableConfig']));
+	$tableId = isset($tableConfig->id) ? (int) $tableConfig->id : 0;
+	if ($tableId > 0) {
+		if (!wdt_permissions_service()->canEditTable($tableId)) {
+			exit();
+		}
+	} elseif (!wdt_permissions_service()->canCreateTables()
+		&& !wdt_permissions_service()->canEditTable(null)
+	) {
+		exit();
+	}
 	// Set placeholders
 	$wdtVar1 = $wdtVar1 === '' ? $tableConfig->var1 : $wdtVar1;
 	$wdtVar2 = $wdtVar2 === '' ? $tableConfig->var2 : $wdtVar2;

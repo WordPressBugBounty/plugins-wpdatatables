@@ -316,6 +316,13 @@ class WPDataTableCache
 				case 'xls':
 				case 'csv':
 					ini_set('memory_limit', '2048M');
+                    if (WDTTools::shouldRestrictDelegatedSources()) {
+                        if (isset($tableData) && $tableData->file_location == 'wp_any_url') {
+                            WDTTools::assertPublicHttpUrl($source);
+                        } else {
+                            $source = WDTTools::resolveUploadSourcePath($source);
+                        }
+                    }
                     if (isset($tableData) && $tableData->file_location == 'wp_media_lib' && !file_exists($source)) {
 						self::_logErrors(
 							'Error message:',
@@ -338,8 +345,12 @@ class WPDataTableCache
                         throw new Exception('Only HTTP and HTTPS protocols are allowed!');
                     }
 
-                    $file = @file_get_contents($source);
-                    if ($file === false){
+                    if (WDTTools::shouldRestrictDelegatedSources()) {
+                        $file = WDTTools::curlGetData($source);
+                    } else {
+                        $file = @file_get_contents($source);
+                    }
+                    if ($file === false || $file === null){
                         throw new Exception('There is an error opening the file!');
                     }
                     $tempFileName = 'tempfile.' . $format;

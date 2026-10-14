@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Melograno\UsageTracker\Core;
 
 use Melograno\UsageTracker\Collectors\ConsentNoticeCollectorInterface;
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
+use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesFeatureTelemetry;
 use Melograno\UsageTracker\Collectors\PluginCollectorInterface;
 
 /**
@@ -324,6 +326,10 @@ class UsageTracker
 
         if ($this->collector instanceof ConsentNoticeCollectorInterface) {
             (new NoticeManager($this->collector->getNoticeOptionName()))->delete();
+        }
+
+        if ($this->collector instanceof WpDataTablesCollector) {
+            WpDataTablesFeatureTelemetry::deleteStoredCounters();
         }
     }
 

@@ -259,6 +259,11 @@ class WpDataTablesCollectorTest extends TestCase
             {
                 return null;
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -273,6 +278,11 @@ class WpDataTablesCollectorTest extends TestCase
             protected function resolveLicenseTier(): ?string
             {
                 return 'standard';
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
             }
         };
 
@@ -359,6 +369,11 @@ class WpDataTablesCollectorTest extends TestCase
             {
                 return null;
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -394,6 +409,11 @@ class WpDataTablesCollectorTest extends TestCase
             }
 
             protected function resolveFirstContentCreatedAt(): ?string
+            {
+                return null;
+            }
+
+            protected function resolveFeatures(): ?array
             {
                 return null;
             }
@@ -434,6 +454,11 @@ class WpDataTablesCollectorTest extends TestCase
             {
                 return null;
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -442,6 +467,148 @@ class WpDataTablesCollectorTest extends TestCase
         $this->assertSame(
             ['google_pie_chart' => 2, 'chartjs_line_chart' => 1],
             $payload['chart_types']
+        );
+    }
+
+    public function testPluginPayloadMergesFeatureTelemetry(): void
+    {
+        $collector = new class () extends WpDataTablesCollector {
+            protected function resolveLicenseTier(): ?string
+            {
+                return null;
+            }
+
+            protected function resolveContentCount(string $contentType): ?int
+            {
+                return 0;
+            }
+
+            protected function resolveTableTypeCounts(): ?array
+            {
+                return null;
+            }
+
+            protected function resolveChartTypeCounts(): ?array
+            {
+                return null;
+            }
+
+            protected function resolveFirstContentCreatedAt(): ?string
+            {
+                return null;
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return [
+                    'skins' => ['material' => 2, 'light' => 1],
+                    'file_source_actions' => [
+                        'addDataToTable' => 3,
+                        'replaceTable' => 1,
+                    ],
+                    'features' => [
+                        'sorting' => true,
+                        'filtering' => true,
+                        'fixedColumns' => true,
+                        'manualFileSourceImport' => true,
+                    ],
+                    'feature_metrics' => [
+                        'sorting' => ['usage_count' => 5],
+                        'filtering' => ['usage_count' => 4],
+                        'fixedHeader' => ['usage_count' => 0],
+                        'fixedColumns' => ['usage_count' => 2],
+                    ],
+                ];
+            }
+        };
+
+        $payload = $this->invokePluginPayload($collector);
+
+        $this->assertSame(['material' => 2, 'light' => 1], $payload['skins']);
+        $this->assertSame(
+            [
+                'addDataToTable' => 3,
+                'replaceTable' => 1,
+            ],
+            $payload['file_source_actions']
+        );
+        $this->assertSame(
+            [
+                'sorting' => true,
+                'filtering' => true,
+                'fixedColumns' => true,
+                'manualFileSourceImport' => true,
+            ],
+            $payload['features']
+        );
+        $this->assertSame(
+            [
+                'sorting' => ['usage_count' => 5],
+                'filtering' => ['usage_count' => 4],
+                'fixedHeader' => ['usage_count' => 0],
+                'fixedColumns' => ['usage_count' => 2],
+            ],
+            $payload['feature_metrics']
+        );
+    }
+
+    public function testPluginPayloadOmitsEmptySkinsAndFeatures(): void
+    {
+        $collector = new class () extends WpDataTablesCollector {
+            protected function resolveLicenseTier(): ?string
+            {
+                return null;
+            }
+
+            protected function resolveContentCount(string $contentType): ?int
+            {
+                return 0;
+            }
+
+            protected function resolveTableTypeCounts(): ?array
+            {
+                return null;
+            }
+
+            protected function resolveChartTypeCounts(): ?array
+            {
+                return null;
+            }
+
+            protected function resolveFirstContentCreatedAt(): ?string
+            {
+                return null;
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return [
+                    'skins' => [],
+                    'file_source_actions' => [],
+                    'features' => [],
+                    'feature_metrics' => [
+                        'sorting' => ['usage_count' => 0],
+                        'filtering' => ['usage_count' => 0],
+                        'fixedHeader' => ['usage_count' => 0],
+                        'fixedColumns' => ['usage_count' => 0],
+                    ],
+                ];
+            }
+        };
+
+        $payload = $this->invokePluginPayload($collector);
+
+        $this->assertArrayNotHasKey('skins', $payload);
+        $this->assertArrayNotHasKey('file_source_actions', $payload);
+        $this->assertInstanceOf(\stdClass::class, $payload['features']);
+        $this->assertSame(
+            [
+                'sorting' => ['usage_count' => 0],
+                'filtering' => ['usage_count' => 0],
+                'fixedHeader' => ['usage_count' => 0],
+                'fixedColumns' => ['usage_count' => 0],
+            ],
+            $payload['feature_metrics']
         );
     }
 
@@ -605,6 +772,11 @@ class WpDataTablesCollectorTest extends TestCase
             {
                 return null;
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -648,6 +820,11 @@ class WpDataTablesCollectorTest extends TestCase
             protected function resolveFirstContentCreatedAt(): ?string
             {
                 return '2024-02-10T12:00:00+00:00';
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
             }
         };
 

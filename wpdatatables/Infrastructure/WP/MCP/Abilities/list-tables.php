@@ -55,6 +55,10 @@ function wdtmcp_register_list_tables_ability() {
                                     'type'        => 'boolean',
                                     'description' => 'Whether server-side processing is enabled.',
                                 ),
+                                'adminLink' => array(
+                                    'type'        => 'string',
+                                    'description' => 'Admin URL to open this table in the editor — render the title as a markdown link.',
+                                ),
                             ),
                         ),
                     ),
@@ -82,13 +86,23 @@ function wdtmcp_register_list_tables_ability() {
                     );
                 }
 
+                if ( function_exists( 'wdtmcp_filter_allowed_table_rows' ) ) {
+                    $rows = wdtmcp_filter_allowed_table_rows( $rows );
+                }
+
                 $tables = array_map( static function ( $row ) {
+                    $table_id   = (int) $row['id'];
+                    $table_type = (string) $row['table_type'];
+
                     return array(
-                        'id'          => (int) $row['id'],
+                        'id'          => $table_id,
                         'title'       => (string) $row['title'],
-                        'table_type'  => (string) $row['table_type'],
+                        'table_type'  => $table_type,
                         'connection'  => isset( $row['connection'] ) ? (string) $row['connection'] : '',
                         'server_side' => ! empty( $row['server_side'] ),
+                        'adminLink'   => function_exists( 'wdtmcp_admin_table_url' )
+                            ? wdtmcp_admin_table_url( $table_id, $table_type )
+                            : '',
                     );
                 }, $rows );
 
@@ -98,13 +112,15 @@ function wdtmcp_register_list_tables_ability() {
                 );
             },
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/list-tables', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
                 'annotations' => array(
-                    'instructions' => __( 'Call with an empty object {}. Use the returned table id with get-table-info or get-table-data. Start here when you do not yet know which tables exist.', 'wpdatatables' ),
+                    'instructions' => __( 'Call with an empty object {}. Render each table title as a clickable markdown link using adminLink. Use the returned table id with get-table-info or get-table-data. Start here when you do not yet know which tables exist.', 'wpdatatables' ),
                     'readonly'    => true,
                     'destructive' => false,
                     'idempotent'  => true,

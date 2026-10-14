@@ -7,135 +7,158 @@ defined('ABSPATH') or die("Cannot access pages directly.");
  */
 function wdtAdminMenu()
 {
+    if (!\WPDataTables\Services\Permissions\WpdtAccess::hasImplicitElevatedAccess()
+        && !\WPDataTables\Services\Permissions\WpdtAccess::currentUserCanAccessPlugin()
+    ) {
+        return;
+    }
+
+    $parentCap = \WPDataTables\Services\Permissions\WpdtAccess::hasImplicitElevatedAccess()
+        ? 'manage_options'
+        : \WPDataTables\Services\Permissions\WpdtAccess::CAP_ACCESS_PLUGIN;
+
     add_menu_page(
             'wpDataTables',
             'wpDataTables',
-            'manage_options',
+            $parentCap,
             'wpdatatables-dashboard',
             'wdtMainDashboard',
             'none'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Dashboard', 'wpdatatables'),
             __('Dashboard', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-dashboard',
             'wdtMainDashboard'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('wpDataTables', 'wpdatatables'),
             __('wpDataTables', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-administration',
             'wdtBrowseTables'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Create a Table', 'wpdatatables'),
             __('Create a Table', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-constructor',
             'wdtConstructor'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('wpDataCharts', 'wpdatatables'),
             __('wpDataCharts', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-charts',
             'wdtBrowseCharts'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Create a Chart', 'wpdatatables'),
             __('Create a Chart', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-chart-wizard',
             'wdtChartWizard'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Settings', 'wpdatatables'),
             __('Settings', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-settings',
             'wdtSettings'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('System info', 'wpdatatables'),
             __('System info', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-system-info',
             'wdtSystemInfo'
     );
-    if (current_user_can('manage_options')) {
-        add_submenu_page(
-                'wpdatatables-dashboard',
-                __('Permissions', 'wpdatatables'),
-                __('Permissions', 'wpdatatables'),
-                'manage_options',
-                'wpdatatables_permissions',
-                ['WDTPermissionsAdmin', 'renderPage']
-        );
-    }
-    add_submenu_page(
+    wdt_maybe_add_submenu(
+            'wpdatatables-dashboard',
+            __('Permissions', 'wpdatatables'),
+            __('Permissions', 'wpdatatables'),
+            'wpdatatables_permissions',
+            'wdtPermissionsPage'
+    );
+    wdt_maybe_add_submenu(
             get_option('wdtGettingStartedPageStatus') ? '' : 'wpdatatables-dashboard',
             __('Getting Started', 'wpdatatables'),
             __('Getting Started', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-getting-started',
             'wdtGettingStarted'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Get Help', 'wpdatatables'),
             __('Get Help', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-support',
             'wdtSupport'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Lite vs Premium', 'wpdatatables'),
             __('Lite vs Premium', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-lite-vs-premium',
             'wdtLiteVSPremium'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Add-ons', 'wpdatatables'),
             __('Addons', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-add-ons',
             'wdtAddOns'
     );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-welcome-page',
             __('Welcome page', 'wpdatatables'),
             __('Welcome page', 'wpdatatables'),
-            'manage_options',
             'wpdatatables-welcome-page',
             'wdtWelcomePAge'
     );
-//    add_submenu_page(
-//        'wpdatatables-dashboard',
-//        __('Go Premium', 'wpdatatables'),
-//        '<span class="dashicons dashicons-star-filled" style="color: #ff8c00"></span><span id="wpdatatables-lite-go-premium-link" style="color: #ff8c00;font-weight: 500;display: inline-block;margin-left: 5px;margin-top: 2px;">' . __('Go Premium', 'wpdatatables') . '</span>',
-//        'manage_options',
-//        'https://wpdatatables.com/pricing/?utm_source=lite&utm_medium=plugin&utm_campaign=wpdtlite'
-//    );
-    add_submenu_page(
+    wdt_maybe_add_submenu(
             'wpdatatables-dashboard',
             __('Go Premium', 'wpdatatables'),
             '<span class="dashicons dashicons-star-filled" style="color: #ff8c00"></span><span id="wpdatatables-lite-go-premium-link" style="color: #ff8c00;font-weight: 500;display: inline-block;margin-left: 5px;margin-top: 2px;">' . __('Go Premium', 'wpdatatables') . '</span>',
-            'manage_options',
             'wpdatatables-lite-vs-premium'
     );
+}
 
+/**
+ * Register a submenu when the current user may see that slug.
+ *
+ * @param string          $parentSlug
+ * @param string          $pageTitle
+ * @param string          $menuTitle
+ * @param string          $menuSlug
+ * @param callable|string $callback
+ * @return void
+ */
+function wdt_maybe_add_submenu($parentSlug, $pageTitle, $menuTitle, $menuSlug, $callback = '')
+{
+    $mapper = \WPDataTables\Services\Permissions\WpdtPermissionsLocator::menuMapper();
+    if (!$mapper->currentUserCanAccessSlug($menuSlug)) {
+        return;
+    }
+
+    add_submenu_page(
+        $parentSlug,
+        $pageTitle,
+        $menuTitle,
+        $mapper->capabilityForSlug($menuSlug),
+        $menuSlug,
+        $callback
+    );
+}
+
+/**
+ * Permissions admin screen.
+ *
+ * @return void
+ */
+function wdtPermissionsPage()
+{
+    \WPDataTables\Services\Permissions\WpdtPermissionsLocator::pageController()->renderPage();
 }
 
 add_action('admin_menu', 'wdtAdminMenu');
@@ -498,6 +521,34 @@ function wdtPermissionsEnqueue()
     wp_enqueue_script('wdt-common');
     wp_enqueue_script('wdt-doc-js');
     wp_enqueue_script('wdt-funcs-js');
+    wp_enqueue_script(
+        'wdt-permissions-js',
+        WDT_ROOT_URL . 'assets/js/wpdatatables/admin/permissions/permissions-admin.js',
+        array('jquery', 'wdt-common'),
+        WDT_CURRENT_VERSION,
+        true
+    );
+
+    $catalog = array(
+        'tables' => \WPDataTables\Services\Permissions\PermissionCatalog::definitionsForResource('tables'),
+        'charts' => \WPDataTables\Services\Permissions\PermissionCatalog::definitionsForResource('charts'),
+    );
+
+    wp_localize_script('wdt-permissions-js', 'wdtPermissions', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('wdt_permissions_nonce'),
+        'catalog' => $catalog,
+        'i18n' => array(
+            'add_permission' => __('Add Permission', 'wpdatatables'),
+            'edit_permission' => __('Edit Permission', 'wpdatatables'),
+            'limit_tables' => __('Limit to specific tables', 'wpdatatables'),
+            'limit_charts' => __('Limit to specific charts', 'wpdatatables'),
+            'limit_tables_help' => __('If unchecked, permissions apply to all tables.', 'wpdatatables'),
+            'limit_charts_help' => __('If unchecked, permissions apply to all charts.', 'wpdatatables'),
+            'select_tables' => __('Select tables', 'wpdatatables'),
+            'select_charts' => __('Select charts', 'wpdatatables'),
+        ),
+    ));
 }
 
 /**
@@ -610,7 +661,7 @@ function wdtStoreEnqueue()
  */
 function wdtBrowseTables()
 {
-    if (!current_user_can('manage_options')) {
+    if (!wdt_permissions_service()->canListTables()) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
@@ -625,11 +676,18 @@ function wdtBrowseTables()
     if ($action === 'delete') {
         $tableId = $_REQUEST['table_id'];
 
+        $permissions = wdt_permissions_service();
         if (!is_array($tableId)) {
-            WPDataTable::deleteTable((int)$tableId);
+            $tableId = absint($tableId);
+            if ($tableId > 0 && $permissions->canDeleteTable($tableId)) {
+                WPDataTable::deleteTable($tableId);
+            }
         } else {
             foreach ($tableId as $singleTableId) {
-                WPDataTable::deleteTable((int)$singleTableId);
+                $singleTableId = absint($singleTableId);
+                if ($singleTableId > 0 && $permissions->canDeleteTable($singleTableId)) {
+                    WPDataTable::deleteTable($singleTableId);
+                }
             }
         }
     }
@@ -660,7 +718,12 @@ function wdtBrowseTables()
  */
 function wdtEdit()
 {
-    if (!current_user_can('manage_options')) {
+    $tableId = isset($_GET['table_id']) ? absint($_GET['table_id']) : 0;
+    if ($tableId > 0) {
+        if (!wdt_permissions_service()->canEditTable($tableId)) {
+            wp_die(__('You do not have sufficient permissions to access this page.'));
+        }
+    } elseif (!wdt_permissions_service()->canCreateTables()) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
@@ -704,21 +767,22 @@ function wdtEdit()
  */
 function wdtConstructor()
 {
-    if (!current_user_can('manage_options')) {
+    if (isset($_GET['source'])) {
+        wdtEdit();
+        return;
+    }
+
+    if (!wdt_permissions_service()->canCreateTables()) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
-    if (isset($_GET['source'])) {
-        wdtEdit();
-    } else {
-        ob_start();
-        include WDT_ROOT_PATH . 'templates/admin/constructor/constructor.inc.php';
-        $constructorPage = ob_get_contents();
-        ob_end_clean();
+    ob_start();
+    include WDT_ROOT_PATH . 'templates/admin/constructor/constructor.inc.php';
+    $constructorPage = ob_get_contents();
+    ob_end_clean();
 
-        $constructorPage = apply_filters('wpdatatables_filter_constructor_page', $constructorPage);
-        echo $constructorPage;
-    }
+    $constructorPage = apply_filters('wpdatatables_filter_constructor_page', $constructorPage);
+    echo $constructorPage;
 }
 
 /**
@@ -726,7 +790,7 @@ function wdtConstructor()
  */
 function wdtBrowseCharts()
 {
-    if (!current_user_can('manage_options')) {
+    if (!wdt_permissions_service()->canListCharts()) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
@@ -741,11 +805,18 @@ function wdtBrowseCharts()
     if ($action === 'delete') {
         $chartId = $_REQUEST['chart_id'];
 
+        $permissions = wdt_permissions_service();
         if (!is_array($chartId)) {
-            WPDataChart::delete((int)$chartId);
+            $chartId = absint($chartId);
+            if ($chartId > 0 && $permissions->canDeleteChart($chartId)) {
+                WPDataChart::delete($chartId);
+            }
         } else {
             foreach ($chartId as $singleChartId) {
-                WPDataChart::delete((int)$singleChartId);
+                $singleChartId = absint($singleChartId);
+                if ($singleChartId > 0 && $permissions->canDeleteChart($singleChartId)) {
+                    WPDataChart::delete($singleChartId);
+                }
             }
         }
     }
@@ -774,11 +845,15 @@ function wdtBrowseCharts()
  */
 function wdtChartWizard()
 {
-    if (!current_user_can('manage_options')) {
+    $chartId = isset($_GET['chart_id']) ? (int)$_GET['chart_id'] : 0;
+    if ($chartId > 0) {
+        if (!wdt_permissions_service()->canEditChart($chartId)) {
+            wp_die(__('You do not have sufficient permissions to access this page.'));
+        }
+    } elseif (!wdt_permissions_service()->canCreateCharts()) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
 
-    $chartId = isset($_GET['chart_id']) ? (int)$_GET['chart_id'] : false;
     $chartEngine = isset($_GET['engine']) ? sanitize_text_field($_GET['engine']) : '';
     if (!empty($chartId)) {
         try {
@@ -810,9 +885,7 @@ function wdtChartWizard()
  */
 function wdtMainDashboard()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_plugin_access();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/dashboard/dashboard.inc.php';
@@ -830,9 +903,7 @@ function wdtMainDashboard()
  */
 function wdtSettings()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_elevated();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/settings/settings.inc.php';
@@ -850,9 +921,7 @@ function wdtSettings()
  */
 function wdtSupport()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_plugin_access();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/support/support.inc.php';
@@ -870,9 +939,7 @@ function wdtSupport()
  */
 function wdtWelcomePage()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_plugin_access();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/welcome_page/welcome_page.inc.php';
@@ -890,9 +957,7 @@ function wdtWelcomePage()
  */
 function wdtSystemInfo()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_elevated();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/system-info/system_info.inc.php';
@@ -910,9 +975,7 @@ function wdtSystemInfo()
  */
 function wdtGettingStarted()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_plugin_access();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/getting-started/getting_started.inc.php';
@@ -930,9 +993,7 @@ function wdtGettingStarted()
  */
 function wdtLiteVSPremium()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_elevated();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/lite-vs-premium/lite_vs_premium.inc.php';
@@ -950,9 +1011,7 @@ function wdtLiteVSPremium()
  */
 function wdtAddOns()
 {
-    if (!current_user_can('manage_options')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-    }
+    wdt_die_unless_plugin_access();
 
     ob_start();
     include WDT_ROOT_PATH . 'templates/admin/addons/addons.inc.php';

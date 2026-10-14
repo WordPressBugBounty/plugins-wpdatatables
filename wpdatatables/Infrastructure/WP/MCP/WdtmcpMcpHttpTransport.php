@@ -14,7 +14,19 @@ use WP\MCP\Transport\Infrastructure\McpTransportContext;
 defined('ABSPATH') or die('Access denied.');
 
 /**
- * Registers REST routes immediately, matching the timing workaround used by IvyForms.
+ * Same behavior as {@see HttpTransport} from wordpress/mcp-adapter, with an extra
+ * immediate registration when the server is created during {@see 'rest_api_init'}.
+ *
+ * Stock {@see HttpTransport} schedules {@see register_routes()} on {@see 'rest_api_init'}
+ * priority 16 while {@see \WP\MCP\Core\McpAdapter::init()} runs at priority 15. Registering
+ * immediately covers that first pass without dropping the deferred callback.
+ *
+ * The deferred callback must stay registered: some plugins (for example Angie) recreate the
+ * REST server mid-request by resetting {@code $wp_rest_server}. A second {@see 'rest_api_init'}
+ * then needs to re-attach routes. Removing the deferred action left MCP at
+ * {@code rest_no_route} (404) while plugins that kept stock transport still worked.
+ *
+ * REST endpoint: /wp-json/mcp/wpdatatables-mcp-server
  */
 class WdtmcpMcpHttpTransport extends HttpTransport
 {
@@ -22,23 +34,9 @@ class WdtmcpMcpHttpTransport extends HttpTransport
     {
         parent::__construct($transportContext);
 
-        // A different MCP Adapter copy may not expose route registration at all.
-        if (! method_exists($this, 'register_routes')) {
-            return;
-        }
-
-        // Outside a REST request the parent hook still fires at the right time, and registering
-        // routes here would only trigger a _doing_it_wrong notice.
-        if (! doing_action('rest_api_init') && ! did_action('rest_api_init')) {
-            return;
-        }
-
-        remove_action('rest_api_init', array($this, 'register_routes'), 16);
-
-        try {
+        // Parent already scheduled register_routes() on rest_api_init@16 — keep that hook.
+        if (doing_action('rest_api_init')) {
             $this->register_routes();
-        } catch (\Throwable $exception) {
-            error_log('wpDataTables MCP: route registration failed - ' . $exception->getMessage());
         }
     }
 }

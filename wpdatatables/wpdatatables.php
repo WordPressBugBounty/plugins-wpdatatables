@@ -3,7 +3,7 @@
 Plugin Name: wpDataTables - Tables & Table Charts
 Plugin URI: https://wpdatatables.com
 Description: Create responsive, sortable tables & charts from Excel, CSV or PHP. Add tables & charts to any post in minutes with DataTables.
-Version: 6.5.1.7
+Version: 6.6.1.1
 Author: Melograno Ventures
 Author URI: https://melograno.io
 Text Domain: wpdatatables
@@ -79,6 +79,23 @@ require_once(WDT_ROOT_PATH . 'controllers/wdt_functions.php');
 // Load dependencies
 require_once WDT_ROOT_PATH . 'lib/autoload.php';
 
+/**
+ * PSR-4 autoload for the permissions slice (`WPDataTables\`).
+ * Lite does not ship the premium PHP-DI backend.
+ */
+spl_autoload_register(static function ($class) {
+    $prefix = 'WPDataTables\\';
+    if (strpos($class, $prefix) !== 0) {
+        return;
+    }
+
+    $relative = substr($class, strlen($prefix));
+    $path = WDT_ROOT_PATH . 'backend/src/' . str_replace('\\', '/', $relative) . '.php';
+    if (is_readable($path)) {
+        require_once $path;
+    }
+});
+
 use Melograno\UsageTracker\Collectors\Plugin\WpDataTablesCollector;
 use Melograno\UsageTracker\Core\UsageTracker;
 
@@ -109,8 +126,8 @@ function wpdatatables_load()
     require_once(WDT_ROOT_PATH . 'source/class.wdtbrowsetable.php');
     require_once(WDT_ROOT_PATH . 'source/class.wdtbrowsechartstable.php');
     require_once(WDT_ROOT_PATH . 'source/class.feedback.php');
-    require_once(WDT_ROOT_PATH . 'source/class.permissions.admin.php');
     require_once(WDT_ROOT_PATH . 'source/class.permissions.enforcer.php');
+    wdt_register_permissions_hooks();
     require_once(WDT_ROOT_PATH . 'integrations/page_builders/gutenberg/WDTGutenbergBlocks.php');
     require_once(WDT_ROOT_PATH . 'integrations/page_builders/elementor/class.wdtelementorblock.php');
     require_once(WDT_ROOT_PATH . 'integrations/page_builders/divi-wpdt/divi-wpdt.php');
@@ -152,6 +169,8 @@ add_shortcode('wpdatachart', 'wdtWpDataChartShortcodeHandler');
 add_shortcode('wpdatatable_cell', 'wdtWpDataTableCellShortcodeHandler');
 
 wpdatatables_load();
+
+\WPDataTables\Plugin\AiBootstrap::register();
 
 require_once WDT_ROOT_PATH . 'Infrastructure/WP/MCP/WdtmcpAdapterCompatibility.php';
 require_once WDT_ROOT_PATH . 'Infrastructure/WP/MCP/WdtmcpBootstrap.php';

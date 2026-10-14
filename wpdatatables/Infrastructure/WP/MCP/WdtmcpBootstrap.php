@@ -40,11 +40,15 @@ class WdtmcpBootstrap
     private static function integrationFiles(): array
     {
         return array(
+            'Infrastructure/WP/MCP/WdtmcpAbilityCatalog.php',
+            'Infrastructure/WP/MCP/Helpers/McpHelpers/WdtmcpPermissionsHelper.php',
             'Infrastructure/WP/MCP/Helpers/McpHelpers/WdtmcpAbilitiesHelper.php',
             'Infrastructure/WP/MCP/Helpers/McpHelpers/WdtmcpLicenseGuideHelper.php',
             'Infrastructure/WP/MCP/WdtmcpAbilitiesRegistrar.php',
             'Infrastructure/WP/MCP/WdtmcpMcpHttpTransport.php',
             'Infrastructure/WP/MCP/WdtmcpMcpServerRegistrar.php',
+            'Infrastructure/WP/MCP/WdtmcpSessionMetaLock.php',
+            'Infrastructure/WP/MCP/WdtmcpAngieRegistrar.php',
         );
     }
 
@@ -54,6 +58,13 @@ class WdtmcpBootstrap
     public static function load(): void
     {
         global $wp_version;
+
+        require_once WDT_ROOT_PATH . 'Infrastructure/WP/MCP/WdtmcpFeatureGate.php';
+
+        // Opt-out via Settings → Main settings or filter `wpdatatables/mcp/enabled`.
+        if (! WdtmcpFeatureGate::isEnabled()) {
+            return;
+        }
 
         if (version_compare($wp_version, WDTMCP_MIN_WP_VERSION, '<')) {
             self::registerUnavailableNotice(
@@ -119,6 +130,8 @@ class WdtmcpBootstrap
             require_once WDT_ROOT_PATH . $relativePath;
         }
 
+        WdtmcpSessionMetaLock::init();
+
         try {
             McpAdapter::instance();
         } catch (Throwable $exception) {
@@ -136,6 +149,7 @@ class WdtmcpBootstrap
         add_action('mcp_adapter_init', array(WdtmcpMcpServerRegistrar::class, 'init'));
         add_action('wp_abilities_api_categories_init', array(WdtmcpAbilitiesRegistrar::class, 'registerCategories'));
         add_action('wp_abilities_api_init', array(WdtmcpAbilitiesRegistrar::class, 'registerAbilities'));
+        WdtmcpAngieRegistrar::init();
 
         if (function_exists('wdtmcp_maybe_migrate_css_to_global')) {
             add_action('init', 'wdtmcp_maybe_migrate_css_to_global', 99);

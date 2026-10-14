@@ -41,8 +41,10 @@ function wdtmcp_register_update_global_settings_ability() {
 
             'execute_callback' => 'wdtmcp_execute_update_global_settings',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/update-global-settings', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -139,6 +141,10 @@ function wdtmcp_get_updatable_global_setting_definitions() {
         'wdtParseShortcodes'            => array(
             'type'        => 'integer',
             'description' => 'Parse WordPress shortcodes inside table cell strings (0 = off, 1 = on).',
+        ),
+        'wdtMcpEnabled'                 => array(
+            'type'        => 'integer',
+            'description' => 'Enable MCP tools for AI assistants such as Angie AI (0 = off, 1 = on). Default is on.',
         ),
         'wdtNumbersAlign'               => array(
             'type'        => 'integer',

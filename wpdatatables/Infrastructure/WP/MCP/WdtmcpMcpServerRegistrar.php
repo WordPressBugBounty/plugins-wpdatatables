@@ -21,8 +21,10 @@ class WdtmcpMcpServerRegistrar
         'wpdatatables/list-tables',
         'wpdatatables/get-table-info',
         'wpdatatables/get-table-data',
+        'wpdatatables/open-table-editor',
         'wpdatatables/list-charts',
         'wpdatatables/get-chart-info',
+        'wpdatatables/open-chart-wizard',
         'wpdatatables/get-system-info',
         'wpdatatables/get-mcp-license-matrix',
         'wpdatatables/get-changelog',
@@ -95,7 +97,9 @@ class WdtmcpMcpServerRegistrar
             array(),
             static function () {
                 if (is_user_logged_in()) {
-                    return current_user_can('manage_options');
+                    return function_exists('wdtmcp_current_user_can_use_mcp')
+                        ? wdtmcp_current_user_can_use_mcp()
+                        : current_user_can('manage_options');
                 }
 
                 $username = (string) (filter_input(INPUT_SERVER, 'PHP_AUTH_USER', FILTER_UNSAFE_RAW) ?? '');
@@ -109,7 +113,15 @@ class WdtmcpMcpServerRegistrar
 
                 $user = wp_authenticate_application_password(null, $username, $password);
 
-                return $user instanceof \WP_User && user_can($user, 'manage_options');
+                if ($user instanceof \WP_User) {
+                    wp_set_current_user($user->ID);
+
+                    return function_exists('wdtmcp_user_can_use_mcp')
+                        ? wdtmcp_user_can_use_mcp($user)
+                        : user_can($user, 'manage_options');
+                }
+
+                return false;
             }
         );
     }

@@ -1128,8 +1128,8 @@ class WPDataChart
     {
         global $wpdb;
 
-        if (!isset($_REQUEST['wdtNonce']) || empty($chartId) || !current_user_can('manage_options')
-            || !wp_verify_nonce($_REQUEST['wdtNonce'], 'wdtDeleteChartNonce')) {
+        if (!isset($_REQUEST['wdtNonce']) || empty($chartId) || !wp_verify_nonce($_REQUEST['wdtNonce'], 'wdtDeleteChartNonce')
+            || !wdt_permissions_service()->canDeleteChart((int) $chartId)) {
             return false;
         }
 

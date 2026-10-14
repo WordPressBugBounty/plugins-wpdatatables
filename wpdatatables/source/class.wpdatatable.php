@@ -1786,6 +1786,13 @@ class WPDataTable
             if (!$xls_url) {
                 throw new WDTException(esc_html__('Excel file not found!', 'wpdatatables'));
             }
+            if (WDTTools::shouldRestrictDelegatedSources()) {
+                if ($fileLocation == 'wp_any_url') {
+                    WDTTools::assertPublicHttpUrl($xls_url);
+                } else {
+                    $xls_url = WDTTools::resolveUploadSourcePath($xls_url);
+                }
+            }
             if ($fileLocation == 'wp_media_lib' && !file_exists($xls_url)) {
                 throw new WDTException('Provided file ' . stripcslashes($xls_url) . ' does not exist!');
             }
@@ -1961,7 +1968,19 @@ class WPDataTable
 	 * @return array|string
 	 */
 	public static function xmlRenderData( $xml, $id) {
-		$XMLObject = simplexml_load_file($xml);
+		if (WDTTools::shouldRestrictDelegatedSources()) {
+			if (WDTTools::isHttpUrl($xml)) {
+				$xmlBody = WDTTools::curlGetData($xml);
+				$XMLObject = is_string($xmlBody)
+					? simplexml_load_string($xmlBody, 'SimpleXMLElement', LIBXML_NONET)
+					: false;
+			} else {
+				$xml = WDTTools::resolveUploadSourcePath($xml);
+				$XMLObject = simplexml_load_file($xml, 'SimpleXMLElement', LIBXML_NONET);
+			}
+		} else {
+			$XMLObject = simplexml_load_file($xml);
+		}
 		$XMLObject = apply_filters('wpdatatables_filter_simplexml', $XMLObject, $id);
 		$XMLArray = WDTTools::convertXMLtoArr($XMLObject);
 		foreach ($XMLArray as &$xml_el) {
@@ -3031,7 +3050,7 @@ class WPDataTable
     {
         global $wpdb;
 
-        if (!isset($_REQUEST['wdtNonce']) || empty($tableId) || !current_user_can('manage_options') || !wp_verify_nonce($_REQUEST['wdtNonce'], 'wdtDeleteTableNonce')) {
+        if (!isset($_REQUEST['wdtNonce']) || empty($tableId) || !wp_verify_nonce($_REQUEST['wdtNonce'], 'wdtDeleteTableNonce') || !wdt_permissions_service()->canDeleteTable((int) $tableId)) {
             return false;
         }
 

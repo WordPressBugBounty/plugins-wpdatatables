@@ -43,6 +43,10 @@ function wdtmcp_register_list_charts_ability() {
                                     'type'        => 'string',
                                     'description' => 'The chart title.',
                                 ),
+                                'adminLink' => array(
+                                    'type'        => 'string',
+                                    'description' => 'Admin URL to open this chart in the wizard — render the title as a markdown link.',
+                                ),
                             ),
                         ),
                     ),
@@ -70,10 +74,19 @@ function wdtmcp_register_list_charts_ability() {
                     );
                 }
 
+                if ( function_exists( 'wdtmcp_filter_allowed_chart_rows' ) ) {
+                    $rows = wdtmcp_filter_allowed_chart_rows( $rows );
+                }
+
                 $charts = array_map( static function ( $row ) {
+                    $chart_id = (int) $row['id'];
+
                     return array(
-                        'id'    => (int) $row['id'],
-                        'title' => (string) $row['title'],
+                        'id'        => $chart_id,
+                        'title'     => (string) $row['title'],
+                        'adminLink' => function_exists( 'wdtmcp_admin_chart_url' )
+                            ? wdtmcp_admin_chart_url( $chart_id )
+                            : '',
                     );
                 }, $rows );
 
@@ -83,13 +96,15 @@ function wdtmcp_register_list_charts_ability() {
                 );
             },
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/list-charts', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
                 'annotations' => array(
-                    'instructions' => __( 'Call with an empty object {}. Use the returned chart id with get-chart-info.', 'wpdatatables' ),
+                    'instructions' => __( 'Call with an empty object {}. Render each chart title as a clickable markdown link using adminLink. Use the returned chart id with get-chart-info.', 'wpdatatables' ),
                     'readonly'    => true,
                     'destructive' => false,
                     'idempotent'  => true,

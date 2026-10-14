@@ -84,13 +84,16 @@ function wdtmcp_register_create_chart_ability() {
                 'properties' => array(
                     'chart_id'  => array( 'type' => 'integer', 'description' => 'Created chart ID.' ),
                     'shortcode' => array( 'type' => 'string',  'description' => 'WordPress shortcode to embed the chart.' ),
+                    'adminLink' => array( 'type' => 'string',  'description' => 'Admin URL to open the created chart in the wizard.' ),
                 ),
             ),
 
             'execute_callback' => 'wdtmcp_execute_create_chart',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/create-chart', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(
@@ -264,6 +267,11 @@ function wdtmcp_execute_create_chart( $input ) {
         );
     }
 
+    if ( ! function_exists( 'wdtmcp_can_read_table' )
+        || ! wdtmcp_can_read_table( array( 'table_id' => $wpdatatable_id ) ) ) {
+        return new \WP_Error( 'wdtmcp_forbidden', __( 'You cannot access the source table.', 'wpdatatables' ) );
+    }
+
     try {
         $table = \WPDataTable::loadWpDataTable( $wpdatatable_id, null, true );
     } catch ( \Exception $e ) {
@@ -335,5 +343,8 @@ function wdtmcp_execute_create_chart( $input ) {
     return array(
         'chart_id'  => $chart_id,
         'shortcode' => $chart->getShortCode(),
+        'adminLink' => function_exists( 'wdtmcp_admin_chart_url' )
+            ? wdtmcp_admin_chart_url( (int) $chart_id, $engine )
+            : '',
     );
 }

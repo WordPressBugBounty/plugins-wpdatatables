@@ -101,6 +101,12 @@ composer test
 For `wpdatatables`, `plugin_data` may include:
 
 - `tables_count` / `charts_count` — total content counts
-- `table_types` — map of `table_type` → count (e.g. `{"simple":4,"mysql":3}`)
+- `table_types` — map of `table_type` → count (e.g. `{"simple":4,"mysql":3}`). Includes form-addon sources when present (`gravity`, `formidable`, `forminator`)
 - `chart_types` — map of chart `type` → count (e.g. `{"google_pie_chart":2}`)
+- `skins` — map of skin slug → table count (e.g. `{"material":2,"light":1}`)
+- `file_source_actions` — cumulative Apply counts for manual-table file import (`replaceTableData`, `addDataToTable`, `replaceTable`); written by the wpDataTables host into `wpdatatables_usage_file_source_actions`, read here at collect time
+- `features` / `feature_metrics` — feature adoption flags and usage counts. Addon-related codes include:
+  - count metrics (`feature_metrics.usage_count` when > 0): `masterDetail`, `cascadeFiltering`, `reportBuilderAddon` (reports linked to a wpDataTable), `reportBuilderStandalone` (reports with no table / variables only)
+  - table options (always emit metrics): `wcag`, `indexColumn`
+  - count metrics: `transformValue` (non-server-side tables with column transform value)
 - `license`, `plugin_version`, `first_content_created_at`

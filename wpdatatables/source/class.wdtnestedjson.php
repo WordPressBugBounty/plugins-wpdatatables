@@ -214,7 +214,12 @@ class WDTNestedJson
 	public function getResponse($tableID)
 	{
 		$endPointArgs = $this->prepareEndPointArgs($tableID);
-		$response = wp_remote_request($this->getUrl(), $endPointArgs);;
+		if (WDTTools::shouldRestrictDelegatedSources()) {
+			$checked = WDTTools::assertPublicHttpUrl($this->getUrl());
+			$response = WDTTools::remoteRequestPinned($checked, $endPointArgs);
+		} else {
+			$response = wp_remote_request($this->getUrl(), $endPointArgs);
+		}
 		if (is_wp_error($response) || !in_array(intval($response['response']['code']), array(200, 201), true)) {
 			return wp_remote_retrieve_response_message($response);
 		}

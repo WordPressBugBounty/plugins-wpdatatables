@@ -96,6 +96,10 @@ class AmeliaFeatureTelemetryTest extends TestCase
 
     public function testStripeNotInUseWhenDisabledOnPaymentsSettings(): void
     {
+        $connection = new AmeliaConnectionStub();
+        // groupBooking + multipleLocations checks run before payment gateway counts.
+        $connection->setFetchQueue([['found' => 0], ['found' => 0]]);
+        $connection->setFetchAllResult([['gateway' => 'stripe', 'cnt' => 12]]);
         $settings = new AmeliaSettingsServiceStub(
             ['stripe' => true],
             [
@@ -110,14 +114,43 @@ class AmeliaFeatureTelemetryTest extends TestCase
             ]
         );
         $container = new AmeliaContainerStub([
-            'app.connection' => new AmeliaConnectionStub(),
+            'app.connection' => $connection,
         ]);
 
         $result = AmeliaFeatureTelemetry::collect($settings, $container);
 
         $this->assertSame(['stripe' => false], $result['features']);
         $this->assertSame(
-            ['stripe' => ['usage_count' => 0]],
+            ['stripe' => ['usage_count' => 12]],
+            $result['feature_metrics']
+        );
+    }
+
+    public function testStripeTransactionCountKeptWhenFeatureNoLongerEnabled(): void
+    {
+        $connection = new AmeliaConnectionStub();
+        // groupBooking + multipleLocations checks run before payment gateway counts.
+        $connection->setFetchQueue([['found' => 0], ['found' => 0]]);
+        $connection->setFetchAllResult([['gateway' => 'stripe', 'cnt' => 9]]);
+        $settings = new AmeliaSettingsServiceStub(
+            ['stripe' => false],
+            [
+                'payments' => [
+                    'stripe' => [
+                        'enabled' => false,
+                    ],
+                ],
+            ]
+        );
+        $container = new AmeliaContainerStub([
+            'app.connection' => $connection,
+        ]);
+
+        $result = AmeliaFeatureTelemetry::collect($settings, $container);
+
+        $this->assertArrayNotHasKey('stripe', $result['features']);
+        $this->assertSame(
+            ['stripe' => ['usage_count' => 9]],
             $result['feature_metrics']
         );
     }
@@ -126,7 +159,8 @@ class AmeliaFeatureTelemetryTest extends TestCase
     {
         $connection = new AmeliaConnectionStub();
         // groupBooking + multipleLocations checks run before payment gateway counts.
-        $connection->setFetchQueue([['found' => 0], ['found' => 0], ['cnt' => 17]]);
+        $connection->setFetchQueue([['found' => 0], ['found' => 0]]);
+        $connection->setFetchAllResult([['gateway' => 'stripe', 'cnt' => 17]]);
         $settings = new AmeliaSettingsServiceStub(
             ['stripe' => true],
             [
@@ -147,7 +181,8 @@ class AmeliaFeatureTelemetryTest extends TestCase
         $result = AmeliaFeatureTelemetry::collect($settings, $container);
 
         $this->assertSame(17, $result['feature_metrics']['stripe']['usage_count'] ?? null);
-        $this->assertStringContainsString("gateway = 'stripe'", $connection->queries[2]);
+        $this->assertStringContainsString('GROUP BY gateway', $connection->queries[2]);
+        $this->assertStringContainsString("'stripe'", $connection->queries[2]);
     }
 
     public function testWebhooksConfiguredReturnsTrue(): void
@@ -398,7 +433,14 @@ class AmeliaFeatureTelemetryTest extends TestCase
     public function testOnSiteReportsUsageFromPaymentsTable(): void
     {
         $connection = new AmeliaConnectionStub();
-        $connection->setFetchQueue([['found' => 0], ['found' => 1], ['cnt' => 4]]);
+        // groupBooking + multipleLocations, then one batched payment-gateway count query.
+        $connection->setFetchQueue([
+            ['found' => 0],
+            ['found' => 0],
+        ]);
+        $connection->setFetchAllResult([
+            ['gateway' => 'onSite', 'cnt' => 4],
+        ]);
         $settings = new AmeliaSettingsServiceStub(
             [],
             ['payments' => ['onSite' => true]]
@@ -412,6 +454,64 @@ class AmeliaFeatureTelemetryTest extends TestCase
         $this->assertSame(['onSite' => true], $result['features']);
         $this->assertSame(
             ['onSite' => ['usage_count' => 4]],
+            $result['feature_metrics']
+        );
+        $this->assertStringContainsString('GROUP BY gateway', $connection->queries[2]);
+        $this->assertStringContainsString("'onSite'", $connection->queries[2]);
+    }
+
+    public function testPayPalUsesAmeliaGatewayCode(): void
+    {
+        $connection = new AmeliaConnectionStub();
+        $connection->setFetchQueue([['found' => 0], ['found' => 0]]);
+        $connection->setFetchAllResult([['gateway' => 'payPal', 'cnt' => 3]]);
+        $settings = new AmeliaSettingsServiceStub(
+            ['payPal' => true],
+            [
+                'payments' => [
+                    'payPal' => [
+                        'enabled' => true,
+                        'sandboxMode' => true,
+                        'testApiClientId' => 'client',
+                        'testApiSecret' => 'secret',
+                    ],
+                ],
+            ]
+        );
+        $container = new AmeliaContainerStub([
+            'app.connection' => $connection,
+        ]);
+
+        $result = AmeliaFeatureTelemetry::collect($settings, $container);
+
+        $this->assertSame(['payPal' => true], $result['features']);
+        $this->assertSame(
+            ['payPal' => ['usage_count' => 3]],
+            $result['feature_metrics']
+        );
+        $this->assertArrayNotHasKey('paypal', $result['features']);
+    }
+
+    public function testOnSiteMetricsKeptWhenSettingDisabledButHasHistory(): void
+    {
+        $connection = new AmeliaConnectionStub();
+        $connection->setFetchQueue([['found' => 0], ['found' => 0]]);
+        $connection->setFetchAllResult([
+            ['gateway' => 'onSite', 'cnt' => 6],
+        ]);
+        $settings = new AmeliaSettingsServiceStub(
+            [],
+            ['payments' => ['onSite' => false]]
+        );
+        $container = new AmeliaContainerStub([
+            'app.connection' => $connection,
+        ]);
+
+        $result = AmeliaFeatureTelemetry::collect($settings, $container);
+
+        $this->assertArrayNotHasKey('onSite', $result['features']);
+        $this->assertSame(
+            ['onSite' => ['usage_count' => 6]],
             $result['feature_metrics']
         );
     }

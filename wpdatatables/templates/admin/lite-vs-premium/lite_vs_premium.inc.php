@@ -212,7 +212,7 @@
                                     <hr>
                                 </td>
                                 <td data-title="Lite" class="text-center wdt-lite-premium-red-row">
-                                    <i class="wpdt-icon-times-full"></i>
+                                    <i class="wpdt-icon-check-full"></i>
                                     <hr>
                                 </td>
                                 <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
@@ -239,7 +239,7 @@
                                     <hr>
                                 </td>
                                 <td data-title="Lite" class="text-center wdt-lite-premium-red-row">
-                                    <i class="wpdt-icon-times-full"></i>
+                                    <i class="wpdt-icon-check-full"></i>
                                     <hr>
                                 </td>
                                 <td data-title="Premium" class="text-center wdt-lite-premium-red-row">
@@ -293,7 +293,7 @@
                                     <hr>
                                 </td>
                                 <td data-title="Lite" class="text-center wdt-lite-premium-red-row">
-                                    <i class="wpdt-icon-times-full"></i>
+                                    <i class="wpdt-icon-check-full"></i>
                                     <hr>
                                 </td>
                                 <td data-title="Premium" class="text-center wdt-lite-premium-red-row">

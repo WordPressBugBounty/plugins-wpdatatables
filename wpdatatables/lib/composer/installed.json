@@ -517,17 +517,17 @@
                 },
                 {
                         "name": "melograno/usage-tracker",
-                        "version": "1.3.7",
-                        "version_normalized": "1.3.7.0",
+                        "version": "1.3.20",
+                        "version_normalized": "1.3.20.0",
                         "source": {
                                 "type": "git",
                                 "url": "git@github.com:melogranoventures/plugin-usage-tracker.git",
-                                "reference": "d4006bd89cf4f2d169f9f6916ff722f8001b5017"
+                                "reference": "0656a97a7309277eb2838dc84eea2f61e706ec0d"
                         },
                         "dist": {
                                 "type": "zip",
-                                "url": "https://api.github.com/repos/melogranoventures/plugin-usage-tracker/zipball/d4006bd89cf4f2d169f9f6916ff722f8001b5017",
-                                "reference": "d4006bd89cf4f2d169f9f6916ff722f8001b5017",
+                                "url": "https://api.github.com/repos/melogranoventures/plugin-usage-tracker/zipball/0656a97a7309277eb2838dc84eea2f61e706ec0d",
+                                "reference": "0656a97a7309277eb2838dc84eea2f61e706ec0d",
                                 "shasum": ""
                         },
                         "require": {
@@ -537,7 +537,7 @@
                                 "brain/monkey": "^2.6",
                                 "phpunit/phpunit": "^9.6"
                         },
-                        "time": "2026-07-22T11:18:05+00:00",
+                        "time": "2026-10-01T16:44:01+00:00",
                         "type": "library",
                         "installation-source": "dist",
                         "autoload": {
@@ -560,7 +560,7 @@
                         ],
                         "description": "WordPress plugin usage telemetry for Melograno products",
                         "support": {
-                                "source": "https://github.com/melogranoventures/plugin-usage-tracker/tree/v1.3.7",
+                                "source": "https://github.com/melogranoventures/plugin-usage-tracker/tree/v1.3.20",
                                 "issues": "https://github.com/melogranoventures/plugin-usage-tracker/issues"
                         },
                         "install-path": "../melograno/usage-tracker"

@@ -118,8 +118,10 @@ function wdtmcp_register_get_table_data_ability() {
 
             'execute_callback' => 'wdtmcp_execute_get_table_data',
 
-            'permission_callback' => function () {
-                return current_user_can( 'manage_options' );
+            'permission_callback' => static function ( $input = null ) {
+                return function_exists( 'wdtmcp_can_execute_ability' )
+                    ? wdtmcp_can_execute_ability( 'wpdatatables/get-table-data', $input )
+                    : current_user_can( 'manage_options' );
             },
 
             'meta' => array(

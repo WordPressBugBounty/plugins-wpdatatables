@@ -44,7 +44,7 @@ class IvyFormsCollector extends BaseCollector implements ConsentNoticeCollectorI
 
     public function shouldEnableConsentByDefault(): bool
     {
-        return false;
+        return $this->isProPluginActive();
     }
 
     public function shouldShowAdminNotice(): bool
@@ -163,11 +163,50 @@ class IvyFormsCollector extends BaseCollector implements ConsentNoticeCollectorI
 
         $data = array_merge($data, $this->resolveRecordCounts());
 
+        $featureTelemetry = $this->resolveFeatures();
+        if ($featureTelemetry !== null) {
+            // Empty PHP arrays become JSON [] and fail BI object validation;
+            // always emit a JSON object for features.
+            $data['features'] = $featureTelemetry['features'] === []
+                ? new \stdClass()
+                : $featureTelemetry['features'];
+            if (($featureTelemetry['feature_metrics'] ?? []) !== []) {
+                $data['feature_metrics'] = $featureTelemetry['feature_metrics'];
+            }
+            if ($featureTelemetry['templates'] !== []) {
+                $data['templates'] = $featureTelemetry['templates'];
+            }
+            if (($featureTelemetry['themes'] ?? []) !== []) {
+                $data['themes'] = $featureTelemetry['themes'];
+            }
+            if (($featureTelemetry['fields'] ?? []) !== []) {
+                $data['fields'] = $featureTelemetry['fields'];
+            }
+        }
+
         $data = array_filter($data, static function ($value) {
             return $value !== null;
         });
 
         return $data;
+    }
+
+    /**
+     * @return array{
+     *     features: array<string, bool>,
+     *     feature_metrics: array<string, array{usage_count: int}>,
+     *     templates: array<string, int>,
+     *     themes: array<string, int>,
+     *     fields: array<string, bool>
+     * }|null null when collection fails
+     */
+    protected function resolveFeatures(): ?array
+    {
+        try {
+            return IvyFormsFeatureTelemetry::collect();
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**

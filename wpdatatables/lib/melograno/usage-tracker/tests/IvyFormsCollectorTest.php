@@ -38,6 +38,7 @@ class IvyFormsCollectorTest extends TestCase
         delete_option(self::NOTICE_OPTION);
         $this->resetUsageTrackerStaticState();
         unset($GLOBALS['melograno_usage_tracker_options']['ivyforms_settings']);
+        unset($GLOBALS['wpdb']);
         Monkey\tearDown();
         parent::tearDown();
     }
@@ -46,10 +47,13 @@ class IvyFormsCollectorTest extends TestCase
     {
         $ref = new ReflectionClass(UsageTracker::class);
 
-        foreach (['bootstrapped', 'instances', 'collectorsByPluginFile'] as $property) {
+        foreach (['bootstrapped', 'instances'] as $property) {
+            if (!$ref->hasProperty($property)) {
+                continue;
+            }
             $prop = $ref->getProperty($property);
             $prop->setAccessible(true);
-            $prop->setValue([]);
+            $prop->setValue(null, []);
         }
     }
 
@@ -88,9 +92,9 @@ class IvyFormsCollectorTest extends TestCase
     public function testShouldEnableConsentByDefaultForLite(): void
     {
         $collector = new class () extends IvyFormsCollector {
-            protected function resolveLicence(): ?string
+            protected function isProPluginActive(): bool
             {
-                return 'lite';
+                return false;
             }
         };
 
@@ -98,25 +102,24 @@ class IvyFormsCollectorTest extends TestCase
         $this->assertTrue($collector->shouldShowAdminNotice());
     }
 
-    public function testConsentDisabledByDefaultForPaidPlanShowsNotice(): void
+    public function testShouldEnableConsentByDefaultForPaid(): void
     {
         $collector = new class () extends IvyFormsCollector {
-            protected function resolveLicence(): ?string
+            protected function isProPluginActive(): bool
             {
-                return 'growth';
+                return true;
             }
         };
 
-        $this->assertFalse($collector->shouldEnableConsentByDefault());
-        $this->assertTrue($collector->shouldShowAdminNotice());
+        $this->assertTrue($collector->shouldEnableConsentByDefault());
     }
 
     public function testInitArmsNoticeForLiteInstall(): void
     {
         $collector = new class () extends IvyFormsCollector {
-            protected function resolveLicence(): ?string
+            protected function isProPluginActive(): bool
             {
-                return 'lite';
+                return false;
             }
         };
 
@@ -126,12 +129,23 @@ class IvyFormsCollectorTest extends TestCase
         $this->assertSame(0, (int) get_option(self::CONSENT_OPTION));
     }
 
-    public function testInitArmsNoticeForPaidInstall(): void
+    public function testInitDoesNotArmNoticeForPaidInstall(): void
     {
         $collector = new class () extends IvyFormsCollector {
-            protected function resolveLicence(): ?string
+            protected function isProPluginActive(): bool
             {
-                return 'agency';
+                return true;
+            }
+
+            public function collect(): array
+            {
+                return [
+                    'schema_version' => 1,
+                    'sent_at' => gmdate('c'),
+                    'plugin' => $this->getPluginSlug(),
+                    'common' => [],
+                    'plugin_data' => $this->pluginPayload(),
+                ];
             }
 
             protected function pluginPayload(): array
@@ -145,8 +159,8 @@ class IvyFormsCollectorTest extends TestCase
 
         UsageTracker::init($collector, 'ivyforms/ivyforms.php');
 
-        $this->assertSame('yes', get_option(self::NOTICE_OPTION));
-        $this->assertSame(0, (int) get_option(self::CONSENT_OPTION));
+        $this->assertFalse(metadata_exists('option', self::NOTICE_OPTION));
+        $this->assertSame(1, (int) get_option(self::CONSENT_OPTION));
     }
 
     public function testDismissedNoticeStaysDismissedAfterReInit(): void
@@ -220,6 +234,11 @@ class IvyFormsCollectorTest extends TestCase
             {
                 return [];
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -238,6 +257,11 @@ class IvyFormsCollectorTest extends TestCase
             protected function resolveRecordCounts(): array
             {
                 return [];
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
             }
         };
 
@@ -312,10 +336,8 @@ class IvyFormsCollectorTest extends TestCase
     {
         $GLOBALS['melograno_usage_tracker_options']['ivyforms_settings'] = json_encode([
             'pro' => [
-                'license' => [
-                    'status' => 'valid',
-                    'plan' => 'growth',
-                ],
+                'license_plan' => 'growth',
+                'license_success' => '1',
             ],
         ]);
 
@@ -335,6 +357,11 @@ class IvyFormsCollectorTest extends TestCase
             protected function resolveRecordCounts(): array
             {
                 return [];
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
             }
         };
 
@@ -361,6 +388,11 @@ class IvyFormsCollectorTest extends TestCase
                     'first_form_created_at' => '2024-03-15T10:00:00+00:00',
                 ];
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -383,6 +415,11 @@ class IvyFormsCollectorTest extends TestCase
                     'submissions_count' => 0,
                 ];
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -397,6 +434,11 @@ class IvyFormsCollectorTest extends TestCase
             {
                 return [];
             }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
         };
 
         $payload = $this->invokePluginPayload($collector);
@@ -405,6 +447,138 @@ class IvyFormsCollectorTest extends TestCase
         $this->assertArrayNotHasKey('active_forms_count', $payload);
         $this->assertArrayNotHasKey('inactive_forms_count', $payload);
         $this->assertArrayNotHasKey('submissions_count', $payload);
+        $this->assertArrayNotHasKey('features', $payload);
+    }
+
+    public function testPluginPayloadMergesFeatureTelemetry(): void
+    {
+        $collector = new class () extends IvyFormsCollector {
+            protected function resolveLicence(): ?string
+            {
+                return 'lite';
+            }
+
+            protected function resolveRecordCounts(): array
+            {
+                return [];
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return [
+                    'features' => [
+                        'google_sheets' => true,
+                        'conversational' => true,
+                    ],
+                    'feature_metrics' => [
+                        'webhooks' => ['usage_count' => 3],
+                    ],
+                    'templates' => [
+                        'contact_form' => 2,
+                    ],
+                    'themes' => [
+                        'midnight' => 4,
+                    ],
+                    'fields' => [
+                        'signature' => true,
+                    ],
+                ];
+            }
+        };
+
+        $payload = $this->invokePluginPayload($collector);
+
+        $this->assertSame(
+            ['google_sheets' => true, 'conversational' => true],
+            $payload['features'] ?? null
+        );
+        $this->assertSame(
+            ['webhooks' => ['usage_count' => 3]],
+            $payload['feature_metrics'] ?? null
+        );
+        $this->assertSame(['contact_form' => 2], $payload['templates'] ?? null);
+        $this->assertSame(['midnight' => 4], $payload['themes'] ?? null);
+        $this->assertSame(['signature' => true], $payload['fields'] ?? null);
+    }
+
+    public function testPluginPayloadIncludesEmptyFeaturesObjectWhenNothingEnabled(): void
+    {
+        $collector = new class () extends IvyFormsCollector {
+            protected function resolveLicence(): ?string
+            {
+                return 'lite';
+            }
+
+            protected function resolveRecordCounts(): array
+            {
+                return [];
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return [
+                    'features' => [],
+                    'feature_metrics' => [],
+                    'templates' => [],
+                    'themes' => [],
+                    'fields' => [],
+                ];
+            }
+        };
+
+        $payload = $this->invokePluginPayload($collector);
+
+        $this->assertArrayHasKey('features', $payload);
+        $this->assertInstanceOf(\stdClass::class, $payload['features']);
+        $this->assertSame([], (array) $payload['features']);
+        $this->assertArrayNotHasKey('templates', $payload);
+        $this->assertArrayNotHasKey('feature_metrics', $payload);
+        $this->assertArrayNotHasKey('themes', $payload);
+        $this->assertArrayNotHasKey('fields', $payload);
+    }
+
+    public function testResolveFeaturesReturnsNullWhenCollectionThrows(): void
+    {
+        $GLOBALS['wpdb'] = new class {
+            public string $prefix = 'wp_';
+
+            public function get_col($query = null)
+            {
+                throw new \RuntimeException('db unavailable');
+            }
+        };
+
+        $collector = new IvyFormsCollector();
+        $reflection = new ReflectionClass($collector);
+        $method = $reflection->getMethod('resolveFeatures');
+        $method->setAccessible(true);
+
+        $this->assertNull($method->invoke($collector));
+    }
+
+    public function testPluginPayloadOmitsFeaturesWhenCollectionFails(): void
+    {
+        $collector = new class () extends IvyFormsCollector {
+            protected function resolveLicence(): ?string
+            {
+                return 'lite';
+            }
+
+            protected function resolveRecordCounts(): array
+            {
+                return [];
+            }
+
+            protected function resolveFeatures(): ?array
+            {
+                return null;
+            }
+        };
+
+        $payload = $this->invokePluginPayload($collector);
+
+        $this->assertArrayNotHasKey('features', $payload);
+        $this->assertArrayNotHasKey('templates', $payload);
     }
 
     /**
