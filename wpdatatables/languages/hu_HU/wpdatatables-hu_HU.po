@@ -26,7 +26,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-7: assets/js/tagsinput\n"
 "X-Poedit-SearchPathExcluded-8: lib\n"
 
-#: controllers/wdt_admin_ajax_actions.php:743
+#: controllers/wdt_admin_ajax_actions.php:774
 msgid "Unable to retrieve data. Roots empty."
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 
 #: controllers/wdt_admin.php:65
 #: controllers/wdt_admin.php:66
-#: controllers/wdt_functions.php:1375
+#: controllers/wdt_functions.php:1405
 #: templates/admin/dashboard/dashboard.inc.php:256
 #: templates/admin/settings/settings.inc.php:23
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:44
@@ -117,13 +117,13 @@ msgstr ""
 
 #: controllers/wdt_admin.php:121
 #: controllers/wdt_admin.php:122
-#: controllers/wdt_functions.php:1380
+#: controllers/wdt_functions.php:1410
 msgid "Go Premium"
 msgstr ""
 
 #: backend/src/Plugin/Admin/PermissionsPageController.php:30
-#: controllers/wdt_functions.php:713
-#: controllers/wdt_functions.php:726
+#: controllers/wdt_functions.php:743
+#: controllers/wdt_functions.php:756
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
@@ -142,84 +142,84 @@ msgstr ""
 msgid "Unauthorized"
 msgstr ""
 
-#: controllers/wdt_functions.php:852
+#: controllers/wdt_functions.php:882
 msgid "You do not have permission to view this chart."
 msgstr ""
 
-#: controllers/wdt_functions.php:858
-#: controllers/wdt_functions.php:867
+#: controllers/wdt_functions.php:888
+#: controllers/wdt_functions.php:897
 msgid "wpDataChart with provided ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:902
-#: controllers/wdt_functions.php:935
-#: controllers/wdt_functions.php:1106
+#: controllers/wdt_functions.php:932
+#: controllers/wdt_functions.php:965
+#: controllers/wdt_functions.php:1136
 msgid "wpDataTable with provided ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:906
+#: controllers/wdt_functions.php:936
 msgid "You do not have permission to view this content."
 msgstr ""
 
-#: controllers/wdt_functions.php:930
-#: controllers/wdt_functions.php:962
-#: controllers/wdt_functions.php:972
+#: controllers/wdt_functions.php:960
+#: controllers/wdt_functions.php:992
+#: controllers/wdt_functions.php:1002
 msgid "Column key for provided table ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:940
+#: controllers/wdt_functions.php:970
 msgid "For getting cell value from simple table, column_id and column_id_value are not supported. Please use row_id."
 msgstr ""
 
-#: controllers/wdt_functions.php:943
-#: controllers/wdt_functions.php:959
+#: controllers/wdt_functions.php:973
+#: controllers/wdt_functions.php:989
 msgid "Row ID for provided table ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:976
-#: controllers/wdt_functions.php:982
+#: controllers/wdt_functions.php:1006
+#: controllers/wdt_functions.php:1012
 msgid "Column ID for provided table ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:979
-#: controllers/wdt_functions.php:1027
+#: controllers/wdt_functions.php:1009
+#: controllers/wdt_functions.php:1057
 msgid "Column ID value for provided table ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:985
+#: controllers/wdt_functions.php:1015
 msgid "At the moment float, date, datetime and time columns can not be used as column_id. Please use other column that contains unique identifiers."
 msgstr ""
 
-#: controllers/wdt_functions.php:988
+#: controllers/wdt_functions.php:1018
 msgid "Column Key an Column ID can not be the same!"
 msgstr ""
 
-#: controllers/wdt_functions.php:1005
+#: controllers/wdt_functions.php:1035
 msgid "Table do not have data for provided table ID!"
 msgstr ""
 
-#: controllers/wdt_functions.php:1035
+#: controllers/wdt_functions.php:1065
 msgid "Entry ID not found! Please provide existing entry id from form."
 msgstr ""
 
-#: controllers/wdt_functions.php:1044
+#: controllers/wdt_functions.php:1074
 msgid "Entry ID value for provided table ID not found!"
 msgstr ""
 
-#: controllers/wdt_functions.php:1099
+#: controllers/wdt_functions.php:1129
 msgid "You do not have permission to view this table."
 msgstr ""
 
-#: controllers/wdt_functions.php:1375
+#: controllers/wdt_functions.php:1405
 msgid "Go to Settings"
 msgstr ""
 
-#: controllers/wdt_functions.php:1410
+#: controllers/wdt_functions.php:1440
 msgid "Docs"
 msgstr ""
 
-#: controllers/wdt_functions.php:1413
-#: templates/admin/dashboard/dashboard.inc.php:818
+#: controllers/wdt_functions.php:1443
+#: templates/admin/dashboard/dashboard.inc.php:815
 #: templates/admin/getting-started/getting_started.inc.php:196
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:3236
 #: templates/admin/support/support.inc.php:24
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Table with ID %d was not found."
 msgstr ""
 
-#: Infrastructure/WP/MCP/Abilities/create-chart.php:275
+#: Infrastructure/WP/MCP/Abilities/create-chart.php:280
 #: Infrastructure/WP/MCP/Abilities/edit-chart.php:139
 #, php-format
 msgid "Could not load source table: %s"
@@ -287,18 +287,18 @@ msgstr ""
 
 #. translators: 1: column name, 2: table id
 #. translators: 1: column, 2: table id
-#: Infrastructure/WP/MCP/Abilities/create-chart.php:290
+#: Infrastructure/WP/MCP/Abilities/create-chart.php:295
 #: Infrastructure/WP/MCP/Abilities/edit-chart.php:154
 #, php-format
 msgid "Column \"%1$s\" was not found on table %2$d."
 msgstr ""
 
-#: Infrastructure/WP/MCP/Abilities/create-chart.php:329
+#: Infrastructure/WP/MCP/Abilities/create-chart.php:334
 #, php-format
 msgid "Failed to create chart: %s"
 msgstr ""
 
-#: Infrastructure/WP/MCP/Abilities/create-chart.php:335
+#: Infrastructure/WP/MCP/Abilities/create-chart.php:340
 msgid "Chart was not saved."
 msgstr ""
 
@@ -383,16 +383,16 @@ msgid "Changing chart engine is not supported. Create a new chart with the desir
 msgstr ""
 
 #. translators: %d: table id
-#: Infrastructure/WP/MCP/Abilities/edit-chart.php:390
+#: Infrastructure/WP/MCP/Abilities/edit-chart.php:394
 #, php-format
 msgid "wpdatatable_id changed; existing columns do not match table %d. Pass selected_columns."
 msgstr ""
 
-#: Infrastructure/WP/MCP/Abilities/edit-chart.php:400
+#: Infrastructure/WP/MCP/Abilities/edit-chart.php:404
 msgid "No editable fields provided. Pass at least one property to update besides chart_id."
 msgstr ""
 
-#: Infrastructure/WP/MCP/Abilities/edit-chart.php:418
+#: Infrastructure/WP/MCP/Abilities/edit-chart.php:422
 #, php-format
 msgid "Failed to save chart: %s"
 msgstr ""
@@ -942,7 +942,7 @@ msgid "From Date"
 msgstr ""
 
 #: integrations/ivyforms/templates/ivyforms_tab_panel.inc.php:17
-#: source/class.wdttools.php:254
+#: source/class.wdttools.php:707
 msgid "From"
 msgstr ""
 
@@ -951,7 +951,7 @@ msgid "To Date"
 msgstr ""
 
 #: integrations/ivyforms/templates/ivyforms_tab_panel.inc.php:22
-#: source/class.wdttools.php:297
+#: source/class.wdttools.php:750
 msgid "To"
 msgstr ""
 
@@ -1123,9 +1123,9 @@ msgstr ""
 msgid "Choose one of wpDataCharts from the list"
 msgstr ""
 
-#: backend/src/Services/Permissions/PermissionsAdminService.php:618
-#: source/class.wpdatatable.php:2700
-#: source/class.wpdatatable.php:2703
+#: backend/src/Services/Permissions/PermissionsAdminService.php:631
+#: source/class.wpdatatable.php:2719
+#: source/class.wpdatatable.php:2722
 #: templates/admin/chart_wizard/steps/step3.inc.php:86
 #: templates/admin/table-settings/column_settings_panel.inc.php:656
 #: templates/admin/table-settings/table_settings_block.inc.php:620
@@ -1133,15 +1133,15 @@ msgid "All"
 msgstr ""
 
 #: backend/src/Plugin/Admin/ListTables/PermissionsListTable.php:338
-#: backend/src/Services/Permissions/PermissionsAdminService.php:579
+#: backend/src/Services/Permissions/PermissionsAdminService.php:592
 msgid "Edit"
 msgstr ""
 
 #: backend/src/Plugin/Admin/ListTables/PermissionsListTable.php:339
-#: backend/src/Services/Permissions/PermissionsAdminService.php:581
+#: backend/src/Services/Permissions/PermissionsAdminService.php:594
 #: source/class.wdtbrowsechartstable.php:184
 #: source/class.wdtbrowsetable.php:205
-#: source/class.wdttools.php:250
+#: source/class.wdttools.php:703
 #: templates/admin/browse/bulk_actions.inc.php:14
 #: templates/admin/permissions/modals.inc.php:185
 #: templates/common/delete_modal.inc.php:42
@@ -1174,7 +1174,7 @@ msgstr ""
 
 #: source/class.wdtbrowsechartstable.php:33
 #: source/class.wdtbrowsetable.php:33
-#: source/class.wdttools.php:300
+#: source/class.wdttools.php:753
 msgid "Shortcode"
 msgstr ""
 
@@ -1322,15 +1322,15 @@ msgid "Manual"
 msgstr ""
 
 #: source/class.wdtbrowsetable.php:250
-#: source/class.wpdatatable.php:2795
-#: source/class.wpdatatable.php:2880
+#: source/class.wpdatatable.php:2814
+#: source/class.wpdatatable.php:2899
 #: templates/admin/table-settings/table_settings_block.inc.php:1414
 msgid "Excel"
 msgstr ""
 
 #: source/class.wdtbrowsetable.php:252
-#: source/class.wpdatatable.php:2807
-#: source/class.wpdatatable.php:2893
+#: source/class.wpdatatable.php:2826
+#: source/class.wpdatatable.php:2912
 #: templates/admin/table-settings/table_settings_block.inc.php:1415
 msgid "CSV"
 msgstr ""
@@ -1380,16 +1380,16 @@ msgstr ""
 msgid "There was an error trying to fetch the table data: "
 msgstr ""
 
-#: source/class.wdtconfigcontroller.php:729
+#: source/class.wdtconfigcontroller.php:730
 msgid "Table in data source has no rows."
 msgstr ""
 
-#: source/class.wdtconfigcontroller.php:1321
-#: source/class.wdtconfigcontroller.php:1323
+#: source/class.wdtconfigcontroller.php:1322
+#: source/class.wdtconfigcontroller.php:1324
 msgid "Select a "
 msgstr ""
 
-#: backend/src/Services/Permissions/PermissionsAdminService.php:554
+#: backend/src/Services/Permissions/PermissionsAdminService.php:567
 #: templates/admin/permissions/modals.inc.php:50
 msgid "User"
 msgstr ""
@@ -1465,34 +1465,34 @@ msgstr ""
 msgid "Attachment"
 msgstr ""
 
-#: source/class.wdttools.php:83
+#: source/class.wdttools.php:102
 msgid "wpDataTables was unable to read your Google Spreadsheet, as it's not been published correctly. <br/> You can publish it by going to <b>File ->Share -> Publish to the web</b> "
 msgstr ""
 
-#: source/class.wdttools.php:92
+#: source/class.wdttools.php:111
 msgid "wpDataTables was unable to access data. Unauthorized access. Please make file accessible."
 msgstr ""
 
-#: source/class.wdttools.php:223
-#: source/class.wdttools.php:293
+#: source/class.wdttools.php:676
+#: source/class.wdttools.php:746
 msgid "Success!"
 msgstr ""
 
-#: source/class.wdttools.php:224
-#: source/class.wdttools.php:252
+#: source/class.wdttools.php:677
+#: source/class.wdttools.php:705
 msgid "Error!"
 msgstr ""
 
-#: source/class.wdttools.php:234
+#: source/class.wdttools.php:687
 msgid "Back to date"
 msgstr ""
 
-#: source/class.wdttools.php:235
+#: source/class.wdttools.php:688
 msgid "Browse"
 msgstr ""
 
-#: source/class.wdttools.php:236
-#: source/class.wdttools.php:476
+#: source/class.wdttools.php:689
+#: source/class.wdttools.php:929
 #: templates/admin/browse/chart/duplicate_chart_modal.inc.php:43
 #: templates/admin/browse/table/duplicate_modal.inc.php:61
 #: templates/admin/chart_wizard/chart_wizard.inc.php:42
@@ -1517,420 +1517,420 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: source/class.wdttools.php:237
+#: source/class.wdttools.php:690
 msgid " field cannot be empty!"
 msgstr ""
 
-#: source/class.wdttools.php:238
+#: source/class.wdttools.php:691
 msgid "Use selected file"
 msgstr ""
 
-#: source/class.wdttools.php:239
+#: source/class.wdttools.php:692
 msgid "Choose file"
 msgstr ""
 
-#: source/class.wdttools.php:240
+#: source/class.wdttools.php:693
 #: templates/admin/common/error_modal.inc.php:23
 #: templates/admin/table-settings/columns_list_modal.inc.php:33
 #: templates/admin/table-settings/foreign_key_config.inc.php:94
 msgid "Close"
 msgstr ""
 
-#: source/class.wdttools.php:241
+#: source/class.wdttools.php:694
 msgid "Column has been added!"
 msgstr ""
 
-#: source/class.wdttools.php:242
+#: source/class.wdttools.php:695
 msgid "Column header cannot be empty!"
 msgstr ""
 
-#: source/class.wdttools.php:243
+#: source/class.wdttools.php:696
 msgid "Please confirm column deletion!"
 msgstr ""
 
-#: source/class.wdttools.php:244
+#: source/class.wdttools.php:697
 msgid "Column has been removed!"
 msgstr ""
 
-#: source/class.wdttools.php:245
+#: source/class.wdttools.php:698
 msgid "Please select columns that you want to use in table"
 msgstr ""
 
-#: source/class.wdttools.php:246
-#: source/class.wpdatatable.php:2820
-#: source/class.wpdatatable.php:2907
+#: source/class.wdttools.php:699
+#: source/class.wpdatatable.php:2839
+#: source/class.wpdatatable.php:2926
 #: templates/admin/table-settings/table_settings_block.inc.php:1416
 msgid "Copy"
 msgstr ""
 
-#: source/class.wdttools.php:247
+#: source/class.wdttools.php:700
 msgid "There was an error trying to insert a new row!"
 msgstr ""
 
-#: source/class.wdttools.php:248
+#: source/class.wdttools.php:701
 msgid "Data has been saved!"
 msgstr ""
 
-#: source/class.wdttools.php:249
+#: source/class.wdttools.php:702
 msgid "detach"
 msgstr ""
 
-#: source/class.wdttools.php:251
+#: source/class.wdttools.php:704
 msgid "Delete selected"
 msgstr ""
 
-#: source/class.wdttools.php:253
+#: source/class.wdttools.php:706
 msgid "Please upload or choose a file from Media Library!"
 msgstr ""
 
-#: source/class.wdttools.php:255
+#: source/class.wdttools.php:708
 msgid "Please provide a valid e-mail address for field"
 msgstr ""
 
-#: source/class.wdttools.php:256
+#: source/class.wdttools.php:709
 msgid "Please provide a valid URL link for field"
 msgstr ""
 
-#: source/class.wdttools.php:257
+#: source/class.wdttools.php:710
 msgid "You have entered invalid value. Press ESC to cancel."
 msgstr ""
 
-#: source/class.wdttools.php:258
-#: source/class.wdttools.php:288
+#: source/class.wdttools.php:711
+#: source/class.wdttools.php:741
 msgid "Show _MENU_ entries"
 msgstr "_MENU_ elem megtekintése"
 
-#: source/class.wdttools.php:259
+#: source/class.wdttools.php:712
 #: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:23
 msgid "Merge"
 msgstr ""
 
-#: source/class.wdttools.php:260
+#: source/class.wdttools.php:713
 msgid "New column"
 msgstr ""
 
-#: source/class.wdttools.php:261
+#: source/class.wdttools.php:714
 msgid "Number of columns can not be empty or 0"
 msgstr ""
 
-#: source/class.wdttools.php:262
+#: source/class.wdttools.php:715
 msgid "Number of rows can not be empty or 0"
 msgstr ""
 
-#: source/class.wdttools.php:264
+#: source/class.wdttools.php:717
 msgid ": activate to sort column ascending"
 msgstr ""
 
-#: source/class.wdttools.php:265
+#: source/class.wdttools.php:718
 msgid ": activate to sort column descending"
 msgstr ""
 
-#: source/class.wdttools.php:267
+#: source/class.wdttools.php:720
 msgid "Ok"
 msgstr ""
 
-#: source/class.wdttools.php:269
+#: source/class.wdttools.php:722
 msgid "First"
 msgstr ""
 
-#: source/class.wdttools.php:270
+#: source/class.wdttools.php:723
 msgid "Last"
 msgstr ""
 
-#: source/class.wdttools.php:271
+#: source/class.wdttools.php:724
 msgid "Next"
 msgstr ""
 
-#: source/class.wdttools.php:272
+#: source/class.wdttools.php:725
 msgid "Previous"
 msgstr ""
 
-#: source/class.wdttools.php:274
+#: source/class.wdttools.php:727
 #: templates/admin/table-settings/possible_values_merge_list_modal.inc.php:27
 msgid "Replace"
 msgstr ""
 
-#: source/class.wdttools.php:275
+#: source/class.wdttools.php:728
 msgid "Row has been deleted!"
 msgstr ""
 
-#: source/class.wdttools.php:276
+#: source/class.wdttools.php:729
 msgid "Save chart"
 msgstr ""
 
-#: source/class.wdttools.php:277
+#: source/class.wdttools.php:730
 msgid "Select a file to use in table"
 msgstr ""
 
-#: source/class.wdttools.php:278
+#: source/class.wdttools.php:731
 msgid "Select an Excel or CSV file"
 msgstr ""
 
-#: source/class.wdttools.php:279
+#: source/class.wdttools.php:732
 msgid "No data available in table"
 msgstr ""
 
-#: source/class.wdttools.php:280
+#: source/class.wdttools.php:733
 msgid "Plugin settings saved successfully"
 msgstr ""
 
-#: source/class.wdttools.php:281
+#: source/class.wdttools.php:734
 msgid "Unable to save settings of plugin. Please try again or contact us over Support page."
 msgstr ""
 
-#: source/class.wdttools.php:282
+#: source/class.wdttools.php:735
 msgid "Shortcode has been copied to the clipboard."
 msgstr ""
 
-#: source/class.wdttools.php:283
+#: source/class.wdttools.php:736
 msgid "Showing _START_ to _END_ of _TOTAL_ entries"
 msgstr "_START_ -tól _END_ -ig a _TOTAL_ elemből"
 
-#: source/class.wdttools.php:284
+#: source/class.wdttools.php:737
 msgid "Showing 0 to 0 of 0 entries"
 msgstr "0-től 0-ig a 0 elemből"
 
-#: source/class.wdttools.php:285
+#: source/class.wdttools.php:738
 msgid "(filtered from _MAX_ total entries)"
 msgstr ""
 
-#: source/class.wdttools.php:287
+#: source/class.wdttools.php:740
 msgid ","
 msgstr ""
 
-#: source/class.wdttools.php:289
+#: source/class.wdttools.php:742
 msgid "Loading..."
 msgstr "Betöltés..."
 
-#: source/class.wdttools.php:290
+#: source/class.wdttools.php:743
 msgid "Processing..."
 msgstr ""
 
-#: source/class.wdttools.php:291
+#: source/class.wdttools.php:744
 msgid "SQL error"
 msgstr ""
 
-#: source/class.wdttools.php:292
+#: source/class.wdttools.php:745
 msgid "Search: "
 msgstr "Keresés:"
 
-#: source/class.wdttools.php:294
+#: source/class.wdttools.php:747
 msgid "No matching records found"
 msgstr ""
 
-#: source/class.wdttools.php:295
+#: source/class.wdttools.php:748
 msgid "System info data has been copied to the clipboard. You can now paste it in file or in support topic."
 msgstr ""
 
-#: source/class.wdttools.php:296
+#: source/class.wdttools.php:749
 msgid "Table saved successfully!"
 msgstr ""
 
-#: source/class.wdttools.php:298
+#: source/class.wdttools.php:751
 msgid "Clear table data"
 msgstr ""
 
-#: source/class.wdttools.php:299
+#: source/class.wdttools.php:752
 msgid "Star rating"
 msgstr ""
 
-#: source/class.wdttools.php:301
+#: source/class.wdttools.php:754
 msgid "HTML code"
 msgstr ""
 
-#: source/class.wdttools.php:302
+#: source/class.wdttools.php:755
 msgid "Media"
 msgstr ""
 
-#: source/class.wdttools.php:303
+#: source/class.wdttools.php:756
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:296
 msgid "Link"
 msgstr ""
 
-#: source/class.wdttools.php:304
+#: source/class.wdttools.php:757
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:271
 msgid "Clip"
 msgstr ""
 
-#: source/class.wdttools.php:305
+#: source/class.wdttools.php:758
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:266
 msgid "Overflow"
 msgstr ""
 
-#: source/class.wdttools.php:306
+#: source/class.wdttools.php:759
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:261
 msgid "Wrap"
 msgstr ""
 
-#: source/class.wdttools.php:307
+#: source/class.wdttools.php:760
 #: templates/admin/table-settings/column_settings_panel.inc.php:273
 #: templates/admin/table-settings/column_settings_panel.inc.php:292
 #: templates/admin/table-settings/table_settings_block.inc.php:887
 msgid "Left"
 msgstr ""
 
-#: source/class.wdttools.php:308
+#: source/class.wdttools.php:761
 #: templates/admin/table-settings/column_settings_panel.inc.php:274
 #: templates/admin/table-settings/column_settings_panel.inc.php:293
 #: templates/admin/table-settings/table_settings_block.inc.php:886
 msgid "Center"
 msgstr ""
 
-#: source/class.wdttools.php:309
+#: source/class.wdttools.php:762
 #: templates/admin/table-settings/column_settings_panel.inc.php:275
 #: templates/admin/table-settings/column_settings_panel.inc.php:294
 #: templates/admin/table-settings/table_settings_block.inc.php:885
 msgid "Right"
 msgstr ""
 
-#: source/class.wdttools.php:310
+#: source/class.wdttools.php:763
 msgid "Justify"
 msgstr ""
 
-#: source/class.wdttools.php:311
+#: source/class.wdttools.php:764
 msgid "Top"
 msgstr ""
 
-#: source/class.wdttools.php:312
+#: source/class.wdttools.php:765
 msgid "Middle"
 msgstr ""
 
-#: source/class.wdttools.php:313
+#: source/class.wdttools.php:766
 msgid "Bottom"
 msgstr ""
 
-#: source/class.wdttools.php:314
+#: source/class.wdttools.php:767
 msgid "Insert row above"
 msgstr ""
 
-#: source/class.wdttools.php:315
+#: source/class.wdttools.php:768
 msgid "Insert row below"
 msgstr ""
 
-#: source/class.wdttools.php:316
+#: source/class.wdttools.php:769
 #: templates/admin/table-settings/custom_headers_row_block.inc.php:25
 msgid "Remove row"
 msgstr ""
 
-#: source/class.wdttools.php:317
+#: source/class.wdttools.php:770
 msgid "Insert column left"
 msgstr ""
 
-#: source/class.wdttools.php:318
+#: source/class.wdttools.php:771
 msgid "Insert column right"
 msgstr ""
 
-#: source/class.wdttools.php:319
+#: source/class.wdttools.php:772
 #: templates/admin/table-settings/table_preview_block.inc.php:38
 msgid "Remove column"
 msgstr ""
 
-#: source/class.wdttools.php:320
+#: source/class.wdttools.php:773
 msgid "Alignment"
 msgstr ""
 
-#: source/class.wdttools.php:321
+#: source/class.wdttools.php:774
 msgid "Cut"
 msgstr ""
 
-#: source/class.wdttools.php:322
+#: source/class.wdttools.php:775
 msgid "Insert custom"
 msgstr ""
 
-#: source/class.wdttools.php:323
+#: source/class.wdttools.php:776
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:92
 msgid "Undo"
 msgstr ""
 
-#: source/class.wdttools.php:324
+#: source/class.wdttools.php:777
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:96
 msgid "Redo"
 msgstr ""
 
-#: source/class.wdttools.php:325
+#: source/class.wdttools.php:778
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:254
 msgid "Text wrapping"
 msgstr ""
 
-#: source/class.wdttools.php:326
+#: source/class.wdttools.php:779
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:449
 #: templates/admin/table-settings/simple_table_settings_block.inc.php:321
 msgid "Merge cells"
 msgstr ""
 
-#: source/class.wdttools.php:327
+#: source/class.wdttools.php:780
 msgid "First page"
 msgstr ""
 
-#: source/class.wdttools.php:328
+#: source/class.wdttools.php:781
 msgid "Last page"
 msgstr ""
 
-#: source/class.wdttools.php:329
+#: source/class.wdttools.php:782
 msgid "Next page"
 msgstr ""
 
-#: source/class.wdttools.php:330
+#: source/class.wdttools.php:783
 msgid "Previous page"
 msgstr ""
 
-#: source/class.wdttools.php:331
+#: source/class.wdttools.php:784
 msgid "wpDataTable Page "
 msgstr ""
 
-#: source/class.wdttools.php:332
+#: source/class.wdttools.php:785
 msgid "Spacer"
 msgstr ""
 
-#: source/class.wdttools.php:333
+#: source/class.wdttools.php:786
 msgid "Print table"
 msgstr ""
 
-#: source/class.wdttools.php:334
+#: source/class.wdttools.php:787
 msgid "Export table"
 msgstr ""
 
-#: source/class.wdttools.php:335
+#: source/class.wdttools.php:788
 #: templates/admin/table-settings/table_settings_block.inc.php:1113
 msgid "Clear filters"
 msgstr "Szűrő törlése"
 
-#: source/class.wdttools.php:336
+#: source/class.wdttools.php:789
 msgid "Column visibility"
 msgstr ""
 
-#: source/class.wdttools.php:337
+#: source/class.wdttools.php:790
 msgid "Invalid response from server"
 msgstr ""
 
-#: source/class.wdttools.php:338
+#: source/class.wdttools.php:791
 msgid "Failed to load form fields"
 msgstr ""
 
-#: source/class.wdttools.php:351
+#: source/class.wdttools.php:804
 msgid "QUICK FEEDBACK"
 msgstr ""
 
-#: source/class.wdttools.php:352
+#: source/class.wdttools.php:805
 msgid "If you have a moment, please let us know why you are deactivating the wpDataTables plugin:"
 msgstr ""
 
-#: source/class.wdttools.php:353
+#: source/class.wdttools.php:806
 msgid "Please select one option from the following list: "
 msgstr ""
 
-#: source/class.wdttools.php:451
+#: source/class.wdttools.php:904
 #: templates/admin/common/premium_modal.inc.php:17
 msgid "This is a premium feature"
 msgstr ""
 
-#: source/class.wdttools.php:452
+#: source/class.wdttools.php:905
 #: templates/admin/common/premium_modal.inc.php:26
 #: templates/admin/table-settings/table_settings_block.inc.php:1577
 msgid "This feature is available only in premium version of wpDataTables"
 msgstr ""
 
-#: source/class.wdttools.php:453
+#: source/class.wdttools.php:906
 #: templates/admin/getting-started/getting_started.inc.php:133
 #: templates/admin/getting-started/getting_started.inc.php:145
 #: templates/admin/getting-started/getting_started.inc.php:157
@@ -1941,408 +1941,408 @@ msgstr ""
 msgid "Compare and View Pricing"
 msgstr ""
 
-#: source/class.wdttools.php:472
+#: source/class.wdttools.php:925
 msgid "Field cannot be empty!"
 msgstr ""
 
-#: source/class.wdttools.php:473
+#: source/class.wdttools.php:926
 msgid "Please choose chart type."
 msgstr ""
 
-#: source/class.wdttools.php:474
+#: source/class.wdttools.php:927
 msgid "Please select wpDataTable from dropdown."
 msgstr ""
 
-#: source/class.wdttools.php:475
+#: source/class.wdttools.php:928
 msgid "Columns field cannot be empty"
 msgstr ""
 
-#: source/class.wdttools.php:477
+#: source/class.wdttools.php:930
 msgid "Tutorial is not canceled,  closed or end properly. Please cancel it by clicking on Cancel button."
 msgstr ""
 
-#: source/class.wdttools.php:478
+#: source/class.wdttools.php:931
 msgid "Finish Tutorial"
 msgstr ""
 
-#: source/class.wdttools.php:479
+#: source/class.wdttools.php:932
 msgid "Continue"
 msgstr ""
 
-#: source/class.wdttools.php:480
+#: source/class.wdttools.php:933
 msgid "Start"
 msgstr ""
 
-#: source/class.wdttools.php:481
+#: source/class.wdttools.php:934
 msgid "Skip Tutorial"
 msgstr ""
 
-#: source/class.wdttools.php:484
-#: source/class.wdttools.php:550
-#: source/class.wdttools.php:592
+#: source/class.wdttools.php:937
+#: source/class.wdttools.php:1003
+#: source/class.wdttools.php:1045
 msgid "Welcome to the tutorial!"
 msgstr ""
 
-#: source/class.wdttools.php:485
-#: source/class.wdttools.php:551
-#: source/class.wdttools.php:593
+#: source/class.wdttools.php:938
+#: source/class.wdttools.php:1004
+#: source/class.wdttools.php:1046
 msgid "Hello "
 msgstr ""
 
-#: source/class.wdttools.php:485
+#: source/class.wdttools.php:938
 msgid ", in this tutorial, we will show you how to create a simple table from scratch by choosing a custom number of columns and rows. How to customize each cell, merge cells and a lot more."
 msgstr ""
 
-#: source/class.wdttools.php:488
+#: source/class.wdttools.php:941
 msgid " Let's create a new wpDataTable from scratch!"
 msgstr ""
 
-#: source/class.wdttools.php:489
-#: source/class.wdttools.php:555
+#: source/class.wdttools.php:942
+#: source/class.wdttools.php:1008
 msgid "Click on 'Create a Table' to access the wpDataTables Table Wizard."
 msgstr ""
 
-#: source/class.wdttools.php:492
+#: source/class.wdttools.php:945
 msgid "Choose this option"
 msgstr ""
 
-#: source/class.wdttools.php:493
+#: source/class.wdttools.php:946
 msgid "Please select 'Create a simple table from scratch'."
 msgstr ""
 
-#: source/class.wdttools.php:496
-#: source/class.wdttools.php:562
+#: source/class.wdttools.php:949
+#: source/class.wdttools.php:1015
 msgid "Click Next"
 msgstr ""
 
-#: source/class.wdttools.php:497
-#: source/class.wdttools.php:563
+#: source/class.wdttools.php:950
+#: source/class.wdttools.php:1016
 msgid "Please click the 'Next' button to continue."
 msgstr ""
 
-#: source/class.wdttools.php:500
+#: source/class.wdttools.php:953
 msgid "Welcome to the Simple table wizard!"
 msgstr ""
 
-#: source/class.wdttools.php:501
+#: source/class.wdttools.php:954
 msgid "Please click 'Continue' button to move on."
 msgstr ""
 
-#: source/class.wdttools.php:504
+#: source/class.wdttools.php:957
 msgid "Choose a name for your table"
 msgstr ""
 
-#: source/class.wdttools.php:505
+#: source/class.wdttools.php:958
 msgid "After inserting table name, click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:508
+#: source/class.wdttools.php:961
 msgid "Choose the number of columns for your table"
 msgstr ""
 
-#: source/class.wdttools.php:509
+#: source/class.wdttools.php:962
 msgid "Please choose how many columns it will have. Remember that you can always add or reduce the number of columns later. Click 'Continue' when you finish."
 msgstr ""
 
-#: source/class.wdttools.php:512
+#: source/class.wdttools.php:965
 msgid "Choose the number of rows for your table."
 msgstr ""
 
-#: source/class.wdttools.php:513
+#: source/class.wdttools.php:966
 msgid "Please choose how many rows it will have. Remember that you can always add or reduce the number of rows later. Click 'Continue' when you finish."
 msgstr ""
 
-#: source/class.wdttools.php:516
+#: source/class.wdttools.php:969
 msgid "Click on the 'Generate Table' button"
 msgstr ""
 
-#: source/class.wdttools.php:517
+#: source/class.wdttools.php:970
 msgid "When you click on the button, the empty table will be ready for you. "
 msgstr ""
 
-#: source/class.wdttools.php:520
+#: source/class.wdttools.php:973
 msgid "We are generating the table..."
 msgstr ""
 
-#: source/class.wdttools.php:521
+#: source/class.wdttools.php:974
 msgid "Please, when you see the table, click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:524
+#: source/class.wdttools.php:977
 msgid "Nice job! You just configured your table and it is ready to fill it with data."
 msgstr ""
 
-#: source/class.wdttools.php:525
+#: source/class.wdttools.php:978
 msgid "Now we will guide you on how to insert data and check table layout throw Simple table editor, table toolbar and table preview. Please click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:528
+#: source/class.wdttools.php:981
 msgid "This is Simple table editor"
 msgstr ""
 
-#: source/class.wdttools.php:529
+#: source/class.wdttools.php:982
 msgid "Here you can populate your table with data. <br><br>You can move around the cells using keyboard arrows and the Tab button. <br><br>Rearrange columns or rows by drag and drop column or row headers. Easily resize column width and row height by dragging the right corner of the column header, or the bottom line of the row header. Click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:532
+#: source/class.wdttools.php:985
 msgid "Check out the Simple table toolbar"
 msgstr ""
 
-#: source/class.wdttools.php:533
+#: source/class.wdttools.php:986
 msgid "Here you can style and insert custom data for each cell or range of cells. You can add or delete columns and rows, merge cells, customize sections by colors, background, alignment, insert custom links, media, shortcodes, star ratings or custom HTML code."
 msgstr ""
 
-#: source/class.wdttools.php:536
+#: source/class.wdttools.php:989
 msgid "Responsive table views"
 msgstr ""
 
-#: source/class.wdttools.php:537
+#: source/class.wdttools.php:990
 msgid "You can switch between Desktop, Tablet or Mobile devices by clicking on the tab that you need, so you can make sure your table looks excellent across all devices. "
 msgstr ""
 
-#: source/class.wdttools.php:540
+#: source/class.wdttools.php:993
 msgid "Real-time preview"
 msgstr ""
 
-#: source/class.wdttools.php:541
+#: source/class.wdttools.php:994
 msgid "Here you will see how your table will look like on the page. Please click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:544
+#: source/class.wdttools.php:997
 msgid "Congrats! Your table is ready."
 msgstr ""
 
-#: source/class.wdttools.php:545
+#: source/class.wdttools.php:998
 msgid "Now you can copy the shortcode for this table, and check out how it looks on your website when you paste it to a post or page. You can always come back and edit the table as you like."
 msgstr ""
 
-#: source/class.wdttools.php:551
+#: source/class.wdttools.php:1004
 msgid ", in this tutorial we will show you how to create a wpDataTable linked to an existing data source. \"Linked\" in this context means that if you create a table, for example, based on an Excel file, it will read the data from this file every time it loads, making sure all table values changes are instantly reflected in the table."
 msgstr ""
 
-#: source/class.wdttools.php:554
+#: source/class.wdttools.php:1007
 msgid "Let's create a new wpDataTable!"
 msgstr ""
 
-#: source/class.wdttools.php:558
+#: source/class.wdttools.php:1011
 msgid "Choose this option."
 msgstr ""
 
-#: source/class.wdttools.php:559
+#: source/class.wdttools.php:1012
 msgid "Please select 'Create a table linked to an existing data source'."
 msgstr ""
 
-#: source/class.wdttools.php:566
+#: source/class.wdttools.php:1019
 #: templates/admin/table-settings/table_settings_block.inc.php:118
 msgid "Input data source type"
 msgstr ""
 
-#: source/class.wdttools.php:567
+#: source/class.wdttools.php:1020
 msgid "Please select a data source type that you need."
 msgstr ""
 
-#: source/class.wdttools.php:570
+#: source/class.wdttools.php:1023
 msgid "Select Data source type"
 msgstr ""
 
-#: source/class.wdttools.php:571
+#: source/class.wdttools.php:1024
 msgid "Please choose the data source that you need ( Excel, CSV, JSON, XML or PHP array) and then click 'Continue' button.<br><br>(SQL and Google Spreadsheet are available in Premium version)"
 msgstr ""
 
-#: source/class.wdttools.php:574
+#: source/class.wdttools.php:1027
 #: templates/admin/table-settings/table_settings_block.inc.php:171
 msgid "Input file path or URL"
 msgstr ""
 
-#: source/class.wdttools.php:575
+#: source/class.wdttools.php:1028
 msgid "Upload your file or provide the full URL here. When you finish click 'Continue' button."
 msgstr ""
 
-#: source/class.wdttools.php:578
+#: source/class.wdttools.php:1031
 msgid "Click Save Changes"
 msgstr ""
 
-#: source/class.wdttools.php:579
+#: source/class.wdttools.php:1032
 msgid "Please click on the 'Save Changes' button to create a table.<br><br> If you get an error message after button click and you are not able to solve it, please contact us on our support platform and provide us this data source that you use for creating this table and copy error message as well and click Skip tutorial."
 msgstr ""
 
-#: source/class.wdttools.php:582
+#: source/class.wdttools.php:1035
 msgid "The table is creating..."
 msgstr ""
 
-#: source/class.wdttools.php:583
+#: source/class.wdttools.php:1036
 msgid "Now the table is creating. Wait until you see it in the background and then click 'Continue'."
 msgstr ""
 
-#: source/class.wdttools.php:586
+#: source/class.wdttools.php:1039
 msgid "Nice job! You just created your first wpDataTable!"
 msgstr ""
 
-#: source/class.wdttools.php:587
+#: source/class.wdttools.php:1040
 msgid "Now you can copy the shortcode for this table, and check out how it looks on your website when you paste it to a post or page."
 msgstr ""
 
-#: source/class.wdttools.php:593
+#: source/class.wdttools.php:1046
 msgid ", in this tutorial we will show you how to create a chart in wpDataTables plugin."
 msgstr ""
 
-#: source/class.wdttools.php:596
+#: source/class.wdttools.php:1049
 msgid "Let's create a new wpDataTables Chart!"
 msgstr ""
 
-#: source/class.wdttools.php:597
+#: source/class.wdttools.php:1050
 msgid "Click on 'Create a Chart' to access the wpDataTables Chart Wizard."
 msgstr ""
 
-#: source/class.wdttools.php:600
+#: source/class.wdttools.php:1053
 msgid "Welcome to the Chart Wizard!"
 msgstr ""
 
-#: source/class.wdttools.php:601
+#: source/class.wdttools.php:1054
 msgid "You are at the first step now; we will introduce you the wpDataTables Chart Wizard section by section.<br><br> Click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:604
+#: source/class.wdttools.php:1057
 msgid "Follow the steps in the Chart Wizard"
 msgstr ""
 
-#: source/class.wdttools.php:605
+#: source/class.wdttools.php:1058
 msgid "By following these steps, you will finish building your chart in the Chart Wizard. The current step will always be highlighted in blue.<br><br> Click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:608
+#: source/class.wdttools.php:1061
 msgid "Choose a name for your Chart"
 msgstr ""
 
-#: source/class.wdttools.php:609
+#: source/class.wdttools.php:1062
 msgid "Click 'Continue' button when you’re ready to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:612
+#: source/class.wdttools.php:1065
 msgid "In wpDataTables you can find several charts render engines."
 msgstr ""
 
-#: source/class.wdttools.php:613
+#: source/class.wdttools.php:1066
 msgid "Click on the dropdown, and you will see several options that you can choose from.(Google charts nad Chart.js are only available) <br><br>To continue, click on the dropdown."
 msgstr ""
 
-#: source/class.wdttools.php:616
+#: source/class.wdttools.php:1069
 msgid "Choose chart engine."
 msgstr ""
 
-#: source/class.wdttools.php:617
+#: source/class.wdttools.php:1070
 msgid "By clicking on chart engine options, you will choose the engine that will render your chart.<br><br> When you finish, please click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:620
+#: source/class.wdttools.php:1073
 msgid "Different charts types. "
 msgstr ""
 
-#: source/class.wdttools.php:621
+#: source/class.wdttools.php:1074
 msgid "Here you can choose a chart type. Please, click on the chart type that you prefer.<br><br> When you finish, please click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:624
+#: source/class.wdttools.php:1077
 msgid "The first step is finished!"
 msgstr ""
 
-#: source/class.wdttools.php:625
+#: source/class.wdttools.php:1078
 msgid "Let's move on. Please, click 'Next' to continue."
 msgstr ""
 
-#: source/class.wdttools.php:628
+#: source/class.wdttools.php:1081
 msgid "Now you need to choose a wpDataTable based on which we will build a chart for you"
 msgstr ""
 
-#: source/class.wdttools.php:629
+#: source/class.wdttools.php:1082
 msgid "Click on the dropdown, and all your tables will be listed. The columns of the table that you choose will be used for creating the chart.<br><br>If you didn't create a wpDataTable yet, then please click on the 'Skip Tutorial' button and create wpDataTable that would contain the data to visualize first."
 msgstr ""
 
-#: source/class.wdttools.php:632
+#: source/class.wdttools.php:1085
 msgid "Pick your wpDataTable"
 msgstr ""
 
-#: source/class.wdttools.php:633
+#: source/class.wdttools.php:1086
 msgid "Pick a wpDataTable from which you want to render a chart and when you finish, please click 'Continue' to move on."
 msgstr ""
 
-#: source/class.wdttools.php:636
+#: source/class.wdttools.php:1089
 msgid "The second step is finished!"
 msgstr ""
 
-#: source/class.wdttools.php:637
+#: source/class.wdttools.php:1090
 msgid "Let's see what is coming up next. <br><br> Please, click 'Next' to continue."
 msgstr ""
 
-#: source/class.wdttools.php:640
+#: source/class.wdttools.php:1093
 msgid "Just a heads up!"
 msgstr ""
 
-#: source/class.wdttools.php:641
+#: source/class.wdttools.php:1094
 msgid "Here you will choose from which columns you will create a chart.<br><br> Please click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:644
+#: source/class.wdttools.php:1097
 msgid "Meet the wpDataTable Column Blocks"
 msgstr ""
 
-#: source/class.wdttools.php:645
+#: source/class.wdttools.php:1098
 msgid "Here you will choose columns you want to use in the chart. Drag and drop it, or click on the arrow to move the desired column to the 'Columns used in the chart' section.<br><br> When you finish please, click 'Continue.'"
 msgstr ""
 
-#: source/class.wdttools.php:648
+#: source/class.wdttools.php:1101
 msgid "Well done!"
 msgstr ""
 
-#: source/class.wdttools.php:649
+#: source/class.wdttools.php:1102
 msgid "Just two more steps to go. Please click 'Next' to continue."
 msgstr ""
 
-#: source/class.wdttools.php:652
+#: source/class.wdttools.php:1105
 msgid "Chart settings and chart preview."
 msgstr ""
 
-#: source/class.wdttools.php:653
+#: source/class.wdttools.php:1106
 msgid "Here you can adjust chart settings, different parameters are grouped in section; adjusting the parameters will be reflected in the preview of your chart in real-time on the right-hand side.<br><br> Please click 'Continue' button to move forward."
 msgstr ""
 
-#: source/class.wdttools.php:656
+#: source/class.wdttools.php:1109
 msgid "In this sidebar, you can find the chart settings section."
 msgstr ""
 
-#: source/class.wdttools.php:657
+#: source/class.wdttools.php:1110
 msgid "By clicking on each section, you can set your desired parameters per section.<br><br> Please click 'Continue' button to move on."
 msgstr ""
 
-#: source/class.wdttools.php:660
+#: source/class.wdttools.php:1113
 msgid "Here are the available chart options"
 msgstr ""
 
-#: source/class.wdttools.php:661
+#: source/class.wdttools.php:1114
 msgid "Set different chart options for the chosen section to get your desired chart look.<br><br> Please click 'Continue' button to move on."
 msgstr ""
 
-#: source/class.wdttools.php:664
+#: source/class.wdttools.php:1117
 msgid "How your chart will look like on the page of your website"
 msgstr ""
 
-#: source/class.wdttools.php:665
+#: source/class.wdttools.php:1118
 msgid "Here you can see a preview of your chart based on the settings you have chosen.<br><br> Please click 'Continue' button to move on."
 msgstr ""
 
-#: source/class.wdttools.php:668
+#: source/class.wdttools.php:1121
 msgid "You can save your chart now"
 msgstr ""
 
-#: source/class.wdttools.php:669
+#: source/class.wdttools.php:1122
 msgid "If you are satisfied with your chart appearance, click on the 'Save chart' button and all your settings for this chart will be saved in the database."
 msgstr ""
 
-#: source/class.wdttools.php:672
+#: source/class.wdttools.php:1125
 msgid "Congrats! Your first chart is ready!"
 msgstr ""
 
-#: source/class.wdttools.php:673
+#: source/class.wdttools.php:1126
 msgid "Now you can copy the shortcode for this chart and paste it in any WP post or page. <br><br>You may now finish this tutorial. "
 msgstr ""
 
@@ -2362,35 +2362,35 @@ msgstr ""
 msgid "Excel file not found!"
 msgstr ""
 
-#: source/class.wpdatatable.php:1855
+#: source/class.wpdatatable.php:1862
 msgid "There is no data in your source file. Please check your source file and try again."
 msgstr ""
 
-#: source/class.wpdatatable.php:2751
+#: source/class.wpdatatable.php:2770
 #: templates/admin/table-settings/table_settings_block.inc.php:1413
 msgid "Print"
 msgstr ""
 
-#: source/class.wpdatatable.php:2753
+#: source/class.wpdatatable.php:2772
 msgid "Export"
 msgstr ""
 
-#: source/class.wpdatatable.php:2756
+#: source/class.wpdatatable.php:2775
 #: templates/admin/table-settings/columns_list_modal.inc.php:12
 msgid "Columns"
 msgstr ""
 
-#: source/class.wpdatatable.php:2831
-#: source/class.wpdatatable.php:2919
+#: source/class.wpdatatable.php:2850
+#: source/class.wpdatatable.php:2938
 #: templates/admin/table-settings/table_settings_block.inc.php:1417
 msgid "PDF"
 msgstr ""
 
-#: source/class.wpdatatable.php:2932
+#: source/class.wpdatatable.php:2951
 msgid "Search table"
 msgstr ""
 
-#: source/class.wpdatatable.php:2933
+#: source/class.wpdatatable.php:2952
 msgid "Showing _MENU_ Entries"
 msgstr "_MENU_ elem megtekintése"
 
@@ -2405,7 +2405,7 @@ msgid "NEW"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:54
-#: templates/admin/dashboard/dashboard.inc.php:609
+#: templates/admin/dashboard/dashboard.inc.php:606
 msgid "Forminator Forms integration for wpDataTables"
 msgstr ""
 
@@ -2414,7 +2414,7 @@ msgid "A powerful tool that adds “Forminator Form” as a new table type in wp
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:62
-#: templates/admin/dashboard/dashboard.inc.php:791
+#: templates/admin/dashboard/dashboard.inc.php:788
 msgid "Free Download"
 msgstr ""
 
@@ -2429,7 +2429,7 @@ msgid "Learn more"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:79
-#: templates/admin/dashboard/dashboard.inc.php:629
+#: templates/admin/dashboard/dashboard.inc.php:626
 #: templates/admin/system-info/system_info.inc.php:270
 #: templates/admin/system-info/system_info.inc.php:291
 #: templates/admin/system-info/system_info.inc.php:309
@@ -2439,7 +2439,7 @@ msgid "Installed"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:94
-#: templates/admin/dashboard/dashboard.inc.php:646
+#: templates/admin/dashboard/dashboard.inc.php:643
 msgid "Master Detail Tables for wpDataTables"
 msgstr ""
 
@@ -2448,7 +2448,7 @@ msgid "A wpDataTables addon which allows showing additional details for a specif
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:121
-#: templates/admin/dashboard/dashboard.inc.php:673
+#: templates/admin/dashboard/dashboard.inc.php:670
 msgid "Powerful Filters for wpDataTables"
 msgstr ""
 
@@ -2457,32 +2457,32 @@ msgid "An add-on for wpDataTables that provides powerful filtering features: cas
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:148
-#: templates/admin/dashboard/dashboard.inc.php:699
+#: templates/admin/dashboard/dashboard.inc.php:696
 msgid "Report Builder"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:151
-#: templates/admin/dashboard/dashboard.inc.php:703
+#: templates/admin/dashboard/dashboard.inc.php:700
 msgid "A unique tool that allows you to generate almost any Word DOCX and Excel XLSX documents filled in with actual data from your database."
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:172
-#: templates/admin/dashboard/dashboard.inc.php:726
+#: templates/admin/dashboard/dashboard.inc.php:723
 msgid "Formidable Forms integration for wpDataTables"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:175
-#: templates/admin/dashboard/dashboard.inc.php:730
+#: templates/admin/dashboard/dashboard.inc.php:727
 msgid "Tool that adds \"Formidable Form\" as a new table type and allows you to create wpDataTables from Formidable Forms entries data."
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:194
-#: templates/admin/dashboard/dashboard.inc.php:752
+#: templates/admin/dashboard/dashboard.inc.php:749
 msgid "Gravity Forms integration for wpDataTables"
 msgstr ""
 
 #: templates/admin/addons/addons.inc.php:197
-#: templates/admin/dashboard/dashboard.inc.php:756
+#: templates/admin/dashboard/dashboard.inc.php:753
 msgid "Tool that adds \"Gravity Form\" as a new table type and allows you to create wpDataTables from Gravity Forms entries data."
 msgstr ""
 
@@ -2791,7 +2791,7 @@ msgstr ""
 msgid "Pick a wpDataTable"
 msgstr ""
 
-#: templates/admin/chart_wizard/steps/step2.inc.php:31
+#: templates/admin/chart_wizard/steps/step2.inc.php:41
 msgid "You are trying to use a Simple table to create a chart, which is not possible at the moment. Please try using any other data table to create a chart."
 msgstr ""
 
@@ -3965,267 +3965,267 @@ msgstr ""
 msgid "Version "
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:377
+#: templates/admin/dashboard/dashboard.inc.php:374
 msgid "Go Premium!"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:383
+#: templates/admin/dashboard/dashboard.inc.php:380
 msgid "View Comparison"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:391
+#: templates/admin/dashboard/dashboard.inc.php:388
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:48
 msgid "Get the most out of wpDataTables by upgrading to Premium and unlocking all of the powerful features."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:395
+#: templates/admin/dashboard/dashboard.inc.php:392
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2314
 msgid "Custom Fields Integration for WP Posts Builder"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:398
+#: templates/admin/dashboard/dashboard.inc.php:395
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2341
 msgid "Custom Fields Integration for WooCommerce"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:401
+#: templates/admin/dashboard/dashboard.inc.php:398
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:372
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2287
 msgid "WooCommerce Integration"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:404
+#: templates/admin/dashboard/dashboard.inc.php:401
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:345
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2260
 msgid "WP Post Builder"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:407
+#: templates/admin/dashboard/dashboard.inc.php:404
 msgid "Fixed headers"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:410
+#: templates/admin/dashboard/dashboard.inc.php:407
 msgid "Fixed columns"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:413
+#: templates/admin/dashboard/dashboard.inc.php:410
 #: templates/admin/table-settings/column_settings_panel.inc.php:68
 msgid "Transform value"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:416
+#: templates/admin/dashboard/dashboard.inc.php:413
 msgid "Highcharts Stock"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:419
+#: templates/admin/dashboard/dashboard.inc.php:416
 msgid "Folders/Categories for tables"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:422
+#: templates/admin/dashboard/dashboard.inc.php:419
 msgid "Folders/Categories for charts"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:425
+#: templates/admin/dashboard/dashboard.inc.php:422
 msgid "GeoCharts"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:428
+#: templates/admin/dashboard/dashboard.inc.php:425
 msgid "Hidden (dynamic) columns"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:431
+#: templates/admin/dashboard/dashboard.inc.php:428
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2701
 msgid "Index column"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:434
+#: templates/admin/dashboard/dashboard.inc.php:431
 msgid "Create a table manually"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:437
+#: templates/admin/dashboard/dashboard.inc.php:434
 msgid "Update manual tables"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:440
+#: templates/admin/dashboard/dashboard.inc.php:437
 msgid "Creating tables from Google Spreadsheet"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:443
+#: templates/admin/dashboard/dashboard.inc.php:440
 msgid "Creating tables via Google Sheet API"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:446
+#: templates/admin/dashboard/dashboard.inc.php:443
 msgid "Creating tables from Private Google Spreadsheet"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:449
+#: templates/admin/dashboard/dashboard.inc.php:446
 msgid "Creating MySQL-based tables from database"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:452
+#: templates/admin/dashboard/dashboard.inc.php:449
 msgid "Creating MySQL-based tables from Wordpress post types"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:455
+#: templates/admin/dashboard/dashboard.inc.php:452
 msgid "Creating tables where users can see and edit own data"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:458
+#: templates/admin/dashboard/dashboard.inc.php:455
 msgid "Creating table relations (Foreign key)"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:461
+#: templates/admin/dashboard/dashboard.inc.php:458
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:1947
 msgid "Advanced filtering"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:464
+#: templates/admin/dashboard/dashboard.inc.php:461
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:1973
 msgid "Pre-filtering tables through URL"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:467
+#: templates/admin/dashboard/dashboard.inc.php:464
 msgid "Table Customization"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:470
+#: templates/admin/dashboard/dashboard.inc.php:467
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:1921
 #: templates/admin/table-settings/table_settings_block.inc.php:214
 msgid "Server-side processing"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:473
+#: templates/admin/dashboard/dashboard.inc.php:470
 msgid "Multiple databases support (MySQL,MS SQL and PostgreSQL)"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:476
+#: templates/admin/dashboard/dashboard.inc.php:473
 msgid "Front-end table editing"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:479
+#: templates/admin/dashboard/dashboard.inc.php:476
 msgid "Excel-like editing"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:482
+#: templates/admin/dashboard/dashboard.inc.php:479
 msgid "Creating charts with ApexCharts"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:485
+#: templates/admin/dashboard/dashboard.inc.php:482
 msgid "Creating charts with Highcharts"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:488
+#: templates/admin/dashboard/dashboard.inc.php:485
 msgid "Export Highcharts data to CSV and XLS files"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:491
+#: templates/admin/dashboard/dashboard.inc.php:488
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2885
 msgid "Follow table filtering in charts"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:494
+#: templates/admin/dashboard/dashboard.inc.php:491
 #: templates/admin/table-settings/column_settings_panel.inc.php:62
 msgid "Conditional formatting"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:497
+#: templates/admin/dashboard/dashboard.inc.php:494
 msgid "Calculating Tools"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:500
+#: templates/admin/dashboard/dashboard.inc.php:497
 msgid "Formula columns"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:503
+#: templates/admin/dashboard/dashboard.inc.php:500
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:2103
 msgid "Rotate column headers"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:506
+#: templates/admin/dashboard/dashboard.inc.php:503
 #: templates/admin/table-settings/table_settings_block.inc.php:89
 msgid "Placeholders"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:509
+#: templates/admin/dashboard/dashboard.inc.php:506
 msgid "Premium support"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:513
+#: templates/admin/dashboard/dashboard.inc.php:510
 msgid "Get Premium Today"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:520
+#: templates/admin/dashboard/dashboard.inc.php:517
 msgid "News Blog"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:525
+#: templates/admin/dashboard/dashboard.inc.php:522
 msgid "Checkout useful articles from wpdatatables.com"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:572
+#: templates/admin/dashboard/dashboard.inc.php:569
 msgid ""
 "Never miss notifications about new cool features, promotions,\n"
 "                                    giveaways or freebies – subscribe to our newsletter! Join 3000+ subscribers. We send\n"
 "                                    about 1 message per month and never spam!"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:588
+#: templates/admin/dashboard/dashboard.inc.php:585
 msgid "wpDataTables Addons"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:589
+#: templates/admin/dashboard/dashboard.inc.php:586
 msgid "Premium "
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:592
+#: templates/admin/dashboard/dashboard.inc.php:589
 msgid "While wpDataTables itself provides quite a large amount of features and unlimited customisation, flexibility, you can achieve even more with our premium addons."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:594
+#: templates/admin/dashboard/dashboard.inc.php:591
 msgid "(except Forminator Forms integration which is free and can be used with Lite version as well, all others requires wpDataTables Premium version)"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:602
+#: templates/admin/dashboard/dashboard.inc.php:599
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:74
 msgid "Free"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:613
+#: templates/admin/dashboard/dashboard.inc.php:610
 msgid "Tool that adds \"Forminator Form\" as a new table type and allows you to create wpDataTables from Forminator Forms submissions."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:620
-#: templates/admin/dashboard/dashboard.inc.php:656
-#: templates/admin/dashboard/dashboard.inc.php:683
-#: templates/admin/dashboard/dashboard.inc.php:709
-#: templates/admin/dashboard/dashboard.inc.php:736
-#: templates/admin/dashboard/dashboard.inc.php:762
-#: templates/admin/dashboard/dashboard.inc.php:795
+#: templates/admin/dashboard/dashboard.inc.php:617
+#: templates/admin/dashboard/dashboard.inc.php:653
+#: templates/admin/dashboard/dashboard.inc.php:680
+#: templates/admin/dashboard/dashboard.inc.php:706
+#: templates/admin/dashboard/dashboard.inc.php:733
+#: templates/admin/dashboard/dashboard.inc.php:759
+#: templates/admin/dashboard/dashboard.inc.php:792
 msgid "Learn More"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:650
+#: templates/admin/dashboard/dashboard.inc.php:647
 msgid "A wpDataTables addon which allows showing additional details for a specific row in a popup or a separate page or post."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:677
+#: templates/admin/dashboard/dashboard.inc.php:674
 msgid "An add-on for wpDataTables that provides powerful filtering features: cascade filtering, applying filters on button click, hide table before filtering."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:773
+#: templates/admin/dashboard/dashboard.inc.php:770
 msgid "Need a free booking plugin?"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:782
+#: templates/admin/dashboard/dashboard.inc.php:779
 msgid "Appointments and Events WordPress Booking Plugin"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:785
+#: templates/admin/dashboard/dashboard.inc.php:782
 #, php-format
 msgid "Amelia Lite is a free appointment and event WordPress booking plugin that allows to set up a fully-featured automated booking system on your WordPress website and is a handy tool for small businesses and individuals that depend on stable appointment booking processes and for premium %s businesses from healthcare, beauty, sports, automotive, educational, creative, HR and other industries use Amelia to flawlessly manage %s appointments and events worldwide each month."
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:806
+#: templates/admin/dashboard/dashboard.inc.php:803
 #: templates/admin/getting-started/getting_started.inc.php:184
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:3220
 #: templates/admin/support/support.inc.php:78
@@ -4234,7 +4234,7 @@ msgstr ""
 msgid "Made by"
 msgstr ""
 
-#: templates/admin/dashboard/dashboard.inc.php:814
+#: templates/admin/dashboard/dashboard.inc.php:811
 #: templates/admin/getting-started/getting_started.inc.php:192
 #: templates/admin/lite-vs-premium/lite_vs_premium.inc.php:3232
 #: templates/admin/support/support.inc.php:45
@@ -8281,55 +8281,55 @@ msgstr ""
 msgid "Configure Connectors"
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:41
+#: backend/src/Services/Permissions/AccessRulesValidator.php:42
 msgid "Access rules payload must be a list of rules."
 msgstr ""
 
 #. translators: %d: rule index
-#: backend/src/Services/Permissions/AccessRulesValidator.php:127
+#: backend/src/Services/Permissions/AccessRulesValidator.php:148
 #, php-format
 msgid "Access rule at index %d is invalid."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:136
+#: backend/src/Services/Permissions/AccessRulesValidator.php:157
 msgid "Each access rule must have type \"role\" or \"user\"."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:143
+#: backend/src/Services/Permissions/AccessRulesValidator.php:164
 msgid "Each access rule must have resource \"tables\" or \"charts\"."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:150
+#: backend/src/Services/Permissions/AccessRulesValidator.php:171
 msgid "Each access rule must have a non-empty id."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:155
+#: backend/src/Services/Permissions/AccessRulesValidator.php:176
 msgid "Access rule ids must be unique."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:184
+#: backend/src/Services/Permissions/AccessRulesValidator.php:205
 msgid "Each access rule must grant at least one permission."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:205
+#: backend/src/Services/Permissions/AccessRulesValidator.php:229
 msgid "item_ids must be null or an array of positive integers."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:215
+#: backend/src/Services/Permissions/AccessRulesValidator.php:239
 msgid "Each item_ids value must be a positive integer."
 msgstr ""
 
 #. translators: %s: comma-separated missing item ids
-#: backend/src/Services/Permissions/AccessRulesValidator.php:231
+#: backend/src/Services/Permissions/AccessRulesValidator.php:260
 #, php-format
 msgid "The following item ids no longer exist: %s"
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:276
+#: backend/src/Services/Permissions/AccessRulesValidator.php:309
 msgid "Access rule role_slug is invalid."
 msgstr ""
 
-#: backend/src/Services/Permissions/AccessRulesValidator.php:306
+#: backend/src/Services/Permissions/AccessRulesValidator.php:343
 msgid "Access rule user_id is invalid."
 msgstr ""
 
@@ -8374,7 +8374,7 @@ msgid "View tables"
 msgstr ""
 
 #: backend/src/Services/Permissions/PermissionsAdminService.php:161
-#: backend/src/Services/Permissions/PermissionsAdminService.php:242
+#: backend/src/Services/Permissions/PermissionsAdminService.php:246
 msgid "Please select at least one item when limiting scope."
 msgstr ""
 
@@ -8386,11 +8386,11 @@ msgstr ""
 msgid "Please select at least one role or user."
 msgstr ""
 
-#: backend/src/Services/Permissions/PermissionsAdminService.php:252
+#: backend/src/Services/Permissions/PermissionsAdminService.php:256
 msgid "Access rule resource does not match the current tab."
 msgstr ""
 
-#: backend/src/Services/Permissions/PermissionsAdminService.php:553
+#: backend/src/Services/Permissions/PermissionsAdminService.php:566
 #: templates/admin/permissions/modals.inc.php:41
 msgid "Role"
 msgstr ""
@@ -8757,4 +8757,52 @@ msgstr ""
 #: integrations/page_builders/gutenberg/build/wpdatatables/block.json
 msgctxt "block keyword"
 msgid "xml"
+msgstr ""
+
+#: backend/src/Services/Permissions/PermissionsAdminService.php:529
+msgid "missing role"
+msgstr ""
+
+#. translators: %d: WordPress user id
+#: backend/src/Services/Permissions/PermissionsAdminService.php:537
+#, php-format
+msgid "Deleted user #%d"
+msgstr ""
+
+#: backend/src/Services/Permissions/PermissionsAdminService.php:546
+msgid "full access"
+msgstr ""
+
+#: Infrastructure/WP/MCP/Abilities/create-chart.php:272
+#: Infrastructure/WP/MCP/Abilities/edit-chart.php:291
+msgid "You cannot access the source table."
+msgstr ""
+
+#: source/class.wdttools.php:201
+#: source/class.wdttools.php:205
+#: source/class.wdttools.php:215
+#: source/class.wdttools.php:250
+msgid "Remote sources must be public HTTP(S) URLs."
+msgstr ""
+
+#: source/class.wdttools.php:210
+#: source/class.wdttools.php:220
+#: source/class.wdttools.php:225
+msgid "Remote sources must not target internal or local addresses."
+msgstr ""
+
+#: source/class.wdttools.php:256
+msgid "Remote sources require the cURL transport."
+msgstr ""
+
+#: source/class.wdttools.php:296
+#: source/class.wdttools.php:302
+#: source/class.wdttools.php:307
+#: source/class.wdttools.php:317
+#: source/class.wdttools.php:323
+msgid "The file must be a Media Library file inside the uploads directory."
+msgstr ""
+
+#: source/class.wdttools.php:427
+msgid "Remote source redirected too many times."
 msgstr ""

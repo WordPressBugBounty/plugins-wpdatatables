@@ -13788,6 +13788,7 @@ input:focus {
     background-color: #37393d;
     margin-top: 0;
     margin-left: 0;
+    transform: translate(-50%, -50%);
     line-height: normal;
     text-align: center;
     z-index: 9999;
